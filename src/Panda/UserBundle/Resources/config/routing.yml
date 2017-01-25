@@ -1,0 +1,53 @@
+user_login:
+    path:    /{_locale}/login
+    defaults: { _controller: "PandaUserBundle:User:login" }
+    methods:  GET|POST
+    options:
+        expose: true
+    requirements:
+        _locale: "|en|zh"
+
+user_login_test:
+    path:    /{_locale}/login-test
+    defaults: { _controller: "PandaUserBundle:User:login" }
+    methods:  GET|POST
+    options:
+        expose: true
+    requirements:
+        _locale: "|en|zh"
+
+user_registration:
+    path:    /{_locale}/registration
+    defaults: { _controller: "PandaUserBundle:User:registration" }
+    methods:  GET
+    requirements:
+        _locale: "|en|zh"
+
+user_password_reset:
+    path:    /{_locale}/password-reset
+    defaults: { _controller: "PandaUserBundle:User:passwordReset" }
+    methods:  GET
+    requirements:
+        _locale: "|en|zh"
+
+user_password_new:
+    path:    /{_locale}/password-new/{hash}
+    defaults: { _controller: "PandaUserBundle:User:passwordNew" }
+    methods:  GET
+    requirements:
+        _locale: "|en|zh"
+
+user_logout:
+    path: /logout
+
+
+
+panda_user_rest:
+    resource: "@PandaUserBundle/Resources/config/routing/rest/user.yml"
+    prefix:   /{_locale}/core-user/rest
+    requirements:
+        _locale: "|en|zh"
+
+#panda_user_homepage:
+#    path:     /
+#    defaults: { _controller: PandaUserBundle:Default:index }

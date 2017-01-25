@@ -1,0 +1,35 @@
+Panda\ConsumerBundle\Entity\Consumer:
+    type: entity
+    repositoryClass: Panda\ConsumerBundle\Repository\ConsumerRepository
+    fields:
+        memberId:
+            type: string
+            length: 255
+            column: member_id
+    oneToMany:
+        consumerUseCashbacks:
+            targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerUseCashBack
+            mappedBy: consumer
+        cashbacks:
+            targetEntity: \Fenglin\CashBackBundle\Entity\CashBack
+            mappedBy: consumer
+        inviteFreindConsumersFrom:
+            targetEntity: \Fenglin\FenglinBundle\Entity\InviteFriend
+            mappedBy: consumerFrom
+        inviteFreindConsumersTo:
+            targetEntity: \Fenglin\FenglinBundle\Entity\InviteFriend
+            mappedBy: consumerTo
+        refreeTreeConsumers:
+            targetEntity: \Fenglin\FenglinBundle\Entity\RefreeTree
+            mappedBy: consumer
+        refreeTreeReferalConsumers:
+            targetEntity: \Fenglin\FenglinBundle\Entity\RefreeTree
+            mappedBy: referalConsumer
+        amountConsumers:
+            targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerAmount
+            mappedBy: consumer
+    manyToMany:
+        followShoppers:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            mappedBy: followConsumers
+    lifecycleCallbacks: {  }

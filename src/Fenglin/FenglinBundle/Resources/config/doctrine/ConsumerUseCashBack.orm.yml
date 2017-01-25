@@ -1,0 +1,30 @@
+Fenglin\FenglinBundle\Entity\ConsumerUseCashBack:
+    type: entity
+    table: fenglin_consumer_use_cashback
+    repositoryClass: Fenglin\FenglinBundle\Repository\ConsumerUseCashBackRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        amount:
+            type: float
+            nullable: true
+        date:
+            type: datetime
+    manyToOne:
+        consumer:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: consumerUseCashbacks
+            joinColumn:
+                name: consumer_id
+                referencedColumnName: id
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: consumerUseCashbacks
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

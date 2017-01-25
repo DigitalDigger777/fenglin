@@ -1,0 +1,28 @@
+Fenglin\FenglinBundle\Entity\ConsumerAmount:
+    type: entity
+    table: fenglin_consumer_amount
+    repositoryClass: Fenglin\FenglinBundle\Repository\ConsumerAmountRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        totalAmount:
+            type: float
+            column: total_amount
+    manyToOne:
+        consumer:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: amountConsumers
+            joinColumn:
+                name: consumer_id
+                referencedColumnName: id
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: amountConsumers
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

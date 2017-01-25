@@ -1,0 +1,3 @@
+panda_we_chat_homepage:
+    path:     /
+    defaults: { _controller: PandaWeChatBundle:Default:index }

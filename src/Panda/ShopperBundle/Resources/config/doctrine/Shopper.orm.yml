@@ -1,0 +1,65 @@
+Panda\ShopperBundle\Entity\Shopper:
+    type: entity
+    repositoryClass: Panda\ShopperBundle\Repository\ShopperRepository
+    fields:
+        name:
+            type: string
+            length: 255
+        logo:
+            type: string
+            length: 255
+            nullable: true
+        address:
+            type: string
+            length: 255
+            nullable: true
+        tel:
+            type: string
+            length: 255
+            nullable: true
+        totalAmount:
+            type: float
+            nullable: true
+            column: total_amount
+        rebate:
+            type: float
+            nullable: true
+        rebateLevelRate:
+            type: float
+            nullable: true
+            column: rebate_level_rate
+        rebateLevel2Rate:
+            type: float
+            nullable: true
+            column: rebate_level2_rate
+        rebateLevel3Rate:
+            type: float
+            nullable: true
+            column: rebate_level3_rate
+    oneToMany:
+        amountConsumers:
+            targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerAmount
+            mappedBy: shopper
+        refreeTrees:
+            targetEntity: \Fenglin\FenglinBundle\Entity\RefreeTree
+            mappedBy: shopper
+        cashbacks:
+            targetEntity: \Fenglin\CashBackBundle\Entity\CashBack
+            mappedBy: shopper
+        consumerUseCashbacks:
+            targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerUseCashBack
+            mappedBy: shopper
+    manyToMany:
+        followConsumers:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: followShoppers
+            joinTable:
+                name: follower_consumers_shoppers
+                joinColumn:
+                    shopper_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    consumer_id:
+                        referencedColumnName: id
+
+    lifecycleCallbacks: {  }

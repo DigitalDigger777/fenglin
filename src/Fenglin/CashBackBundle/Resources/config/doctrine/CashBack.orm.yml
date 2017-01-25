@@ -1,0 +1,45 @@
+Fenglin\CashBackBundle\Entity\CashBack:
+    type: entity
+    table: fenglin_cashback
+    repositoryClass: Fenglin\CashBackBundle\Repository\CashBackRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        amount:
+            type: float
+            nullable: true
+        amountLevel2:
+            type: float
+            nullable: true
+            column: amount_level2
+        amountLevel3:
+            type: float
+            nullable: true
+            column: amount_level3
+        date:
+            type: datetime
+        status:
+            type: integer
+            nullable: true
+    manyToOne:
+        consumer:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: cashbacks
+            joinColumn:
+                name: consumer_id
+                referencedColumnName: id
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: cashbacks
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    oneToMany:
+        logItems:
+            targetEntity: \Fenglin\CashBackBundle\Entity\CashBackLog
+            mappedBy: cashback
+    lifecycleCallbacks: {  }

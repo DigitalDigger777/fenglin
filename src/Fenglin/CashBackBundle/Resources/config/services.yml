@@ -1,0 +1,4 @@
+services:
+#    fenglin_cash_back.example:
+#        class: Fenglin\CashBackBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

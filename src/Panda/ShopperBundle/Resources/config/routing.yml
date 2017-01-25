@@ -1,0 +1,3 @@
+panda_shopper_homepage:
+    path:     /
+    defaults: { _controller: PandaShopperBundle:Default:index }

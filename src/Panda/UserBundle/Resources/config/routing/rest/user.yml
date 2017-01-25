@@ -1,0 +1,27 @@
+user_rest_restore_password:
+    path:     /restore-password
+    defaults: { _controller: "PandaUserBundle:Rest/RestUser:restore" }
+    methods:  POST
+    options:
+        expose: true
+
+user_rest_restore_success:
+    path:     /restore-password/success
+    defaults: { _controller: "PandaUserBundle:Rest/RestUser:successRestore" }
+    methods:  POST
+    options:
+        expose: true
+
+user_rest_login:
+    path:     /login
+    defaults: { _controller: "PandaUserBundle:Rest/RestUser:login" }
+    methods:  [POST,GET,OPTIONS]
+    options:
+        expose: true
+
+user_rest_api_auth:
+    path:     /api-auth
+    defaults: { _controller: "PandaUserBundle:Rest/RestUser:apiAuth" }
+    methods:  [GET]
+    options:
+        expose: true

@@ -1,0 +1,4 @@
+services:
+#    fenglin_fenglin.example:
+#        class: Fenglin\FenglinBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

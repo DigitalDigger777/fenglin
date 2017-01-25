@@ -1,0 +1,36 @@
+Panda\UserBundle\Entity\User:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorMap:
+        user: User
+        shopper: \Panda\ShopperBundle\Entity\Shopper
+        consumer: \Panda\ConsumerBundle\Entity\Consumer
+    table: panda_users
+    repositoryClass: Panda\UserBundle\Repository\UserRepository
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: '400'
+        status:
+            type: integer
+        role:
+            type: string
+        apiKey:
+            type: string
+            column: api_key
+            nullable: true
+    oneToMany:
+        requestsRecoveryPassword:
+            targetEntity: RequestRecoveryPassword
+            mappedBy: user
+    lifecycleCallbacks: {  }

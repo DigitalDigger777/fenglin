@@ -1,0 +1,24 @@
+Fenglin\CashBackBundle\Entity\CashBackLog:
+    type: entity
+    table: fenglin_cashback_log
+    repositoryClass: Fenglin\CashBackBundle\Repository\CashBackLogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        action:
+            type: integer
+            nullable: true
+        date:
+            type: datetime
+    manyToOne:
+        cashback:
+            targetEntity: \Fenglin\CashBackBundle\Entity\CashBack
+            inversedBy: logItems
+            joinColumn:
+                name: cashback_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

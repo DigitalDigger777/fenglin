@@ -1,0 +1,3 @@
+fenglin_fenglin_homepage:
+    path:     /
+    defaults: { _controller: FenglinFenglinBundle:Default:index }

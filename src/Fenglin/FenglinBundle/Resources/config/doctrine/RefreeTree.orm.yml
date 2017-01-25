@@ -1,0 +1,30 @@
+Fenglin\FenglinBundle\Entity\RefreeTree:
+    type: entity
+    table: fenglin_refree_tree
+    repositoryClass: Fenglin\FenglinBundle\Repository\RefreeTreeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        consumer:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: refreeTreeConsumers
+            joinColumn:
+                name: consumer_id
+                referencedColumnName: id
+        referalConsumer:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: refreeTreeReferalConsumers
+            joinColumn:
+                name: referal_consumer_id
+                referencedColumnName: id
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: refreeTrees
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

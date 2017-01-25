@@ -1,0 +1,30 @@
+panda_we_chat:
+    resource: "@PandaWeChatBundle/Resources/config/routing.yml"
+    prefix:   /
+
+panda_user:
+    resource: "@PandaUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fenglin_fenglin:
+    resource: "@FenglinFenglinBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fenglin_cash_back:
+    resource: "@FenglinCashBackBundle/Resources/config/routing.yml"
+    prefix:   /
+
+panda_consumer:
+    resource: "@PandaConsumerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+panda_shopper:
+    resource: "@PandaShopperBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -1,0 +1,24 @@
+Fenglin\FenglinBundle\Entity\InviteFriend:
+    type: entity
+    table: fenglin_invite_friend
+    repositoryClass: Fenglin\FenglinBundle\Repository\InviteFriendRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        consumerFrom:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: inviteFreindConsumersFrom
+            joinColumn:
+                name: consumer_from_id
+                referencedColumnName: id
+        consumerTo:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: inviteFreindConsumersTo
+            joinColumn:
+                name: consumer_to_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }
