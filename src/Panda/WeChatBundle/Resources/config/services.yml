@@ -2,3 +2,6 @@ services:
 #    panda_we_chat.example:
 #        class: Panda\WeChatBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+  we_chat_api.access_token:
+      class: Panda\WeChatBundle\WeChatAPI\AccessToken
+      arguments: ["@service_container"]

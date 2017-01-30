@@ -1,0 +1,23 @@
+Fenglin\FenglinBundle\Entity\AuthorizationLog:
+    type: entity
+    table: null
+    repositoryClass: Fenglin\FenglinBundle\Repository\AuthorizationLogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 255
+        state:
+            type: string
+            length: 255
+        ip:
+            type: string
+            length: 255
+        date:
+            type: datetime
+    lifecycleCallbacks: {  }

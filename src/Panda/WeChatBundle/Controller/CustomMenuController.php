@@ -19,20 +19,31 @@ class CustomMenuController extends Controller
      */
     public function createAction(Request $request)
     {
+        /**
+         * @var \Panda\WeChatBundle\WeChatAPI\AccessToken $accessToken
+         */
+        $accessToken = $this->get('we_chat_api.access_token');
+        $appId = $this->container->getParameter('wechat_appid');
+
         $client = new Client([
             'base_uri' => 'https://api.wechat.com'
         ]);
 
         $response = $client->request('POST', '/cgi-bin/menu/create', [
             'query' => [
-                'access_token' => 'oza6PE29j5j_-W6puC-vO7R5bF9-FjfmPZ0VkeFV5jnhSUy1nYK17Po3-zGF8m6nz4QCAY40k-8bnGbNlIPUwYcErjflKyaHZCS6zVPnuWzR-XwInsNMO8ovXAjixvEHGPBeADAJSE'
+                'access_token' => $accessToken->getAccessToken()
             ],
             'body' => json_encode([
                 'button' => [
                     [
                         "type" => "view",
                         "name" => "Home",
-                        "url" => "http://xu.joinppcg.com/fenglin/fenglin/src/after-link-this-shopper-but-no-balance.html"
+                        "url"  => "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appId&redirect_uri=http%3A%2F%2Ffenglin.joinppcg.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "Shopper",
+                        "url"  => "http://fenglin.joinppcg.com/shopper#shopper/home"
                     ]
                 ]
             ])
