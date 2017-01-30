@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'FenglinFont';
+    src: url('../fonts/Fenglin-Font.eot');
+    src: local('☺'), url('../fonts/Fenglin-Font.woff') format('woff'), url('../fonts/Fenglin-Font.ttf') format('truetype'), url('../fonts/Fenglin-Font.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ff {
+    display: inline-block;
+    font: normal normal normal 14px/1 FenglinFont;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ff-1_5x {
+    font-size: 1.5em;
+}
+
+.ff.mrg-r {
+    margin-right: 10px;
+}
+.ff-location-arrow:before {
+    content: "\e001";
+}
+
+.ff-phone:before {
+    content: "\e002";
+}
+
+.ff-play:before {
+    content: "\e003";
+}

@@ -1,0 +1,23 @@
+panda_shopper_rest_index:
+    path:     /{id}
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:index, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+panda_shopper_rest_list:
+    path:     /list/{page}
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:list, page:1 }
+    requirements:
+        page: \d+
+    options:
+        expose: true
+
+panda_shopper_rest_cash_back_list:
+    path:     /cash-back-list/{page}
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:cashBackList, page:1 }
+    requirements:
+        page: \d+
+    options:
+        expose: true

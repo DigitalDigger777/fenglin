@@ -1,3 +1,7 @@
-panda_shopper_homepage:
-    path:     /
-    defaults: { _controller: PandaShopperBundle:Default:index }
+#panda_shopper_homepage:
+#    path:     /
+#    defaults: { _controller: PandaShopperBundle:Default:index }
+
+panda_shopper_rest:
+    resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper.yml"
+    prefix:   /rest/

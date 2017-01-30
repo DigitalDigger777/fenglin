@@ -8,6 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('FenglinFenglinBundle:Default:index.html.twig');
+        return $this->render('base.html.twig');
+    }
+
+    public function shopperAction()
+    {
+        return $this->render('base_shopper.html.twig');
     }
 }

@@ -1,3 +1,7 @@
 fenglin_fenglin_homepage:
     path:     /
     defaults: { _controller: FenglinFenglinBundle:Default:index }
+
+fenglin_fenglin_shopper:
+    path:     /shopper
+    defaults: { _controller: FenglinFenglinBundle:Default:shopper }

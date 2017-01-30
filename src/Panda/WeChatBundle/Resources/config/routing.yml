@@ -1,3 +1,16 @@
-panda_we_chat_homepage:
-    path:     /
-    defaults: { _controller: PandaWeChatBundle:Default:index }
+panda_we_chat_access_token:
+    path:     /access_token
+    defaults: { _controller: PandaWeChatBundle:AccessToken:getAccessToken }
+
+panda_we_chat_follower_list:
+    path:     /user-management/follower_list
+    defaults: { _controller: PandaWeChatBundle:UserManagement:followerList }
+
+panda_we_chat_user_profile:
+    path:     /user-management/profile
+    defaults: { _controller: PandaWeChatBundle:UserManagement:profile }
+
+
+panda_we_chat_custom_menu_create:
+    path:     /custom-menu/create
+    defaults: { _controller: PandaWeChatBundle:CustomMenu:create }
