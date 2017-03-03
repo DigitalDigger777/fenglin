@@ -5,3 +5,7 @@ services:
   we_chat_api.access_token:
       class: Panda\WeChatBundle\WeChatAPI\AccessToken
       arguments: ["@service_container"]
+
+  wechat:
+      class: Panda\WeChatBundle\Services\WeChat
+      arguments: ["@service_container"]

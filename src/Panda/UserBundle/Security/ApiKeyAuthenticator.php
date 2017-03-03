@@ -26,6 +26,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
 {
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
+
         /**
          * @var \Panda\UserBundle\Security\ApiKeyUserProvider $userProvider
          */
@@ -40,6 +41,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         $apiKey = $token->getCredentials();
+
         $username = $userProvider->getUsernameForApiKey($apiKey);
 
         if (!$username) {
@@ -65,6 +67,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
 
     public function createToken(Request $request, $providerKey)
     {
+
         $apiKey = $request->query->get('apikey');
 
         if (!$apiKey) {

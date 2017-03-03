@@ -5,3 +5,7 @@ fenglin_fenglin_homepage:
 fenglin_fenglin_shopper:
     path:     /shopper
     defaults: { _controller: FenglinFenglinBundle:Default:shopper }
+
+fenglin_fenglin_consumer:
+    path:     /consumer
+    defaults: { _controller: FenglinFenglinBundle:Default:consumer }

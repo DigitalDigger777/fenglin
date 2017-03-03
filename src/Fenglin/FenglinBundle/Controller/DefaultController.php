@@ -21,15 +21,23 @@ class DefaultController extends Controller
         $date = new \DateTime();
         $ip = $request->getClientIp();
 
-        $log = new AuthorizationLog();
-        $log->setCode($code);
-        $log->setState($state);
-        $log->setIp($ip);
-        $log->setDate($date);
+//        $log = new AuthorizationLog();
+//        $log->setCode($code);
+//        $log->setState($state);
+//        $log->setIp($ip);
+//        $log->setDate($date);
+//
+//        $em->persist($log);
+//        $em->flush();
+        //check auth
+//        $user = $this->getUser();
+//        var_dump($user);
+//        exit;
+        return $this->render('base.html.twig');
+    }
 
-        $em->persist($log);
-        $em->flush();
-
+    public function consumerAction()
+    {
         return $this->render('base.html.twig');
     }
 

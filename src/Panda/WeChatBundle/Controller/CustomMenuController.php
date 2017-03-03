@@ -38,7 +38,7 @@ class CustomMenuController extends Controller
                     [
                         "type" => "view",
                         "name" => "Home",
-                        "url"  => "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appId&redirect_uri=http%3A%2F%2Ffenglin.joinppcg.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+                        "url"  => "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appId&redirect_uri=http%3A%2F%2Ffenglin.joinppcg.com&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
                     ],
                     [
                         "type" => "view",

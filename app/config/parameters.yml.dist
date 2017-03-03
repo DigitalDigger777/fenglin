@@ -19,6 +19,8 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     #wechat credentials
+    wechat_base_uri_api: http://dev.fenglin/app_dev.php/mock-wechat-oauth/
+    wechat_redirect_uri: http://dev.fenglin/app_dev.php/panda-we-chat/mock-oauth/authorization
     wechat_grant_type: client_credential
     wechat_appid: wx70d2ff5978524a23
     wechat_secret: 89e784ce396bc6234faff835db0a5894

@@ -24,6 +24,7 @@ class ApiKeyUserProvider implements UserProviderInterface
     function __construct(EntityManager $em)
     {
         $this->em = $em;
+
     }
 
     /**
@@ -34,15 +35,19 @@ class ApiKeyUserProvider implements UserProviderInterface
      */
     public function getUsernameForApiKey($apiKey)
     {
+
         /**
          * @var \Panda\UserBundle\Entity\User $user
          */
         $userRepo = $this->em->getRepository('PandaUserBundle:User');
+
         $user = $userRepo->findOneBy([
             'apiKey' => $apiKey
         ]);
 
+
         if ($user) {
+
             return $user->getEmail();
         } else {
             return null;
@@ -57,6 +62,7 @@ class ApiKeyUserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
+
         /**
          * @var \Panda\UserBundle\Entity\User $user
          */
@@ -71,6 +77,7 @@ class ApiKeyUserProvider implements UserProviderInterface
             $user->getRoles()
         );
     }
+
 
     /**
      * Refresh user.

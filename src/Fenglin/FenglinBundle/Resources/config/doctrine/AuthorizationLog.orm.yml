@@ -1,6 +1,6 @@
 Fenglin\FenglinBundle\Entity\AuthorizationLog:
     type: entity
-    table: null
+    table: fenglin_authorization_log
     repositoryClass: Fenglin\FenglinBundle\Repository\AuthorizationLogRepository
     id:
         id:

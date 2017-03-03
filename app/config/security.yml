@@ -4,17 +4,32 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+#        in_memory:
+#            memory: ~
+       api_key_user_provider:
+            id: api_key_user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+#
         main:
-            anonymous: ~
+            pattern: ^/(panda-shopper|mock-wechat-oauth|panda-we-chat)
+            security: false
+
+        secured_area:
+            pattern: ^/
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
+            provider: api_key_user_provider
+
+    access_control:
+        - { path: ^/mock-wechat-oauth/, roles: ROLE_ANONYMOUSLY}
+        - { path: ^/, roles: ROLE_CONSUMER }
+
             # activate different ways to authenticate
 
             # http_basic: ~

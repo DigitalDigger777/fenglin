@@ -1,0 +1,11 @@
+panda_mock_we_chat_o_auth_home:
+    path:     /
+    defaults: { _controller: PandaMockWeChatOAuthBundle:Default:index }
+
+panda_mock_we_chat_o_auth_authorize:
+    path:     /connect/oauth2/authorize
+    defaults: { _controller: PandaMockWeChatOAuthBundle:MockOAuth:authorize }
+
+panda_mock_we_chat_o_auth_access_token:
+    path:     /sns/oauth2/access_token
+    defaults: { _controller: PandaMockWeChatOAuthBundle:MockOAuth:accessToken }

@@ -1,3 +1,7 @@
+panda_mock_we_chat_o_auth:
+    resource: "@PandaMockWeChatOAuthBundle/Resources/config/routing.yml"
+    prefix:   /mock-wechat-oauth/
+
 panda_we_chat:
     resource: "@PandaWeChatBundle/Resources/config/routing.yml"
     prefix:   /panda-we-chat/

@@ -14,3 +14,9 @@ panda_we_chat_user_profile:
 panda_we_chat_custom_menu_create:
     path:     /custom-menu/create
     defaults: { _controller: PandaWeChatBundle:CustomMenu:create }
+
+
+#mock oauth
+panda_we_chat_mock_oauth_authorization:
+    path:     /mock-oauth/authorization
+    defaults: { _controller: PandaWeChatBundle:MockOauth:auth }
