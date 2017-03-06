@@ -42,7 +42,9 @@ class MockOauthController extends Controller
         $em->persist($log);
         $em->flush();
 
-
+        $openid = $request->cookies->get('openid');
+        echo 'oo' . $openid . 'ppp';
+        exit;
         if ($openid = $request->cookies->get('openid')) {
             $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
                 'openId' => $openid
@@ -87,29 +89,33 @@ class MockOauthController extends Controller
                     }
                 }
             }
-        } elseif(!$user->getWechatData()) {
+        } else {
 
-            $userData = $user->getData();
+            $wechatData = $user->getWechatData();
 
-            $responseObjectUserInfo = $wechatService->getUserInfo($userData->access_token, $user->getOpenId());
+            if (!$wechatData) {
+                $userData = $user->getData();
 
-            if (property_exists($responseObjectUserInfo, 'errcode')) {
-                $log = new Log();
-                $log->setAction('get userinfo');
-                $log->setData($responseObjectUserInfo);
-                $log->setDate(new \DateTime());
+                $responseObjectUserInfo = $wechatService->getUserInfo($userData->access_token, $user->getOpenId());
 
-                $em->persist($log);
-                $em->flush();
-            } else {
+                if (property_exists($responseObjectUserInfo, 'errcode')) {
+                    $log = new Log();
+                    $log->setAction('get userinfo');
+                    $log->setData($responseObjectUserInfo);
+                    $log->setDate(new \DateTime());
 
-                $user->setWechatData($responseObjectUserInfo);
+                    $em->persist($log);
+                    $em->flush();
+                } else {
 
-                $em->persist($user);
-                $em->flush();
+                    $user->setWechatData($responseObjectUserInfo);
 
+                    $em->persist($user);
+                    $em->flush();
+
+                }
             }
-            //$responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
+
         }
 
 
