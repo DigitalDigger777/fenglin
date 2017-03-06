@@ -31,11 +31,39 @@ class WeChat
      */
     public function buildAuthUrl($scope = 'snsapi_userinfo', $state = null)
     {
-        $appid = $this->container->getParameter('wechat_appid');
-        $baseUri = $this->container->getParameter('wechat_base_uri_api');
+        $appid       = $this->container->getParameter('wechat_appid');
+        $baseUri     = $this->container->getParameter('wechat_base_uri_auth');
         $redirectUri = $this->container->getParameter('wechat_redirect_uri');
 
         $url = $baseUri . 'connect/oauth2/authorize';
+        $urlParts = [
+            'appid=' . $appid,
+            'redirect_uri=' . urlencode($redirectUri),
+            'response_type=code',
+            'scope=' . $scope
+        ];
+
+        if ($state) {
+            $urlParts[] = 'state=' . $state;
+        }
+
+        $url .= '?' . implode('&', $urlParts);
+
+        return $url;
+    }
+
+    /**
+     * @param string $scope
+     * @param null $state
+     * @return string
+     */
+    public function buildQRConnectUrl($scope = 'snsapi_login', $state = null)
+    {
+        $appid       = $this->container->getParameter('wechat_appid');
+        $baseUri     = $this->container->getParameter('wechat_base_uri_auth');
+        $redirectUri = $this->container->getParameter('wechat_redirect_uri');
+
+        $url = $baseUri . 'connect/qrconnect';
         $urlParts = [
             'appid=' . $appid,
             'redirect_uri=' . urlencode($redirectUri),

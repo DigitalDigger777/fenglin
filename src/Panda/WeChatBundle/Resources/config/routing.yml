@@ -20,3 +20,13 @@ panda_we_chat_custom_menu_create:
 panda_we_chat_mock_oauth_authorization:
     path:     /mock-oauth/authorization
     defaults: { _controller: PandaWeChatBundle:MockOauth:auth }
+
+
+#get urls
+panda_we_chat_get_code_url:
+    path: /get-url/code
+    defaults: { _controller: PandaWeChatBundle:Url:getCodeUrl }
+
+panda_we_chat_get_qrconnect_url:
+    path: /get-url/qrconnect
+    defaults: { _controller: PandaWeChatBundle:Url:getQRConnectUrl }

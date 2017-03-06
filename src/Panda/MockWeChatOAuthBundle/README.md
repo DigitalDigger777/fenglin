@@ -1,0 +1,1 @@
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70d2ff5978524a23&redirect_uri=http%3A%2F%2Fwxfenling.com%2Fpanda-we-chat%2Fmock-oauth%2Fauthorization&response_type=code&scope=snsapi_userinfo&state=123&connect_redirect=1#wechat_redirect

@@ -16,9 +16,11 @@ class DefaultController extends Controller
          */
         $wechatService = $this->get('wechat');
         $url = $wechatService->buildAuthUrl('snsapi_userinfo', 123);
+        $urlQR = $wechatService->buildQRConnectUrl('snsapi_userinfo', 123);
 
         return $this->render('PandaMockWeChatOAuthBundle:Default:index.html.twig',[
-            'url' => $url
+            'url' => $url,
+            'url_qr' => $urlQR
         ]);
     }
 }
