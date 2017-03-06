@@ -158,7 +158,7 @@ class WeChat
         ]);
 
         $data = $user->getData();
-        echo $data['refresh_token']; exit;
+
         $response = $client->request('GET', 'sns/oauth2/refresh_token', [
             'query' => [
                 'appid'         => $this->container->getParameter('wechat_appid'),
@@ -175,18 +175,19 @@ class WeChat
 
             if (property_exists($responseObject, 'errcode')) {
                 $log = new Log();
-                $log->setAction('get access token by code');
+                $log->setAction('refresh token by code');
                 $log->setData($responseObject);
                 $log->setDate(new \DateTime());
 
                 $em->persist($log);
                 $em->flush();
-                return false;
-            }
 
-            $user->setData($responseObject);
-            $em->persist($user);
-            $em->flush();
+                return false;
+            } else {
+                $user->setData($responseObject);
+                $em->persist($user);
+                $em->flush();
+            }
 
             return $responseObject;
         } else {
