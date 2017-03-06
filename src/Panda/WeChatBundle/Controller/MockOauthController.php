@@ -96,7 +96,7 @@ class MockOauthController extends Controller
             if (!$wechatData) {
                 $userData = $user->getData();
                 print_r($userData);
-                $responseObjectUserInfo = $wechatService->getUserInfo($userData->access_token, $user->getOpenId());
+                $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
                 print_r($responseObjectUserInfo); exit;
 
                 if (property_exists($responseObjectUserInfo, 'errcode')) {
