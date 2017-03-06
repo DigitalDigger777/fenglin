@@ -43,12 +43,14 @@ class MockOauthController extends Controller
         $em->flush();
 
         $openid = $request->cookies->get('openid');
-        echo 'oo' . $openid . 'ppp';
-        exit;
-        if ($openid = $request->cookies->get('openid')) {
+        
+        if ($openid) {
             $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
                 'openId' => $openid
             ]);
+
+            echo $user->getId();
+            exit;
         } else {
             $user = null;
         }
