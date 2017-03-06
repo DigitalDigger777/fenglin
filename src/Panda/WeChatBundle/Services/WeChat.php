@@ -119,25 +119,17 @@ class WeChat
             $responseObject = json_decode($content);
 
             if (property_exists($responseObject, 'errcode')) {
-                $log = new Log();
-                $log->setAction('get access token by code');
-                $log->setData($responseObject);
-                $log->setDate(new \DateTime());
 
-                $em->persist($log);
-                $em->flush();
+                $this->writeToLog('get access token by code', $responseObject);
                 return false;
             }
 
             return $responseObject;
         } else {
-            $log = new Log();
-            $log->setAction('get access token by code');
-            $log->setData([
+            $this->writeToLog('get access token by code', [
                 'status_code' => $statusCode,
                 'content' => $response->getBody()->getContents()
             ]);
-            $log->setDate(new \DateTime());
             return false;
         }
     }
@@ -174,14 +166,7 @@ class WeChat
             $responseObject = json_decode($content);
 
             if (property_exists($responseObject, 'errcode')) {
-                $log = new Log();
-                $log->setAction('refresh token by code');
-                $log->setData($responseObject);
-                $log->setDate(new \DateTime());
-
-                $em->persist($log);
-                $em->flush();
-
+                $this->writeToLog('refresh token by code', $responseObject);
                 return false;
             } else {
                 $user->setData($responseObject);
@@ -191,13 +176,10 @@ class WeChat
 
             return $responseObject;
         } else {
-            $log = new Log();
-            $log->setAction('get access token by code');
-            $log->setData([
+            $this->writeToLog('get access token by code', [
                 'status_code' => $statusCode,
                 'content' => $response->getBody()->getContents()
             ]);
-            $log->setDate(new \DateTime());
             return false;
         }
     }
@@ -240,5 +222,22 @@ class WeChat
         }
     }
 
+    /**
+     * @param $action
+     * @param $data
+     */
+    public function writeToLog($action, $data)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->container->get('doctrine')->getManager();
+        $log = new Log();
+        $log->setAction($action);
+        $log->setData($data);
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush();
+    }
 
 }

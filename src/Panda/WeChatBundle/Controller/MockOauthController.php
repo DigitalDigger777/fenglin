@@ -32,15 +32,15 @@ class MockOauthController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $log = new Log();
-        $log->setAction('get_code');
-        $log->setData([
-            'code' => $code,
-            'state' => $request->query->get('state', 0)
-        ]);
-        $log->setDate(new \DateTime());
-        $em->persist($log);
-        $em->flush();
+//        $log = new Log();
+//        $log->setAction('get_code');
+//        $log->setData([
+//            'code' => $code,
+//            'state' => $request->query->get('state', 0)
+//        ]);
+//        $log->setDate(new \DateTime());
+//        $em->persist($log);
+//        $em->flush();
 
         $openid = $request->cookies->get('openid');
 
@@ -61,90 +61,87 @@ class MockOauthController extends Controller
                 $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
 
                 if (property_exists($responseObjectUserInfo, 'errcode')) {
-                    $log = new Log();
-                    $log->setAction('get userinfo');
-                    $log->setData($responseObject);
-                    $log->setDate(new \DateTime());
 
-                    $em->persist($log);
-                    $em->flush();
-                } else {
-                    $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
-                        'apiKey' => md5($responseObject->openid)
-                    ]);
+                    $wechatService->writeToLog('get userinfo', $responseObject);
 
-                    if (!$user) {
-                        $user = new User();
-                        $user->setApiKey(md5($responseObject->openid));
-                        $user->setRole('ROLE_CONSUMER');
-                        $user->setStatus(1);
-                        $user->setEmail(md5($responseObject->openid) . '@mock.com');
-                        $user->setPassword('');
-                        $user->setOpenId($responseObject->openid);
-                        $user->setData($responseObject);
-                        $user->setWechatData($responseObjectUserInfo);
-
-                        $em->persist($user);
-                        $em->flush();
-                    }
-                }
-            }
-        } else {
-
-            $wechatData = $user->getWechatData();
-
-            if (!$wechatData) {
-                $userData = $user->getData();
-                //print_r($userData);
-                $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
-
-
-                if (property_exists($responseObjectUserInfo, 'errcode')) {
-                    $log = new Log();
-                    $log->setAction('get userinfo');
-                    $log->setData($responseObjectUserInfo);
-                    $log->setDate(new \DateTime());
-
-                    $em->persist($log);
-                    $em->flush();
-
-                    if ($responseObjectUserInfo->errcode == '40001') {
-                        $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
-                            'openId' => $openid
-                        ]);
-
-                        $wechatService->refreshAccessToken($user);
-
-                        $userData = $user->getData();
-                        //print_r($userData);
-                        $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
-
-                        if (property_exists($responseObjectUserInfo, 'errcode')) {
-                            $log = new Log();
-                            $log->setAction('get userinfo');
-                            $log->setData($responseObjectUserInfo);
-                            $log->setDate(new \DateTime());
-
-                            $em->persist($log);
-                            $em->flush();
-                        } else {
-                            $user->setWechatData($responseObjectUserInfo);
-
-                            $em->persist($user);
-                            $em->flush();
-
-                        }
-
-                    }
                 } else {
 
+                    $user = new User();
+                    $user->setApiKey(md5($responseObject->openid));
+                    $user->setRole('ROLE_CONSUMER');
+                    $user->setStatus(1);
+                    $user->setEmail(md5($responseObject->openid) . '@mock.com');
+                    $user->setPassword('');
+                    $user->setOpenId($responseObject->openid);
+                    $user->setData($responseObject);
                     $user->setWechatData($responseObjectUserInfo);
 
                     $em->persist($user);
                     $em->flush();
-
                 }
             }
+        } else {
+
+//            $wechatData = $user->getWechatData();
+            $responseObject = $wechatService->getAccessTokenByCode($code);
+
+            if (property_exists($responseObject, 'errcode')) {
+                $wechatService->writeToLog('get access token', $responseObject);
+            } else {
+                $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $user->getOpenId());
+
+                if (property_exists($responseObjectUserInfo, 'errcode')) {
+                    $wechatService->writeToLog('get user info', $responseObjectUserInfo);
+                } else {
+                    $user->setData($responseObject);
+                    $user->setWechatData($responseObjectUserInfo);
+                    
+                    $em->persist($user);
+                    $em->flush();
+                }
+            }
+//
+//            if (!$wechatData) {
+//                $userData = $user->getData();
+//                //print_r($userData);
+//                $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
+//
+//                if (property_exists($responseObjectUserInfo, 'errcode')) {
+//
+//                    $wechatService->writeToLog('get userinfo', $responseObjectUserInfo);
+//
+//                    if ($responseObjectUserInfo->errcode == '40001') {
+//                        $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+//                            'openId' => $openid
+//                        ]);
+//
+//                        $wechatService->refreshAccessToken($user);
+//
+//                        $userData = $user->getData();
+//                        //print_r($userData);
+//                        $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
+//
+//                        if (property_exists($responseObjectUserInfo, 'errcode')) {
+//
+//                            $wechatService->writeToLog('get userinfo', $responseObjectUserInfo);
+//                        } else {
+//                            $user->setWechatData($responseObjectUserInfo);
+//
+//                            $em->persist($user);
+//                            $em->flush();
+//
+//                        }
+//
+//                    }
+//                } else {
+//
+//                    $user->setWechatData($responseObjectUserInfo);
+//
+//                    $em->persist($user);
+//                    $em->flush();
+//
+//                }
+//            }
 
         }
 
@@ -155,10 +152,7 @@ class MockOauthController extends Controller
                 '_fragment'=>'consumer/home'
             ])
         );
-//        if (!$request->cookies->get('access_token')) {
-//            $cookie = new Cookie('access_token', $responseObject->access_token);
-//            $response->headers->setCookie($cookie);
-//        }
+
 
         if (!$request->cookies->get('openid')) {
             $cookie = new Cookie('openid', $user->getOpenId());
