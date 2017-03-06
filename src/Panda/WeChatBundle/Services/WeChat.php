@@ -158,6 +158,7 @@ class WeChat
         ]);
 
         $data = $user->getData();
+        echo $data['refresh_token']; exit
         $response = $client->request('GET', 'sns/oauth2/refresh_token', [
             'query' => [
                 'appid'         => $this->container->getParameter('wechat_appid'),
