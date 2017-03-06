@@ -8,6 +8,7 @@
 
 namespace Panda\WeChatBundle\Services;
 use GuzzleHttp\Client;
+use Panda\UserBundle\Entity\User;
 use Panda\WeChatBundle\Entity\AccessToken;
 use Panda\WeChatBundle\Entity\Log;
 
@@ -142,6 +143,63 @@ class WeChat
     }
 
     /**
+     * @param User $user
+     * @return bool|mixed
+     */
+    public function refreshAccessToken(User $user)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \GuzzleHttp\Psr7\Response $response
+         */
+        $client = new Client([
+            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
+        ]);
+
+        $data = $user->getData();
+        $response = $client->request('GET', 'sns/oauth2/refresh_token', [
+            'query' => [
+                'appid'         => $this->container->getParameter('wechat_appid'),
+                'grant_type'    => 'refresh_token',
+                'refresh_token' => $data['refresh_token'],
+            ]
+        ]);
+
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode == 200) {
+            $content        = $response->getBody()->getContents();
+            $responseObject = json_decode($content);
+
+            if (property_exists($responseObject, 'errcode')) {
+                $log = new Log();
+                $log->setAction('get access token by code');
+                $log->setData($responseObject);
+                $log->setDate(new \DateTime());
+
+                $em->persist($log);
+                $em->flush();
+                return false;
+            }
+
+            $user->setData($responseObject);
+            $em->persist($user);
+            $em->flush();
+
+            return $responseObject;
+        } else {
+            $log = new Log();
+            $log->setAction('get access token by code');
+            $log->setData([
+                'status_code' => $statusCode,
+                'content' => $response->getBody()->getContents()
+            ]);
+            $log->setDate(new \DateTime());
+            return false;
+        }
+    }
+
+    /**
      * @param $access_token
      * @param $openid
      * @return bool|mixed
@@ -178,4 +236,6 @@ class WeChat
             return false;
         }
     }
+
+
 }

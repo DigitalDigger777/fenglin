@@ -107,6 +107,35 @@ class MockOauthController extends Controller
 
                     $em->persist($log);
                     $em->flush();
+
+                    if ($responseObjectUserInfo->errcode == '40001') {
+                        $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+                            'openId' => $openid
+                        ]);
+
+                        $wechatService->refreshAccessToken($user);
+
+                        $userData = $user->getData();
+                        //print_r($userData);
+                        $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
+
+                        if (property_exists($responseObjectUserInfo, 'errcode')) {
+                            $log = new Log();
+                            $log->setAction('get userinfo');
+                            $log->setData($responseObjectUserInfo);
+                            $log->setDate(new \DateTime());
+
+                            $em->persist($log);
+                            $em->flush();
+                        } else {
+                            $user->setWechatData($responseObjectUserInfo);
+
+                            $em->persist($user);
+                            $em->flush();
+
+                        }
+
+                    }
                 } else {
 
                     $user->setWechatData($responseObjectUserInfo);
