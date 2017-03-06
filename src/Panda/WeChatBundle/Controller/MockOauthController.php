@@ -68,6 +68,8 @@ class MockOauthController extends Controller
                 $user->setStatus(1);
                 $user->setEmail(md5($responseObject->openid) . '@mock.com');
                 $user->setPassword('');
+                $user->setOpenId($responseObject->openid);
+                $user->setData($responseObject);
 
                 $em->persist($user);
                 $em->flush();

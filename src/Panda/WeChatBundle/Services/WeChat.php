@@ -7,6 +7,9 @@
  */
 
 namespace Panda\WeChatBundle\Services;
+use GuzzleHttp\Client;
+use Panda\WeChatBundle\Entity\Log;
+
 
 /**
  * Class WeChat
@@ -14,6 +17,9 @@ namespace Panda\WeChatBundle\Services;
  */
 class WeChat
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     private $container;
 
     /**
@@ -78,5 +84,45 @@ class WeChat
         $url .= '?' . implode('&', $urlParts);
 
         return $url;
+    }
+
+    /**
+     * @param $code
+     * @param string $grand_type
+     * @return bool|mixed
+     */
+    public function getAccessTokenByCode($code, $grand_type = 'authorization_code')
+    {
+        /**
+         * @var \GuzzleHttp\Psr7\Response $response
+         */
+        $client = new Client([
+            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
+        ]);
+
+        $response = $client->request('GET', 'sns/oauth2/access_token', [
+            'query' => [
+                'appid'         => $this->container->getParameter('wechat_appid'),
+                'secret'        => $this->container->getParameter('wechat_secret'),
+                'code'          => $code,
+                'grant_type'    => $grand_type
+            ]
+        ]);
+
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode == 200) {
+            $content        = $response->getBody()->getContents();
+            return json_decode($content);
+        } else {
+            $log = new Log();
+            $log->setAction('get access token by code');
+            $log->setData([
+                'status_code' => $statusCode,
+                'content' => $response->getBody()->getContents()
+            ]);
+            $log->setDate(new \DateTime());
+            return false;
+        }
     }
 }

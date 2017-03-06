@@ -29,6 +29,14 @@ Panda\UserBundle\Entity\User:
             type: string
             column: api_key
             nullable: true
+        openId:
+            type: string
+            column: open_id
+            nullable: true
+        data:
+            type: json_array
+            column: data
+            nullable: true
     oneToMany:
         requestsRecoveryPassword:
             targetEntity: RequestRecoveryPassword

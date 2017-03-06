@@ -52,6 +52,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $apiKey;
 
     /**
+     * @var string
+     */
+    private $openId;
+
+    /**
+     * @var array
+     */
+    private $data;
+
+    /**
      * Get id
      *
      * @return integer
@@ -329,5 +339,39 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->apiKey = $apiKey;
     }
+
+    /**
+     * @return string
+     */
+    public function getOpenId()
+    {
+        return $this->openId;
+    }
+
+    /**
+     * @param string $openId
+     */
+    public function setOpenId($openId)
+    {
+        $this->openId = $openId;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+
 }
 
