@@ -4,6 +4,7 @@ namespace Panda\WeChatBundle\Controller;
 
 use GuzzleHttp\Client;
 use Panda\UserBundle\Entity\User;
+use Panda\WeChatBundle\Entity\Log;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +21,20 @@ class MockOauthController extends Controller
     {
         //http://dev.fenglin/app_dev.php/mock-wechat-oauth/connect/oauth2/authorize?appid=wx70d2ff5978524a23&redirect_uri=http%3A%2F%2Fdev.fenglin%2Fapp_dev.php%2Fpanda-we-chat%2Fmock-oauth%2Fget-code-response&response_type=code&scope=snsapi_userinfo&state=123
         //on this acction wechat redirect after user allow permission
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+
+        $log = new Log();
+        $log->setAction('get_code');
+        $log->setData([
+            'code' => $request->query->get('code', 0),
+            'state' => $request->query->get('state', 0)
+        ]);
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush();
 
         $client = new Client([
             'base_uri' => $this->container->getParameter('wechat_base_uri_api')
@@ -41,10 +56,7 @@ class MockOauthController extends Controller
             $responseObject = json_decode($content);
             $message        = 'success';
 
-            /**
-             * @var \Doctrine\ORM\EntityManager $em
-             */
-            $em = $this->getDoctrine()->getManager();
+
             $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
                 'apiKey' => md5($responseObject->openid)
             ]);

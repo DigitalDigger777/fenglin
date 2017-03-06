@@ -21,8 +21,11 @@ class CustomMenuController extends Controller
     {
         /**
          * @var \Panda\WeChatBundle\WeChatAPI\AccessToken $accessToken
+         * @var \Panda\WeChatBundle\Services\WeChat $wechatService
          */
         $accessToken = $this->get('we_chat_api.access_token');
+        $wechatService = $this->get('wechat');
+
         $appId = $this->container->getParameter('wechat_appid');
 
         $client = new Client([
@@ -37,8 +40,8 @@ class CustomMenuController extends Controller
                 'button' => [
                     [
                         "type" => "view",
-                        "name" => "Home",
-                        "url"  => "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appId&redirect_uri=http%3A%2F%2Ffenglin.joinppcg.com&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+                        "name" => "Consumer",
+                        "url"  => $wechatService->buildAuthUrl('snsapi_userinfo', 123)
                     ],
                     [
                         "type" => "view",

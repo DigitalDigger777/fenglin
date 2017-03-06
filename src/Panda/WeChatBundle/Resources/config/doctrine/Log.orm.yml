@@ -1,0 +1,19 @@
+Panda\WeChatBundle\Entity\Log:
+    type: entity
+    table: panda_wechat_log
+    repositoryClass: Panda\WeChatBundle\Repository\LogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        action:
+            type: string
+            length: 255
+        data:
+            type: json_array
+        date:
+            type: datetime
+    lifecycleCallbacks: {  }
