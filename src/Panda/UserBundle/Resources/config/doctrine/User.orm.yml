@@ -37,6 +37,10 @@ Panda\UserBundle\Entity\User:
             type: json_array
             column: data
             nullable: true
+        wechatData:
+            type: json_array
+            column: wechat_data
+            nullable: true
     oneToMany:
         requestsRecoveryPassword:
             targetEntity: RequestRecoveryPassword

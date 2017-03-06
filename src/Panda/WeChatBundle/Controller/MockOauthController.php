@@ -23,7 +23,9 @@ class MockOauthController extends Controller
         //on this acction wechat redirect after user allow permission
         /**
          * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\WeChatBundle\Services\WeChat $wechatService
          */
+        $wechatService = $this->get('wechat');
         $em = $this->getDoctrine()->getManager();
 
         $log = new Log();
@@ -35,6 +37,53 @@ class MockOauthController extends Controller
         $log->setDate(new \DateTime());
         $em->persist($log);
         $em->flush();
+
+        $code = $request->query->get('code');
+        $responseObject = $wechatService->getAccessTokenByCode($code);
+
+        if ($responseObject) {
+            if (property_exists($responseObject, 'errcode')) {
+                $log = new Log();
+                $log->setAction('get access token by code');
+                $log->setData($responseObject);
+                $log->setDate(new \DateTime());
+
+                $em->persist($log);
+                $em->flush();
+            } else {
+
+                $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
+
+                if (property_exists($responseObjectUserInfo, 'errcode')) {
+                    $log = new Log();
+                    $log->setAction('get userinfo');
+                    $log->setData($responseObject);
+                    $log->setDate(new \DateTime());
+
+                    $em->persist($log);
+                    $em->flush();
+                } else {
+                    $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+                        'apiKey' => md5($responseObject->openid)
+                    ]);
+
+                    if (!$user) {
+                        $user = new User();
+                        $user->setApiKey(md5($responseObject->openid));
+                        $user->setRole('ROLE_CONSUMER');
+                        $user->setStatus(1);
+                        $user->setEmail(md5($responseObject->openid) . '@mock.com');
+                        $user->setPassword('');
+                        $user->setOpenId($responseObject->openid);
+                        $user->setData($responseObject);
+                        $user->setWechatData($responseObjectUserInfo);
+
+                        $em->persist($user);
+                        $em->flush();
+                    }
+                }
+            }
+        }
 
         $client = new Client([
             'base_uri' => $this->container->getParameter('wechat_base_uri_api')
@@ -49,41 +98,6 @@ class MockOauthController extends Controller
             ]
         ]);
 
-        $statusCode = $response->getStatusCode();
-
-        if ($statusCode == 200) {
-            $content        = $response->getBody()->getContents();
-            $responseObject = json_decode($content);
-            $message        = 'success';
-
-
-            $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
-                'apiKey' => md5($responseObject->openid)
-            ]);
-
-            if (!$user) {
-                $user = new User();
-                $user->setApiKey(md5($responseObject->openid));
-                $user->setRole('ROLE_CONSUMER');
-                $user->setStatus(1);
-                $user->setEmail(md5($responseObject->openid) . '@mock.com');
-                $user->setPassword('');
-                $user->setOpenId($responseObject->openid);
-                $user->setData($responseObject);
-
-                $em->persist($user);
-                $em->flush();
-            }
-
-        } else {
-            $accessToken = '';
-            $message = 'error';
-        }
-
-//        $response = new JsonResponse([
-//            'message'       => $message,
-//            'response'      => $responseObject
-//        ], $statusCode);
 
         $response = new RedirectResponse(
             $this->generateUrl('fenglin_fenglin_homepage', [

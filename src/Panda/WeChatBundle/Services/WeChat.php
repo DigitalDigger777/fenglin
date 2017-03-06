@@ -125,4 +125,42 @@ class WeChat
             return false;
         }
     }
+
+    /**
+     * @param $access_token
+     * @param $openid
+     * @return bool|mixed
+     */
+    public function getUserInfo($access_token, $openid)
+    {
+        /**
+         * @var \GuzzleHttp\Psr7\Response $response
+         */
+        $client = new Client([
+            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
+        ]);
+
+        $response = $client->request('GET', 'sns/userinfo', [
+            'query' => [
+                'access_token'  => $access_token,
+                'openid'        => $openid
+            ]
+        ]);
+
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode == 200) {
+            $content        = $response->getBody()->getContents();
+            return json_decode($content);
+        } else {
+            $log = new Log();
+            $log->setAction('get user info');
+            $log->setData([
+                'status_code' => $statusCode,
+                'content' => $response->getBody()->getContents()
+            ]);
+            $log->setDate(new \DateTime());
+            return false;
+        }
+    }
 }
