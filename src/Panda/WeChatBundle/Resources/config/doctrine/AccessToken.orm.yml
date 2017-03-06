@@ -1,0 +1,16 @@
+Panda\WeChatBundle\Entity\AccessToken:
+    type: entity
+    table: panda_wechat_access_token
+    repositoryClass: Panda\WeChatBundle\Repository\AccessTokenRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        data:
+            type: json_array
+        date:
+            type: datetime
+    lifecycleCallbacks: {  }

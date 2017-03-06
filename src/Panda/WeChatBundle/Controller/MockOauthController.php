@@ -24,79 +24,94 @@ class MockOauthController extends Controller
         /**
          * @var \Doctrine\ORM\EntityManager $em
          * @var \Panda\WeChatBundle\Services\WeChat $wechatService
+         * @var \Panda\UserBundle\Entity\User $user
+         * @var \Panda\WeChatBundle\Entity\AccessToken $accessToken
          */
-        $wechatService = $this->get('wechat');
+        $wechatService  = $this->get('wechat');
+        $code           = $request->query->get('code', 0);
+
         $em = $this->getDoctrine()->getManager();
 
         $log = new Log();
         $log->setAction('get_code');
         $log->setData([
-            'code' => $request->query->get('code', 0),
+            'code' => $code,
             'state' => $request->query->get('state', 0)
         ]);
         $log->setDate(new \DateTime());
         $em->persist($log);
         $em->flush();
 
-        $code = $request->query->get('code');
-        $responseObject = $wechatService->getAccessTokenByCode($code);
 
-        if ($responseObject) {
-            if (property_exists($responseObject, 'errcode')) {
-                $log = new Log();
-                $log->setAction('get access token by code');
-                $log->setData($responseObject);
-                $log->setDate(new \DateTime());
+        if ($openid = $request->cookies->get('openid')) {
+            $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+                'openId' => $openid
+            ]);
 
-                $em->persist($log);
-                $em->flush();
-            } else {
+            if (!$user) {
+                $responseObject = $wechatService->getAccessTokenByCode($code);
 
-                $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
+                if ($responseObject) {
+                    $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
+
+                    if (property_exists($responseObjectUserInfo, 'errcode')) {
+                        $log = new Log();
+                        $log->setAction('get userinfo');
+                        $log->setData($responseObject);
+                        $log->setDate(new \DateTime());
+
+                        $em->persist($log);
+                        $em->flush();
+                    } else {
+                        $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+                            'apiKey' => md5($responseObject->openid)
+                        ]);
+
+                        if (!$user) {
+                            $user = new User();
+                            $user->setApiKey(md5($responseObject->openid));
+                            $user->setRole('ROLE_CONSUMER');
+                            $user->setStatus(1);
+                            $user->setEmail(md5($responseObject->openid) . '@mock.com');
+                            $user->setPassword('');
+                            $user->setOpenId($responseObject->openid);
+                            $user->setData($responseObject);
+                            $user->setWechatData($responseObjectUserInfo);
+
+                            $em->persist($user);
+                            $em->flush();
+                        }
+                    }
+                }
+            } elseif(!$user->getWechatData()) {
+
+                $userData = $user->getData();
+
+                $responseObjectUserInfo = $wechatService->getUserInfo($userData->access_token, $user->getOpenId());
 
                 if (property_exists($responseObjectUserInfo, 'errcode')) {
                     $log = new Log();
                     $log->setAction('get userinfo');
-                    $log->setData($responseObject);
+                    $log->setData($responseObjectUserInfo);
                     $log->setDate(new \DateTime());
 
                     $em->persist($log);
                     $em->flush();
                 } else {
-                    $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
-                        'apiKey' => md5($responseObject->openid)
-                    ]);
 
-                    if (!$user) {
-                        $user = new User();
-                        $user->setApiKey(md5($responseObject->openid));
-                        $user->setRole('ROLE_CONSUMER');
-                        $user->setStatus(1);
-                        $user->setEmail(md5($responseObject->openid) . '@mock.com');
-                        $user->setPassword('');
-                        $user->setOpenId($responseObject->openid);
-                        $user->setData($responseObject);
-                        $user->setWechatData($responseObjectUserInfo);
+                    $user->setWechatData($responseObjectUserInfo);
 
-                        $em->persist($user);
-                        $em->flush();
-                    }
+                    $em->persist($user);
+                    $em->flush();
+
                 }
+                //$responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
             }
         }
 
-        $client = new Client([
-            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
-        ]);
 
-        $response = $client->request('GET', 'sns/oauth2/access_token', [
-            'query' => [
-                'appid'         => $this->container->getParameter('wechat_appid'),
-                'secret'        => $this->container->getParameter('wechat_secret'),
-                'code'          => $request->query->get('code'),
-                'grant_type'    => 'authorization_code'
-            ]
-        ]);
+
+
 
 
         $response = new RedirectResponse(
@@ -105,13 +120,13 @@ class MockOauthController extends Controller
                 '_fragment'=>'consumer/home'
             ])
         );
-        if (!$request->cookies->get('access_token')) {
-            $cookie = new Cookie('access_token', $responseObject->access_token);
-            $response->headers->setCookie($cookie);
-        }
+//        if (!$request->cookies->get('access_token')) {
+//            $cookie = new Cookie('access_token', $responseObject->access_token);
+//            $response->headers->setCookie($cookie);
+//        }
 
-        if (!$request->cookies->get('apikey')) {
-            $cookie = new Cookie('apikey', $user->getApiKey());
+        if (!$request->cookies->get('openid')) {
+            $cookie = new Cookie('openid', $user->getOpenId());
             $response->headers->setCookie($cookie);
         }
 

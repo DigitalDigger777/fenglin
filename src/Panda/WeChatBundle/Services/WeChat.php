@@ -8,6 +8,7 @@
 
 namespace Panda\WeChatBundle\Services;
 use GuzzleHttp\Client;
+use Panda\WeChatBundle\Entity\AccessToken;
 use Panda\WeChatBundle\Entity\Log;
 
 
@@ -89,11 +90,12 @@ class WeChat
     /**
      * @param $code
      * @param string $grand_type
-     * @return bool|mixed
+     * @return bool|mixed|AccessToken
      */
     public function getAccessTokenByCode($code, $grand_type = 'authorization_code')
     {
         /**
+         * @var \Doctrine\ORM\EntityManager $em
          * @var \GuzzleHttp\Psr7\Response $response
          */
         $client = new Client([
@@ -113,7 +115,20 @@ class WeChat
 
         if ($statusCode == 200) {
             $content        = $response->getBody()->getContents();
-            return json_decode($content);
+            $responseObject = json_decode($content);
+
+            if (property_exists($responseObject, 'errcode')) {
+                $log = new Log();
+                $log->setAction('get access token by code');
+                $log->setData($responseObject);
+                $log->setDate(new \DateTime());
+
+                $em->persist($log);
+                $em->flush();
+                return false;
+            }
+
+            return $responseObject;
         } else {
             $log = new Log();
             $log->setAction('get access token by code');
