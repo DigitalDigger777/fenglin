@@ -152,6 +152,7 @@ class WeChat
          * @var \Doctrine\ORM\EntityManager $em
          * @var \GuzzleHttp\Psr7\Response $response
          */
+        $em = $this->container->get('doctrine')->getManager();
         $client = new Client([
             'base_uri' => $this->container->getParameter('wechat_base_uri_api')
         ]);
