@@ -43,14 +43,12 @@ class MockOauthController extends Controller
         $em->flush();
 
         $openid = $request->cookies->get('openid');
-        
+
         if ($openid) {
             $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
                 'openId' => $openid
             ]);
 
-            echo $user->getId();
-            exit;
         } else {
             $user = null;
         }
@@ -99,6 +97,7 @@ class MockOauthController extends Controller
                 $userData = $user->getData();
 
                 $responseObjectUserInfo = $wechatService->getUserInfo($userData->access_token, $user->getOpenId());
+                print_r($responseObjectUserInfo); exit;
 
                 if (property_exists($responseObjectUserInfo, 'errcode')) {
                     $log = new Log();
