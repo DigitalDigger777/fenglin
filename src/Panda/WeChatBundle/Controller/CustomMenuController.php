@@ -46,7 +46,7 @@ class CustomMenuController extends Controller
                     [
                         "type" => "view",
                         "name" => "Shopper",
-                        "url"  => "http://fenglin.joinppcg.com/shopper#shopper/home"
+                        "url"  => "http://wxfenling.com/shopper#shopper/home"
                     ]
                 ]
             ])
