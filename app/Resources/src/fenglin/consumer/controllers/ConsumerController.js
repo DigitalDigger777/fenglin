@@ -42,7 +42,7 @@ define([
         },
         homePage: function(){
             console.log('Consumer home page');
-
+            alert('Consumer home page');
             var shopperCollection  = new ShopperCollections();
             shopperCollection.fetch();
 
