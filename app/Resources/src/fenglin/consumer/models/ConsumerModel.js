@@ -4,8 +4,8 @@
 
 define(['backbone'], function(Backbone){
     var reg = /\?apikey=([\w\W]+)/;
-    var match = reg.exec(window.location.search);;
-    alert(match[1]);
+    var match = reg.exec(location.search);
+
     return Backbone.Model.extend({
         urlRoot: Routing.generate('panda_consumer_rest_index', {
             apikey: match[1]
