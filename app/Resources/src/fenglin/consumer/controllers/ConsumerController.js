@@ -19,7 +19,6 @@ define([
 
         },
         memberNumberPage: function(){
-            alert(location.search);
             var consumerModel = new ConsumerModel();
             consumerModel.fetch({
                 success: function(model, response){
