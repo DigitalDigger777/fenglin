@@ -3,8 +3,9 @@
  */
 
 define(['marionette',
-        'consumer/views/core/MenuMemberIdView'
-], function(Marionette, MenuMemberIdView) {
+        'consumer/views/core/MenuMemberIdView',
+        'consumer/models/ConsumerModel'
+], function(Marionette, MenuMemberIdView, ConsumerModel) {
     return Marionette.View.extend({
         el:'#contentContainer',
         template: '#memberIdView',
@@ -14,6 +15,8 @@ define(['marionette',
             $('#searchBarContainer').empty();
             $('#paginationContainer').empty();
             $('#menuContainer').empty();
+
+            var model = new ConsumerModel();
 
             var menuMemberIdView = new MenuMemberIdView();
             menuMemberIdView.render();

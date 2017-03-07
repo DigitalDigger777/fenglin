@@ -95,54 +95,11 @@ class MockOauthController extends Controller
                 } else {
                     $user->setData($responseObject);
                     $user->setWechatData($responseObjectUserInfo);
-                    
+
                     $em->persist($user);
                     $em->flush();
                 }
             }
-//
-//            if (!$wechatData) {
-//                $userData = $user->getData();
-//                //print_r($userData);
-//                $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
-//
-//                if (property_exists($responseObjectUserInfo, 'errcode')) {
-//
-//                    $wechatService->writeToLog('get userinfo', $responseObjectUserInfo);
-//
-//                    if ($responseObjectUserInfo->errcode == '40001') {
-//                        $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
-//                            'openId' => $openid
-//                        ]);
-//
-//                        $wechatService->refreshAccessToken($user);
-//
-//                        $userData = $user->getData();
-//                        //print_r($userData);
-//                        $responseObjectUserInfo = $wechatService->getUserInfo($userData['access_token'], $user->getOpenId());
-//
-//                        if (property_exists($responseObjectUserInfo, 'errcode')) {
-//
-//                            $wechatService->writeToLog('get userinfo', $responseObjectUserInfo);
-//                        } else {
-//                            $user->setWechatData($responseObjectUserInfo);
-//
-//                            $em->persist($user);
-//                            $em->flush();
-//
-//                        }
-//
-//                    }
-//                } else {
-//
-//                    $user->setWechatData($responseObjectUserInfo);
-//
-//                    $em->persist($user);
-//                    $em->flush();
-//
-//                }
-//            }
-
         }
 
 

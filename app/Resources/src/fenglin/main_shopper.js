@@ -5,7 +5,8 @@
 define([
     'backbone',
     'marionette',
-    'shopper/routers/ShopperRouter'
+    'shopper/routers/ShopperRouter',
+    'shopper/routers/ConsumerRouter'
 ], function(Backbone){
 
 

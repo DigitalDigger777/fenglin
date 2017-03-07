@@ -1,0 +1,147 @@
+@import "fenglin-font.css";
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+body,
+.page {
+  background-color: #f8f8f8;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.fa.mrg-r {
+  margin-right: 10px;
+}
+.footer-group-button {
+  bottom: 0;
+}
+.footer-group-button .weui-btn-my {
+  margin: 0;
+  border-radius: 0;
+  background-color: #fff;
+}
+.footer-group-button .weui-btn:after {
+  border-radius: 0;
+}
+.footer-group-two-button .weui-btn {
+  margin: 0;
+  border-radius: 0;
+  background-color: #fff;
+  width: 50%;
+  float: left;
+}
+.footer-group-three-button .weui-btn {
+  margin: 0;
+  border-radius: 0;
+  background-color: #fff;
+  width: 31.5%;
+  float: left;
+}
+.footer-group-three-button .weui-btn:first-child + .weui-btn {
+  width: 37%;
+}
+.weui-footer .pager {
+  margin-bottom: 20px;
+}
+.weui-footer .pager .weui-btn_primary {
+  color: #fff;
+}
+.button-sp-area.mrg-b {
+  margin-bottom: 15px;
+}
+.button-sp-area.mrg-b .weui-btn {
+  width: 32%;
+}
+.alert {
+  margin-top: 200px;
+  text-align: center;
+  line-height: 2em;
+}
+.wrap-form {
+  margin-top: 200px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.wrap-form.mrg-t {
+  margin-top: 0;
+}
+.col-2 {
+  width: 50%;
+  float: left;
+}
+.weui-media-box__thumb.circle {
+  width: 60px;
+  height: auto;
+  border-radius: 30px;
+}
+#searchBar {
+  margin-bottom: 10px;
+}
+#searchBar .weui-search-bar__label span,
+#searchBar .weui-icon-search,
+#searchBar .weui-search-bar__box .weui-search-bar__input {
+  font-size: 18px;
+}
+#searchBar .weui-search-bar__box {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.weui-btn_primary.mrg-b {
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.member-detail {
+  text-align: center;
+}
+.for-payment {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.img-shopper {
+  width: 100px;
+  margin: 10px;
+}
+.weui-cells_form-my .weui-label {
+  width: 140px;
+  color: #aaa;
+}
+.weui-cells_form-my .weui-cell {
+  height: 40px;
+}
+.weui-cells_form-my .weui-cell_select,
+.weui-cells_form-my .weui-select {
+  height: 56px;
+}
+.weui-cells_form-my .weui-cells {
+  margin-top: 0;
+}
+.weui-cells.mrg-t {
+  margin-top: 0;
+}
+.dashed-line-right {
+  border-right: 1px dashed #9e9e9c;
+}
+.no-padding-top-bottom {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.no-padding-top-bottom .weui-media-box__bd .clearfix > div {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.page__bd.mrg-b {
+  margin-bottom: 40px;
+}
+.pager.mrg-b {
+  margin-bottom: 60px;
+}
