@@ -1,0 +1,7 @@
+panda_consumer_rest_index:
+    path:     /{id}
+    defaults: { _controller: PandaConsumerBundle:Rest/Consumer:index, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true

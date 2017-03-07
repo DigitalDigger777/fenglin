@@ -3,10 +3,13 @@
  */
 
 define(['backbone'], function(Backbone){
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+    var reg = /\?apikey=([\w\W]+)/;
+    var match = reg.exec(window.location.search);;
 
     return Backbone.Model.extend({
-        urlRoot: urlRoot + 'en/pass/rest/coupon'
+        urlRoot: Routing.generate('panda_consumer_rest_index', {
+            apikey: match[1]
+        })
     });
 
 });
