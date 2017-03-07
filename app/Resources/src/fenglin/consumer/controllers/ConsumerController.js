@@ -29,7 +29,7 @@ define([
                     memberIdView.render();
                 },
                 error: function(model, response){
-                    console.log('error')
+                    alert('error');
                 }
             });
         },
