@@ -66,7 +66,14 @@ class MockOauthController extends Controller
 
                 } else {
 
-                    $user = new User();
+                    $user = $em->getRepository('PandaUserBundle:User')->findOneBy([
+                        'openId' => $responseObject->openid
+                    ]);
+
+                    if (!$user) {
+                        $user = new User();
+                    }
+
                     $user->setApiKey(md5($responseObject->openid));
                     $user->setRole('ROLE_CONSUMER');
                     $user->setStatus(1);
