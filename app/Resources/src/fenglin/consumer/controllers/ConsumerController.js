@@ -19,19 +19,26 @@ define([
 
         },
         memberNumberPage: function(){
-            var consumerModel = new ConsumerModel();
-            consumerModel.fetch({
-                success: function(model, response){
-
-                    var memberIdView = new MemberIdView({
-                        model: model
-                    });
-                    memberIdView.render();
-                },
-                error: function(model, response){
-                    alert('error');
-                }
+            //var consumerModel = new ConsumerModel();
+            //consumerModel.fetch({
+            //    success: function(model, response){
+            //
+            //        var memberIdView = new MemberIdView({
+            //            model: model
+            //        });
+            //        memberIdView.render();
+            //    },
+            //    error: function(model, response){
+            //        alert('error');
+            //    }
+            //});
+            var model = new ConsumerModel({
+                openId: '123456'
             });
+            var memberIdView = new MemberIdView({
+                model: model
+            });
+            memberIdView.render();
         },
         homePage: function(){
             console.log('Consumer home page');
