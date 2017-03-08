@@ -7,9 +7,14 @@ define(['backbone'], function(Backbone){
     var match = reg.exec(location.search);
 
     return Backbone.Model.extend({
-        urlRoot: Routing.generate('panda_consumer_rest_index', {
-            apikey: match[1]
-        })
+        apikey: match[1],
+        urlRoot: Routing.generate('panda_consumer_rest_index'),
+        url: function(){
+            var url = this.urlRoot + '/' + this.id;
+            url = url + "?apikey=" + match[1];
+
+            return url;
+        }
     });
 
 });

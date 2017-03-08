@@ -77,6 +77,9 @@
             <div id="menuContainer" class="weui-footer weui-footer_fixed-bottom footer-group-button">
 
             </div>
+
+            <div id="loadToastContainer" style="display:none;"></div>
+            <div id="errorToastContainer" style="display:none;"></div>
         </div>
     </div>
 
@@ -98,5 +101,6 @@
     {% include 'fenglin/shopper/payment/payment_confirm.html.twig' %}
     {% include 'fenglin/shopper/shopper/setting.html.twig' %}
     {% include 'fenglin/shopper/shopper/home.html.twig' %}
+    {% include 'fenglin/consumer/core/toast.html.twig' %}
 </body>
 </html>

@@ -80,7 +80,11 @@ class ConsumerController extends Controller
             $this->save($request);
         }
         if ($this->getMethod($request) == 'GET') {
-            $this->load($request);
+            if (!$request->get('id')) {
+                $this->load($request);
+            } else {
+                $this->search($request);
+            }
         }
         if ($this->getMethod($request) == 'DELETE') {
             $this->delete($request);
@@ -141,6 +145,7 @@ class ConsumerController extends Controller
             $this->setMessage($e->getMessage());
         }
     }
+
     /**
      * @param Request $request
      */
@@ -166,6 +171,34 @@ class ConsumerController extends Controller
         } catch (\Exception $e) {
             $this->setCode(500);
             $this->setMessage($e->getMessage() . ' ' . $email);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function search(Request $request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+        $id = $request->get('id');
+
+        $qb = $em->createQueryBuilder();
+        $qb->select('u')
+            ->from('PandaUserBundle:User', 'u')
+            ->where($qb->expr()->eq('u.id', ':id'))
+            ->setParameter(':id', $id);
+
+        $query = $qb->getQuery();
+
+        try {
+            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+            $this->setData($data);
+        } catch (\Exception $e) {
+            $this->setCode(500);
+            $this->setMessage($e->getMessage() . ' ' . $id);
         }
     }
 

@@ -8,19 +8,26 @@ define([
     'consumer/views/consumer/MemberIdView',
     'consumer/models/ConsumerModel',
     'consumer/views/core/LoadingToastView',
-    'consumer/views/core/ErrorToastView'
+    'consumer/views/core/ErrorToastView',
+    'consumer/views/core/SearchBarView'
 ], function(ShopperCompositeView,
             ShopperCollections,
             MemberIdView,
             ConsumerModel,
             LoadingToastView,
-            ErrorToastView){
+            ErrorToastView,
+            SearchBarView){
 
     var loadToast  = new LoadingToastView();
     loadToast.render();
 
     var errorToast = new ErrorToastView();
     errorToast.render();
+    console.log(ShopperCompositeView);
+
+    $('#searchBarContainer').empty();
+    var searchBarView = new SearchBarView()
+    searchBarView.render();
 
     return {
         getToken: function(){

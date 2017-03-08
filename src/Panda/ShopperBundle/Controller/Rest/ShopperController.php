@@ -127,9 +127,12 @@ class ShopperController extends Controller
 //            ->from('PandaShopperBundle:Shopper', 's');
 //        $count = $qb->getQuery()->getSingleScalarResult();
 
+        $search = $request->query->get('search');
 
         $qb->select('s')
-            ->from('PandaShopperBundle:Shopper', 's');
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->where($qb->expr()->like('s.name', ':name'))
+            ->setParameter(':name', '%' . $search . '%');
 
         $result = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
 
