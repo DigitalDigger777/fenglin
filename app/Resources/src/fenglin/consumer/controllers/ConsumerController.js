@@ -6,13 +6,21 @@ define([
     'consumer/views/shopper/ShopperCompositeView',
     'consumer/collections/ShopperCollections',
     'consumer/views/consumer/MemberIdView',
-    'consumer/models/ConsumerModel'
+    'consumer/models/ConsumerModel',
+    'consumer/views/core/LoadingToastView',
+    'consumer/views/core/ErrorToastView'
 ], function(ShopperCompositeView,
             ShopperCollections,
             MemberIdView,
-            ConsumerModel){
+            ConsumerModel,
+            LoadingToastView,
+            ErrorToastView){
 
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+    var loadToast  = new LoadingToastView();
+    loadToast.render();
+
+    var errorToast = new ErrorToastView();
+    errorToast.render();
 
     return {
         getToken: function(){
@@ -20,6 +28,7 @@ define([
         },
         memberNumberPage: function(){
             console.log('render member page');
+            loadToast.show();
             var consumerModel = new ConsumerModel();
             consumerModel.fetch({
                 success: function(model, response){
@@ -29,9 +38,10 @@ define([
                         model: model
                     });
                     memberIdView.render();
+                    loadToast.hide();
                 },
                 error: function(model, response){
-                    console.log(response);
+                    errorToast.show();
                 }
             });
 
@@ -39,13 +49,21 @@ define([
         homePage: function(){
             console.log('Consumer home page');
 
-            var shopperCollection  = new ShopperCollections();
-            shopperCollection.fetch();
+            loadToast.show();
 
-            var shopperList = new ShopperCompositeView({
-                collection: shopperCollection
+            var shopperCollection  = new ShopperCollections();
+            shopperCollection.fetch({
+                success: function(){
+                    var shopperList = new ShopperCompositeView({
+                        collection: shopperCollection
+                    });
+                    shopperList.render();
+                    loadToast.hide();
+                },
+                error: function(){
+                    errorToast.show();
+                }
             });
-            shopperList.render();
 
 
 

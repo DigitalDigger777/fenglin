@@ -8,7 +8,8 @@ define(['marionette', 'consumer/controllers/ConsumerController'], function(Mario
         controller: ConsumerController,
         appRoutes: {
             'consumer/home':'homePage',
-            'consumer/show-member-number': 'memberNumberPage'
+            'consumer/show-member-number': 'memberNumberPage',
+            'consumer/member-id': 'memberNumberPage'
         }
     });
 
