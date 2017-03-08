@@ -19,9 +19,11 @@ define([
 
         },
         memberNumberPage: function(){
+            console.log('render member page');
             var consumerModel = new ConsumerModel();
             consumerModel.fetch({
                 success: function(model, response){
+                    console.log('success response:', response);
 
                     var memberIdView = new MemberIdView({
                         model: model
@@ -29,7 +31,7 @@ define([
                     memberIdView.render();
                 },
                 error: function(model, response){
-                    alert('error');
+                    console.log(response);
                 }
             });
 
