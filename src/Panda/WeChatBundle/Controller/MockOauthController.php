@@ -29,6 +29,7 @@ class MockOauthController extends Controller
          */
         $wechatService  = $this->get('wechat');
         $code           = $request->query->get('code', 0);
+        $state          = $request->query->get('state', 0);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -110,12 +111,21 @@ class MockOauthController extends Controller
         }
 
 
-        $response = new RedirectResponse(
-            $this->generateUrl('fenglin_fenglin_homepage', [
-                'apikey' => $user->getApiKey(),
-                '_fragment'=>'consumer/home'
-            ])
-        );
+        if ($state == 'consumer') {
+            $response = new RedirectResponse(
+                $this->generateUrl('fenglin_fenglin_homepage', [
+                    'apikey' => $user->getApiKey(),
+                    '_fragment' => 'consumer/home'
+                ])
+            );
+        } else {
+            $response = new RedirectResponse(
+                $this->generateUrl('fenglin_fenglin_shopper', [
+                    'apikey' => $user->getApiKey(),
+                    '_fragment' => 'shopper/home'
+                ])
+            );
+        }
 
 
         if (!$request->cookies->get('openid')) {
