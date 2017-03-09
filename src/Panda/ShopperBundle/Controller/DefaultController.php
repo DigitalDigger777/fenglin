@@ -32,7 +32,13 @@ class DefaultController extends Controller
 
             if ($password == $shopper->getPassword()) {
                 return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+            } else {
+                return new Response('Password not correct', 403);
             }
+
+
+        } else {
+            return new Response('Shopper not found', 403);
         }
 
         return new Response('Phone number or password is not correct', 403);
