@@ -10,6 +10,8 @@ define(['backbone'], function(Backbone){
         apikey: match[1],
         urlRoot: Routing.generate('panda_consumer_rest_index'),
         url: function(){
+            this.id = this.id == undefined ? 0 : this.id;
+
             var url = this.urlRoot + '/' + this.id;
             url = url + "?apikey=" + match[1];
 
