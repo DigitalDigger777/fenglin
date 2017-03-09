@@ -29,8 +29,7 @@ security:
     access_control:
         - { path: ^/mock-wechat-oauth/, roles: ROLE_ANONYMOUSLY}
         - { path: ^/shopper, roles: ROLE_SHOPPER }
-        - { path: ^/, roles: ROLE_CONSUMER }
-        - { path: ^/, roles: ROLE_SHOPPER }
+        - { path: ^/, roles: [ROLE_CONSUMER, ROLE_SHOPPER] }
 
 
             # activate different ways to authenticate
