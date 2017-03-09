@@ -19,20 +19,19 @@ define([
             SearchBarView){
 
     var loadToast  = new LoadingToastView();
-    loadToast.render();
-
     var errorToast = new ErrorToastView();
-    errorToast.render();
-    console.log(ShopperCompositeView);
-
-    $('#searchBarContainer').empty();
     var searchBarView = new SearchBarView()
-    searchBarView.render();
+
+    var initHome = function(){
+
+        loadToast.render();
+        errorToast.render();
+        $('#searchBarContainer').empty();
+        searchBarView.render();
+    };
 
     return {
-        getToken: function(){
 
-        },
         memberNumberPage: function(){
             console.log('render member page');
             loadToast.show();
@@ -48,6 +47,7 @@ define([
                     loadToast.hide();
                 },
                 error: function(model, response){
+                    loadToast.hide();
                     errorToast.show();
                 }
             });
@@ -55,6 +55,7 @@ define([
         },
         homePage: function(){
             console.log('Consumer home page');
+            initHome();
 
             loadToast.show();
 
@@ -64,16 +65,16 @@ define([
                     var shopperList = new ShopperCompositeView({
                         collection: shopperCollection
                     });
+
                     shopperList.render();
                     loadToast.hide();
                 },
                 error: function(){
+                    loadToast.hide();
                     errorToast.show();
                 }
             });
-
-
-
         }
+
     }
 });
