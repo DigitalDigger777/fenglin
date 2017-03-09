@@ -11,6 +11,11 @@ class Shopper extends User
     /**
      * @var string
      */
+    private $memberId;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -77,6 +82,23 @@ class Shopper extends User
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $consumerUseCashbacks;
+
+    /**
+     * @return string
+     */
+    public function getMemberId()
+    {
+        return $this->memberId;
+    }
+
+    /**
+     * @param string $memberId
+     */
+    public function setMemberId($memberId)
+    {
+        $this->memberId = $memberId;
+    }
+
 
     /**
      * Set name

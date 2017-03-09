@@ -3,6 +3,7 @@
 namespace Panda\WeChatBundle\Controller;
 
 use GuzzleHttp\Client;
+use Panda\ConsumerBundle\Entity\Consumer;
 use Panda\ShopperBundle\Entity\Shopper;
 use Panda\UserBundle\Entity\User;
 use Panda\WeChatBundle\Entity\Log;
@@ -74,7 +75,7 @@ class MockOauthController extends Controller
 
                     if ($state == 'consumer') {
                         if (!$user) {
-                            $user = new User();
+                            $user = new Consumer();
                         }
                     } elseif ($state == 'shopper') {
                         if (!$user) {
@@ -94,6 +95,7 @@ class MockOauthController extends Controller
                     $user->setOpenId($responseObject->openid);
                     $user->setData($responseObject);
                     $user->setWechatData($responseObjectUserInfo);
+                    $user->setMemberId(hexdec(md5($responseObject->openid)));
 
                     $em->persist($user);
                     $em->flush();

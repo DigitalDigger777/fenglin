@@ -2,6 +2,9 @@ Panda\ShopperBundle\Entity\Shopper:
     type: entity
     repositoryClass: Panda\ShopperBundle\Repository\ShopperRepository
     fields:
+        memberId:
+            type: string
+            length: 255
         name:
             type: string
             length: 255
