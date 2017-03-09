@@ -38,7 +38,7 @@ class DefaultController extends Controller
 
 
         } else {
-            return new Response('Shopper not found', 403);
+            return new Response('Shopper with tel ' . $tel . 'not found', 403);
         }
 
         return new Response('Phone number or password is not correct', 403);
