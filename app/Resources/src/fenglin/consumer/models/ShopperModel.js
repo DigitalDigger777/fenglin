@@ -3,10 +3,20 @@
  */
 
 define(['backbone'], function(Backbone){
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+    var reg = /\?apikey=([\w\W]+)/;
+    var match = reg.exec(location.search);
 
     return Backbone.Model.extend({
-        urlRoot: Routing.generate('panda_shopper_rest_index')
+        apikey: match[1],
+        urlRoot: Routing.generate('panda_shopper_rest_index'),
+        url: function(){
+            this.id = this.id == undefined ? 0 : this.id;
+
+            var url = this.urlRoot + '/' + this.id;
+            url = url + "?apikey=" + match[1];
+
+            return url;
+        }
     });
 
 });

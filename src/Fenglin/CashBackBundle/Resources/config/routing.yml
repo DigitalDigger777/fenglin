@@ -1,3 +1,7 @@
-fenglin_cash_back_homepage:
-    path:     /
-    defaults: { _controller: FenglinCashBackBundle:Default:index }
+#fenglin_cash_back_homepage:
+#    path:     /
+#    defaults: { _controller: FenglinCashBackBundle:Default:index }
+
+fenglin_cash_back_rest:
+    resource: "@FenglinCashBackBundle/Resources/config/routing/rest/cashback.yml"
+    prefix:   /rest/fenglin-cash-back/

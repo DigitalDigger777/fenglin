@@ -12,6 +12,10 @@ define([
         refreePage: function(){
             var refreeView = new RefreeView();
             refreeView.render();
+        },
+        confirmPage: function(){
+            var confirmView = new RefreeConfirmView();
+            confirmView.render();
         }
     };
 });

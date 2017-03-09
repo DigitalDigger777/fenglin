@@ -8,13 +8,19 @@ define([
     'shopper/views/cash_back/CashBackStatementCompositeView',
     'shopper/collections/CashBackConfirmCollection',
     'shopper/collections/CashBackStatementCollection',
-    'shopper/views/cash_back/CashBackConfirmCompositeView'
+    'shopper/views/cash_back/CashBackConfirmCompositeView',
+    'shopper/views/shopper/LoginView',
+    'shopper/views/shopper/InactiveReactiveAccountView',
+    'shopper/views/shopper/NewShopperView'
 ], function(ShopperHomeView,
             SettingView,
             CashBackStatementCompositeView,
             CashBackConfirmCollection,
             CashBackStatementCollection,
-            CashBackConfirmCompositeView){
+            CashBackConfirmCompositeView,
+            LoginView,
+            InactiveReactiveAccountView,
+            NewShopperView){
     var urlRoot = requirejs.s.contexts._.config.urlRoot;
 
     return {
@@ -58,6 +64,18 @@ define([
 
             var setting = new SettingView();
             setting.render();
+        },
+        loginPage: function(){
+            var login = new LoginView();
+            login.render();
+        },
+        inactiveReactiveAccount: function(id){
+            var inactiveReactiveAccountView = new InactiveReactiveAccountView();
+            inactiveReactiveAccountView.render();
+        },
+        newShopper: function(){
+            var newShopperView = new NewShopperView();
+            newShopperView.render();
         }
     };
 });

@@ -122,7 +122,7 @@ class MockOauthController extends Controller
             $response = new RedirectResponse(
                 $this->generateUrl('fenglin_fenglin_shopper', [
                     'apikey' => $user->getApiKey(),
-                    '_fragment' => 'shopper/home'
+                    '_fragment' => 'shopper/login'
                 ])
             );
         }

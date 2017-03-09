@@ -5,29 +5,44 @@
 
 define([
     'consumer/views/statement/StatementCompositeView',
-    'consumer/collections/StatementCollections'
-], function(StatementCompositeView, StatementCollections){
+    'consumer/collections/StatementCollections',
+    'consumer/models/ShopperModel'
+], function(StatementCompositeView, StatementCollections, ShopperModel){
 
     return {
         statementPage: function(id){
 
-            var collection = new StatementCollections([], {
-                id: id
-            });
+            var shopperModel = new ShopperModel();
 
-            collection.fetch({
-                success: function(collection, response){
-                    var statementView = new StatementCompositeView({
-                        collection: collection
+            shopperModel.set('id', id);
+            shopperModel.fetch({
+                success: function(shopperModel){
+                    var collection = new StatementCollections([], {
+                        id: id
                     });
-                    statementView.render();
 
-                    console.log('statement page');
+                    collection.fetch({
+                        success: function(collection, response){
+
+                            var statementView = new StatementCompositeView({
+                                model: shopperModel,
+                                collection: collection
+                            });
+                            statementView.render();
+
+                            console.log('statement page');
+                        },
+                        error: function(model, response){
+
+                        }
+                    });
                 },
-                error: function(model, response){
+                error: function(shopperModel){
 
                 }
             });
+
+
 
 
             //var menu = new MenuView();

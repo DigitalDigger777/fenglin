@@ -145,3 +145,19 @@ body,
 .pager.mrg-b {
   margin-bottom: 60px;
 }
+.shopper-logo {
+  text-align: center;
+  padding: 60px 0;
+}
+.shopper-logo .circle {
+  margin-bottom: 10px;
+}
+.shopper-logo .circle img {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+}
+.add-button {
+  margin: 30px 40px;
+  padding-bottom: 50px;
+}
