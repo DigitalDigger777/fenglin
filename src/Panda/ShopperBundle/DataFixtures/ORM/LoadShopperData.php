@@ -42,14 +42,14 @@ class LoadShopperData implements FixtureInterface, ContainerAwareInterface, Orde
      */
     private function loadShopper(ObjectManager $manager)
     {
-//        $encoder = $this->container->get('security.password_encoder');
+        $encoder = $this->container->get('security.password_encoder');
 
 
         $shopper = new Shopper();
-//        $password = $encoder->encodePassword($shopper, '1demo!');
+        $password = $encoder->encodePassword($shopper, '1demo!');
 
         $shopper->setEmail('shopper' . rand(0, 1000) . '@test.com');
-        $shopper->setPassword('');
+        $shopper->setPassword($password);
         $shopper->setName('Shopper ' . rand(1, 200000));
         $shopper->setLogo('fixture_resources/shopper/logo/1.png');
         $shopper->setAddress('C1070AAM Capital Federal, Piedras No 623, Piso2 Dto.4');

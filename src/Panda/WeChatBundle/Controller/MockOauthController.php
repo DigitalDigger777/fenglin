@@ -76,7 +76,11 @@ class MockOauthController extends Controller
                     }
 
                     $user->setApiKey(md5($responseObject->openid));
-                    $user->setRole('ROLE_CONSUMER');
+                    if ($state == 'consumer') {
+                        $user->setRole('ROLE_CONSUMER');
+                    } elseif($state == 'shopper') {
+                        $user->setRole('ROLE_SHOPPER');
+                    }
                     $user->setStatus(1);
                     $user->setEmail(md5($responseObject->openid) . '@mock.com');
                     $user->setPassword('');

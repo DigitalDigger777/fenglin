@@ -45,9 +45,7 @@ class ApiKeyUserProvider implements UserProviderInterface
             'apiKey' => $apiKey
         ]);
 
-
         if ($user) {
-
             return $user->getEmail();
         } else {
             return null;

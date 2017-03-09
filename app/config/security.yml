@@ -28,7 +28,9 @@ security:
 
     access_control:
         - { path: ^/mock-wechat-oauth/, roles: ROLE_ANONYMOUSLY}
+        - { path: ^/shopper, roles: ROLE_SHOPPER }
         - { path: ^/, roles: ROLE_CONSUMER }
+
 
             # activate different ways to authenticate
 
@@ -37,3 +39,6 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    encoders:
+           Panda\ShopperBundle\Entity\Shopper:
+               algorithm: md5
