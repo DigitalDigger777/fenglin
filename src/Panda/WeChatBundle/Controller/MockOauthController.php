@@ -95,7 +95,7 @@ class MockOauthController extends Controller
                     $user->setOpenId($responseObject->openid);
                     $user->setData($responseObject);
                     $user->setWechatData($responseObjectUserInfo);
-                    $user->setMemberId(hexdec(md5($responseObject->openid)));
+                    $user->setMemberId(crc32($responseObject->openid));
 
                     $em->persist($user);
                     $em->flush();
