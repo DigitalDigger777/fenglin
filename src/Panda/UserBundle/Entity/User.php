@@ -67,6 +67,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $wechatData;
 
     /**
+     * @var string
+     */
+    private $memberId;
+
+    /**
      * Get id
      *
      * @return integer
@@ -391,6 +396,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setWechatData($wechatData)
     {
         $this->wechatData = $wechatData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMemberId()
+    {
+        return $this->memberId;
+    }
+
+    /**
+     * @param string $memberId
+     */
+    public function setMemberId($memberId)
+    {
+        $this->memberId = $memberId;
     }
 }
 
