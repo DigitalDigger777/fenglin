@@ -8,10 +8,6 @@ use Panda\UserBundle\Entity\User;
  */
 class Consumer extends User
 {
-    /**
-     * @var string
-     */
-    private $memberId;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -53,29 +49,6 @@ class Consumer extends User
      */
     private $followShoppers;
 
-    /**
-     * Set memberId
-     *
-     * @param string $memberId
-     *
-     * @return Consumer
-     */
-    public function setMemberId($memberId)
-    {
-        $this->memberId = $memberId;
-
-        return $this;
-    }
-
-    /**
-     * Get memberId
-     *
-     * @return string
-     */
-    public function getMemberId()
-    {
-        return $this->memberId;
-    }
 
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
