@@ -3,6 +3,7 @@
 namespace Panda\WeChatBundle\Controller;
 
 use GuzzleHttp\Client;
+use Panda\ShopperBundle\Entity\Shopper;
 use Panda\UserBundle\Entity\User;
 use Panda\WeChatBundle\Entity\Log;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,8 +72,14 @@ class MockOauthController extends Controller
                         'openId' => $responseObject->openid
                     ]);
 
-                    if (!$user) {
-                        $user = new User();
+                    if ($state == 'consumer') {
+                        if (!$user) {
+                            $user = new User();
+                        }
+                    } elseif ($state == 'shopper') {
+                        if (!$user) {
+                            $user = new Shopper();
+                        }
                     }
 
                     $user->setApiKey(md5($responseObject->openid));
