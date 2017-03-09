@@ -1,11 +1,7 @@
 Panda\ConsumerBundle\Entity\Consumer:
     type: entity
     repositoryClass: Panda\ConsumerBundle\Repository\ConsumerRepository
-    fields:
-        memberId:
-            type: string
-            length: 255
-            column: member_id
+
     oneToMany:
         consumerUseCashbacks:
             targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerUseCashBack
