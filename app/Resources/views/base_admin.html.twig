@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Fenglin</title>
+    <link rel="stylesheet" href="{{ asset('vendor/weui/dist/style/weui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('resources/styles/main.css') }}"/>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('vendor/zepto/zepto.js') }}"></script>
+
+</head>
+<body ontouchstart>
+    <div class="page">
+        <div class="page__bd page__bd_spacing">
+            <header id="searchBarContainer">
+
+            </header>
+
+            <script type="text/javascript" class="searchbar js_show">
+                $(function(){
+                    var $searchBar = $('#searchBar'),
+                            $searchResult = $('#searchResult'),
+                            $searchText = $('#searchText'),
+                            $searchInput = $('#searchInput'),
+                            $searchClear = $('#searchClear'),
+                            $searchCancel = $('#searchCancel');
+
+                    function hideSearchResult(){
+                        $searchResult.hide();
+                        $searchInput.val('');
+                    }
+                    function cancelSearch(){
+                        hideSearchResult();
+                        $searchBar.removeClass('weui-search-bar_focusing');
+                        $searchText.show();
+                    }
+
+                    $searchText.on('click', function(){
+                        $searchBar.addClass('weui-search-bar_focusing');
+                        $searchInput.focus();
+                    });
+                    $searchInput
+                            .on('blur', function () {
+                                if(!this.value.length) cancelSearch();
+                            })
+                            .on('input', function(){
+                                if(this.value.length) {
+                                    $searchResult.show();
+                                } else {
+                                    $searchResult.hide();
+                                }
+                            })
+                    ;
+                    $searchClear.on('click', function(){
+                        hideSearchResult();
+                        $searchInput.focus();
+                    });
+                    $searchCancel.on('click', function(){
+                        cancelSearch();
+                        $searchInput.blur();
+                    });
+                });
+            </script>
+
+            <section id="contentContainer">
+
+            </section>
+
+
+            <div id="paginationContainer" class="pager mrg-b" style="text-align: center">
+
+            </div>
+
+            <div id="menuContainer" class="weui-footer weui-footer_fixed-bottom footer-group-button">
+
+            </div>
+
+            <div id="loadToastContainer" style="display:none;"></div>
+            <div id="errorToastContainer" style="display:none;"></div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script data-main="{{ asset('fenglin/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>
+        {#<script src="{{ asset('vendor/zepto/zepto.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/jweixin-bower/jweixin-1.0.0.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/weui.js/dist/weui.js') }}"></script>#}
+
+    {% endblock %}
+
+    {% include 'fenglin/admin/core/admin_menu.html.twig' %}
+    {% include 'fenglin/admin/core/search_bar.html.twig' %}
+    {% include 'fenglin/admin/login.html.twig' %}
+    {% include 'fenglin/admin/shopper/inactive_reactive.html.twig' %}
+    {% include 'fenglin/admin/shopper/new_shopper.html.twig' %}
+
+    {% include 'fenglin/consumer/core/toast.html.twig' %}
+</body>
+</html>

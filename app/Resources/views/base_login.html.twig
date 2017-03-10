@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Fenglin</title>
+    <link rel="stylesheet" href="{{ asset('vendor/weui/dist/style/weui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('resources/styles/main.css') }}"/>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('vendor/zepto/zepto.js') }}"></script>
+
+</head>
+<body ontouchstart>
+    <div class="page">
+        <div class="page__bd page__bd_spacing">
+            <header id="searchBarContainer">
+
+            </header>
+
+
+            <section id="contentContainer">
+                {% block content %}{% endblock %}
+            </section>
+
+
+            <div id="paginationContainer" class="pager mrg-b" style="text-align: center">
+
+            </div>
+
+            <div id="menuContainer" class="weui-footer weui-footer_fixed-bottom footer-group-button">
+
+            </div>
+
+            <div id="loadToastContainer" style="display:none;"></div>
+            <div id="errorToastContainer" style="display:none;"></div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        {#<script data-main="{{ asset('fenglin/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/zepto/zepto.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/jweixin-bower/jweixin-1.0.0.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/weui.js/dist/weui.js') }}"></script>#}
+
+    {% endblock %}
+
+    {% include 'fenglin/consumer/core/toast.html.twig' %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "weui.js",
+  "description": "JavaScript for WeUI",
+  "version": "0.3.0",
+  "main": "dist/weui.js",
+  "authors": [
+    "jf <xingzhewujiang1999@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/progrape/weui.js",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "65aefd90c2c08bc3a616ad1e2fb3dc8a8146599a"
+  },
+  "_source": "https://github.com/progrape/weui.js.git",
+  "_target": "^0.3.0",
+  "_originalSource": "weui.js",
+  "_direct": true
+}

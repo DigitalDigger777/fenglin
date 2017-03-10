@@ -1,0 +1,3 @@
+fenglin_login_homepage:
+    path:     /
+    defaults: { _controller: FenglinLoginBundle:Default:index }

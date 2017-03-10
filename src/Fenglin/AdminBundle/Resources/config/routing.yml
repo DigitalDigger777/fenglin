@@ -1,0 +1,7 @@
+#fenglin_admin_homepage:
+#    path:     /
+#    defaults: { _controller: FenglinAdminBundle:Default:index }
+
+fenglin_admin_login_page:
+    path:     /login
+    defaults: { _controller: FenglinAdminBundle:Default:loginPage, _fragment: admin/login }

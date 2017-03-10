@@ -8,6 +8,7 @@ requirejs.config({
     baseUrl: '/',
     paths: {
         vendor: "/vendor",
+        admin: "/fenglin/admin",
         consumer: "/fenglin/consumer",
         shopper: "/fenglin/shopper",
 
@@ -21,8 +22,8 @@ requirejs.config({
         weui: "/vendor/weui.js/dist/weui",
         text: "/vendor/text/text",
         main: "/fenglin/main",
-        "main.shopper": "/fenglin/main_shopper"
-
+        "main.shopper": "/fenglin/main_shopper",
+        "main.admin": "/fenglin/main_admin"
     },
     shim: {
         underscore: {
@@ -42,13 +43,23 @@ requirejs.config({
 
 console.log(window.location.pathname);
 var reg = /shopper/;
-if (!reg.test(window.location.pathname)) {
+if (reg.test(window.location.pathname)) {
+
+    requirejs(['main.shopper'], function (Fenglin) {
+        var fenglin = new Fenglin();
+        fenglin.start();
+    });
+}
+
+if (/consumer/.test(window.location.pathname)) {
     requirejs(['main'], function (Fenglin) {
         var fenglin = new Fenglin();
         fenglin.start();
     });
-} else {
-    requirejs(['main.shopper'], function (Fenglin) {
+}
+
+if (/admin/.test(window.location.pathname)) {
+    requirejs(['main.admin'], function (Fenglin) {
         var fenglin = new Fenglin();
         fenglin.start();
     });

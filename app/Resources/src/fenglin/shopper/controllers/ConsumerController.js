@@ -20,31 +20,41 @@ define([
         search: function(){
             console.log('consumer search page');
             var memberId = $('#searchConsumer').val()
-            var reg = /0+?([1-9]+)/;
-            var memberIdParts = reg.exec(memberId);
+            //var reg = /0+?([1-9]+)/;
+            //var memberIdParts = reg.exec(memberId);
 
 
-
-            if (memberIdParts !== null && memberIdParts[1] !== undefined) {
+            //if (memberIdParts !== null && memberIdParts[1] !== undefined) {
                 loadToast.show();
                 var consumerModel = new ConsumerModel();
-                consumerModel.set('id', memberIdParts[1]);
+                consumerModel.set('memberId', memberId);
 
-                consumerModel.fetch({
-                    success: function (model, response) {
-                        loadToast.hide();
-                        var consumerSearchView = new ConsumerSearchView({
-                            model: model
-                        });
-                        consumerSearchView.render();
-                    },
-                    error: function (model, response) {
-                        errorToast.show();
-                    }
+                consumerModel.fetchByMemberId(function(model){
+                    loadToast.hide();
+                    var consumerSearchView = new ConsumerSearchView({
+                        model: model
+                    });
+                    consumerSearchView.render();
+                }, function(){
+                    errorToast.show();
                 });
-            } else {
-                window.location.hash = 'shopper/home';
-            }
+
+
+                //consumerModel.fetch({
+                //    success: function (model, response) {
+                //        loadToast.hide();
+                //        var consumerSearchView = new ConsumerSearchView({
+                //            model: model
+                //        });
+                //        consumerSearchView.render();
+                //    },
+                //    error: function (model, response) {
+                //        errorToast.show();
+                //    }
+                //});
+            //} else {
+            //    window.location.hash = 'shopper/home';
+            //}
         }
     };
 });

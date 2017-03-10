@@ -16,6 +16,15 @@ define(['backbone'], function(Backbone){
             url = url + "?apikey=" + match[1];
 
             return url;
+        },
+        fetchByMemberId: function(success, error){
+            this.fetch({
+                data: $.param({
+                    memberId: this.memberId
+                }),
+                success: success,
+                error: error
+            });
         }
     });
 

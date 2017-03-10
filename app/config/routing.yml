@@ -1,3 +1,11 @@
+fenglin_login:
+    resource: "@FenglinLoginBundle/Resources/config/routing.yml"
+    prefix:   /login
+
+fenglin_admin:
+    resource: "@FenglinAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
 panda_mock_we_chat_o_auth:
     resource: "@PandaMockWeChatOAuthBundle/Resources/config/routing.yml"
     prefix:   /mock-wechat-oauth/

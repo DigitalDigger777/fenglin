@@ -1,0 +1,8 @@
+Fenglin\AdminBundle\Entity\Admin:
+    type: entity
+    repositoryClass: Fenglin\AdminBundle\Repository\AdminRepository
+    fields:
+        tel:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

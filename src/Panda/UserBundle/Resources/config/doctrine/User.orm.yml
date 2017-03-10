@@ -5,6 +5,7 @@ Panda\UserBundle\Entity\User:
         user: User
         shopper: \Panda\ShopperBundle\Entity\Shopper
         consumer: \Panda\ConsumerBundle\Entity\Consumer
+        admin: \Fenglin\AdminBundle\Entity\Admin
     table: panda_users
     repositoryClass: Panda\UserBundle\Repository\UserRepository
 
