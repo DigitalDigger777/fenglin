@@ -15,6 +15,8 @@ class DefaultController extends Controller
 
         if ($tel && $password) {
             return $this->auth($request);
+
+
         }
 
         return $this->render('fenglin/login/login.html.twig');
