@@ -7,407 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09b204d8-7f67-4f67-b9a0-eea5540f8cb1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/app.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/app_dev.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/apple-touch-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/fenglin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/fixture_resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/robots.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/ISSUE_TEMPLATE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/PULL_REQUEST_TEMPLATE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/changelog.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/lib/backbone.marionette.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/lib/backbone.marionette.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/lib/backbone.marionette.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/lib/backbone.marionette.min.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/license.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/marionette-logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/readme.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.marionette/trigger-deploy-mn-com.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/build/backbone.radio.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/build/backbone.radio.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/build/backbone.radio.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/build/backbone.radio.min.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/gulpfile.babel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone.radio/src/backbone.radio.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/backbone-min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/backbone-min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/backbone.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/backbone/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/AUTHORS.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/core.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.slim.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.slim.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/dist/jquery.slim.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/external/sizzle/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/external/sizzle/dist/sizzle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/external/sizzle/dist/sizzle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/external/sizzle/dist/sizzle.min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/.eslintrc.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/jsonp.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/load.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/parseXML.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/var/location.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/var/nonce.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/var/rquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/ajax/xhr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes/attr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes/classes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes/prop.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/attributes/val.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/callbacks.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/DOMEval.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/access.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/init.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/parseHTML.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/ready-no-deferred.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/ready.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/readyException.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/stripAndCollapse.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/core/var/rsingleTag.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/addGetHookIf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/adjustCSS.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/curCSS.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/hiddenVisibleSelectors.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/showHide.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/cssExpand.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/getStyles.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/isHiddenWithinTree.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/rmargin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/rnumnonpx.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/css/var/swap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/data.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/data/Data.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/data/var/acceptData.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/data/var/dataPriv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/data/var/dataUser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/deferred.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/deferred/exceptionHook.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/deprecated.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/dimensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/effects.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/effects/Tween.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/effects/animatedSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event/ajax.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event/alias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event/focusin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/event/trigger.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/exports/amd.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/exports/global.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/_evalUrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/buildFragment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/getAll.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/setGlobalEval.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/var/rcheckableType.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/var/rscriptType.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/var/rtagName.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/manipulation/wrapMap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/offset.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/queue.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/queue/delay.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/selector-native.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/selector-sizzle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/selector.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/serialize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/traversing.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/traversing/findFilter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/traversing/var/dir.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/traversing/var/rneedsContext.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/traversing/var/siblings.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/ObjectFunctionString.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/arr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/class2type.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/concat.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/document.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/documentElement.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/fnToString.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/getProto.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/hasOwn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/indexOf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/pnum.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/push.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/rcssNum.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/rnothtmlwhite.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/slice.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/support.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/var/toString.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jquery/src/wrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jweixin-bower/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jweixin-bower/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jweixin-bower/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/jweixin-bower/jweixin-1.0.0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/requirejs/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/requirejs/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/requirejs/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/requirejs/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/requirejs/require.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/text/text.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/underscore-min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/underscore-min.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/underscore/underscore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/dist/example/example.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/dist/example/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/dist/weui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/dist/weui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/gulpfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/actionSheet.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/alert.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/confirm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/dialog.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/example/example.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/example/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/form.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/loading.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/progress.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/searchbar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/tab.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/toast.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/toptips.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/uploader.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui.js/src/weui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/example.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/example.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_footer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_footer_link.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_intro.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_actionSheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_article.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_cell.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_dialog.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_feedback.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_flow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_form.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_layout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_msg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_nav.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_panel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_progress.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_search_bar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_special.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_tab.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_toast.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_z-index.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_nav_zindex.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/icon_tabbar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/layers/content.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/layers/navigation.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/layers/popout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/layers/transparent.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/pic_160.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/pic_article.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/images/vcode.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/actionSheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/cell.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/dialog1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/dialog2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/grid.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/progress.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/qrcode.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/result.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/text.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/toast1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/snapshot/toast2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/example/zepto.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/style/weui.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/dist/style/weui.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/gulpfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/example.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/example.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/actionsheet.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/article.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/badge.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/button.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/dialog.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/flex.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/footer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/gallery.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/grid.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/home.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/icons.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/input.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/layers.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/loadmore.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/msg.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/msg_success.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/msg_warn.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/navbar.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/panel.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/picker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/preview.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/progress.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/searchbar.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/slider.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/tabbar.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/toast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/fragment/uploader.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_footer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_footer_link.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_intro.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_feedback.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_form.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_layout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_nav.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_special.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_nav_z-index.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/icon_tabbar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/layers/content.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/layers/navigation.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/layers/popout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/layers/transparent.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/pic_160.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/pic_article.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/images/vcode.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/cell.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/dialog1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/dialog2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/grid.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/progress.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/qrcode.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/result.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/text.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/toast1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/snapshot/toast2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/example/zepto.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/fn.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/mixin/mobile.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/mixin/setArrow.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/mixin/setOnepx.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/mixin/text.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/reset.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/color.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/global.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-button.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-cell.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-dialog.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-grid.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-msg.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/base/variable/weui-progress.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/icon/weui-font.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/icon/weui-icon_font.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/weui.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-agree/weui-agree.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-animate/weui-animate.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_default.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_disabled.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_global.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_loading.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_plain.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_primary.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-btn_warn.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-button/weui-button.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-access.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-cell_global.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-check.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-check/weui-check_common.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-check/weui-checkbox.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-check/weui-radio.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-form.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-form/weui-form-preview.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-form/weui-form_common.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-form/weui-select.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-form/weui-vcode.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-gallery.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-switch.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-cell/weui-uploader.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-flex/weui-flex.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-footer/weui-footer.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-grid/weui-grid.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-loading/weui-loading.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-media-box/weui-media-box.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-page/weui-article.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-page/weui-msg.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-panel/weui-panel.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-picker/weui-picker.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-progress/weui-progress.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-searchbar/weui-searchbar.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-slider/weui-slider.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tab/weui-navbar.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tab/weui-tab.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tab/weui-tabbar.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-actionsheet.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-badge.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-dialog.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-loadmore.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-mask.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/weui/src/style/widget/weui-tips/weui-toast.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/component.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/zepto.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/vendor/zepto/zepto.min.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Fenglin/LoginBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Fenglin/LoginBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fenglin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -503,15 +104,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Fenglin/LoginBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4" vertical-offset="34" max-vertical-offset="756">
+            <state vertical-scroll-proportion="-5.4074073" vertical-offset="34" max-vertical-offset="756">
               <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
               <folding>
                 <element signature="e#50#107#0#PHP" expanded="true" />
                 <element signature="e#866#2549#0#PHP" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.49514562" vertical-offset="0" max-vertical-offset="618">
+              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -544,7 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Resources/src/fenglin/shopper/views/shopper/InactiveReactiveAccountView.js" />
         <option value="$PROJECT_DIR$/app/Resources/views/base_shopper.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/src/fenglin/shopper/views/shopper/newShopperView.js" />
         <option value="$PROJECT_DIR$/app/Resources/src/fenglin/shopper/controllers/ShopperController.js" />
@@ -595,6 +205,7 @@
         <option value="$PROJECT_DIR$/src/Panda/ShopperBundle/Controller/Rest/ShopperController.php" />
         <option value="$PROJECT_DIR$/src/Fenglin/LoginBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Fenglin/LoginBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -648,6 +259,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fenglin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fenglin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fenglin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1169,12 +794,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="24" width="1319" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3110762" sideWeight="0.49845678" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3110762" sideWeight="0.49845678" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299293" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1625,22 +1250,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46601942" vertical-offset="0" max-vertical-offset="618">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Fenglin/LoginBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4" vertical-offset="34" max-vertical-offset="756">
+        <state vertical-scroll-proportion="-5.4074073" vertical-offset="34" max-vertical-offset="756">
           <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
           <folding>
             <element signature="e#50#107#0#PHP" expanded="true" />
             <element signature="e#866#2549#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49514562" vertical-offset="0" max-vertical-offset="618">
+          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
