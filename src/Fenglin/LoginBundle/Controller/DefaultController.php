@@ -20,6 +20,12 @@ class DefaultController extends Controller
         return $this->render('fenglin/login/login.html.twig');
     }
 
+    public function exampleAction(Request $request)
+    {
+        $memberId = $request->query->get('member_id');
+        return new Response("Member ID: " . $memberId);
+    }
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -56,7 +62,7 @@ class DefaultController extends Controller
             $password = $encoder->encodePassword($admin, $password);
 
             if ($password == $admin->getPassword()) {
-                return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/home');
+                return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account');
             } else {
                 return new Response('Password not correct', 403);
             }

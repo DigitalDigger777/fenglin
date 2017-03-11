@@ -1,3 +1,7 @@
 fenglin_login_homepage:
     path:     /
     defaults: { _controller: FenglinLoginBundle:Default:index }
+
+fenglin_login_example:
+    path:     /example
+    defaults: { _controller: FenglinLoginBundle:Default:example }

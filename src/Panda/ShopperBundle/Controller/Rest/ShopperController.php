@@ -175,6 +175,7 @@ class ShopperController extends Controller
          */
         $em = $this->getDoctrine()->getManager();
         $method = $request->getMethod();
+        $encoder = $this->container->get('security.password_encoder');
 
         if ($method == 'POST') {
             $item = new Shopper();
@@ -196,14 +197,14 @@ class ShopperController extends Controller
                     'POST'
                 ]
             ],
-            'logo' => [],
-            'address' => [],
-            'tel' => [],
-            'totalAmount' => [],
-            'rebate' => [],
-            'rebateLevelRate' => [],
-            'rebateLevel2Rate' => [],
-            'rebateLevel3Rate' => []
+            'logo'              => [],
+            'address'           => [],
+            'tel'               => [],
+            'totalAmount'       => [],
+            'rebate'            => [],
+            'rebateLevelRate'   => [],
+            'rebateLevel2Rate'  => [],
+            'rebateLevel3Rate'  => []
         ];
 
         foreach($fields as $fieldName => $rule) {
@@ -213,13 +214,16 @@ class ShopperController extends Controller
             if (count($rule) == 0) {
 
                 if ($fieldValue) {
-                    $item->{"set" . ucfirst($fieldName) . "($fieldValue)"};
+
+                    $item->{"set" . ucfirst($fieldName)}($fieldValue);
                 }
 
             } else {
 
                 if (isset($rule['required']) && in_array(strtoupper($method), $rule['required']) && $fieldValue) {
-                    $item->{"set" . ucfirst($fieldName) . "($fieldValue)"};
+
+                    $item->{"set" . ucfirst($fieldName)}($fieldValue);
+
                 } else {
                     $this->setCode(500);
                     $this->setMessage($fieldName . ' not found');
@@ -231,6 +235,16 @@ class ShopperController extends Controller
         }
 
         try {
+            $tel = $item->getTel();
+            $pass = $this->getRandomPassword();
+            $password = $encoder->encodePassword($item, $pass);
+
+            $item->setEmail($tel.'@wxfenling.com');
+            $item->setPassword($password);
+            $item->setOpenPassword($pass);
+            $item->setStatus(Shopper::STATUS_ACTIVE);
+            $item->setRole('ROLE_SHOPPER');
+
             $em->persist($item);
             $em->flush();
             $this->setMessage('Item save successful');
@@ -338,5 +352,20 @@ class ShopperController extends Controller
             }
         }
         return $request->getMethod();
+    }
+
+    /**
+     * @return string
+     */
+    private function getRandomPassword()
+    {
+        $chars = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        $len = strlen($chars);
+        $pass = '';
+        for ($i = 0; $i < 6; $i++) {
+            $pass .= substr($chars, rand(0, $len - 1), 1);
+        }
+
+        return $pass;
     }
 }

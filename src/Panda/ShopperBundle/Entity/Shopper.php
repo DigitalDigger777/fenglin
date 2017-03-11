@@ -80,6 +80,11 @@ class Shopper extends User
     private $consumerUseCashbacks;
 
     /**
+     * @var string
+     */
+    private $openPassword;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -373,6 +378,22 @@ class Shopper extends User
     public function setConsumerUseCashbacks($consumerUseCashbacks)
     {
         $this->consumerUseCashbacks = $consumerUseCashbacks;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOpenPassword()
+    {
+        return $this->openPassword;
+    }
+
+    /**
+     * @param string $openPassword
+     */
+    public function setOpenPassword($openPassword)
+    {
+        $this->openPassword = $openPassword;
     }
 }
 

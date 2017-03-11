@@ -19,6 +19,7 @@ Panda\UserBundle\Entity\User:
         email:
             type: string
             length: 255
+            nullable: true
         password:
             type: string
             length: '400'

@@ -36,6 +36,11 @@ Panda\ShopperBundle\Entity\Shopper:
             type: float
             nullable: true
             column: rebate_level3_rate
+        openPassword:
+            type: string
+            length: 255
+            nullable: true
+
     oneToMany:
         amountConsumers:
             targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerAmount
