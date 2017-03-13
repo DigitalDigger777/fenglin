@@ -75,9 +75,9 @@ class DefaultController extends Controller
 
             if ($password == $admin->getPassword()) {
                 if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account', 200);
+                    return $this->redirectToRoute('fenglin_admin_homepage', ['apikey'=> $admin->getApiKey(), '_fragment' => 'admin/shopper/inactive-reactive/account']);
                 } else {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account', 200);
+                    return $this->redirectToRoute('fenglin_admin_homepage', ['apikey'=> $admin->getApiKey(), '_fragment' => 'admin/shopper/inactive-reactive/account']);
                 }
             } else {
                 return new Response('Password not correct', 403);
