@@ -46,7 +46,7 @@ class CustomMenuController extends Controller
                     [
                         "type" => "view",
                         "name" => "Shopper",
-                        "url"  => $wechatService->buildAuthUrl('snsapi_userinfo', 'shopper')
+                        "url"  => 'http://wxfenling.com/login'
                     ]
                 ]
             ])
