@@ -4,7 +4,24 @@
 
 define(['marionette',
         'admin/views/core/AdminMenuView',
-        'consumer/models/ShopperModel'], function(Marionette, AdminMenuView, ShopperModel){
+        'consumer/models/ShopperModel',
+        'consumer/views/core/LoadingToastView',
+        'consumer/views/core/ErrorToastView',
+        'consumer/views/core/SuccessToastView'], function(Marionette,
+                                                        AdminMenuView,
+                                                        ShopperModel,
+                                                        LoadingToastView,
+                                                        ErrorToastView,
+                                                        SuccessToastView){
+    var loadToast  = new LoadingToastView();
+    loadToast.render();
+
+    var errorToast = new ErrorToastView();
+    errorToast.render();
+
+    var successToast = new SuccessToastView();
+    successToast.render();
+
     return Marionette.View.extend({
         el:'#contentContainer',
         template: '#newShopperView',
@@ -15,6 +32,9 @@ define(['marionette',
             'click @ui.saveButton': function(e){
                 e.preventDefault();
                 console.log('click');
+                loadToast.show();
+
+                var shopperId = $('#shopperId').val();
                 var name = $('#name').val();
                 var address = $('#address').val();
                 var tel = $('#tel').val();
@@ -24,6 +44,11 @@ define(['marionette',
                 var rebate_level_3 = $('#rebate_level_3').val();
 
                 var shopperModel = new ShopperModel();
+
+                if (shopperId != 0) {
+                    shopperModel.set('id', shopperId);
+                }
+
                 shopperModel.set('name', name);
                 shopperModel.set('address', address);
                 shopperModel.set('tel', tel);
@@ -35,9 +60,21 @@ define(['marionette',
                 shopperModel.save(null, {
                     success: function(data){
                         console.log(data);
+                        loadToast.hide();
+                        successToast.show();
+                        $('#shopperId').val(data.id);
+                        setTimeout(function(){
+                            successToast.hide();
+                        }, 2000);
+
                     },
                     error: function(error){
                         console.log(error);
+                        loadToast.hide();
+                        errorToast.show();
+                        setTimeout(function(){
+                            errorToast.hide();
+                        }, 3000);
                     }
                 });
             }

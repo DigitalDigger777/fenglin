@@ -98,7 +98,8 @@ class ShopperController extends Controller
             $response = new JsonResponse($data, $this->getCode());
         } else {
             $response = new JsonResponse([
-                'message' => $this->getMessage()
+                'message' => $this->getMessage(),
+                'data' => $data
             ], $this->getCode());
         }
 
@@ -194,7 +195,8 @@ class ShopperController extends Controller
         $fields = [
             'name' => [
                 'required' => [
-                    'POST'
+                    'POST',
+                    'PUT'
                 ]
             ],
             'logo'              => [],
@@ -248,6 +250,9 @@ class ShopperController extends Controller
             $em->persist($item);
             $em->flush();
             $this->setMessage('Item save successful');
+            $this->setData([
+                'id' => $item->getId()
+            ]);
         } catch(\Exception $e) {
             $this->setCode(500);
             $this->setMessage($e->getMessage());

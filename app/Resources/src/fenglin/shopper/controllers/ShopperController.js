@@ -18,10 +18,9 @@ define([
             CashBackConfirmCollection,
             CashBackStatementCollection,
             CashBackConfirmCompositeView,
-            LoginView,
             InactiveReactiveAccountView,
             NewShopperView){
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+
 
     return {
         homePage: function(){
@@ -64,10 +63,6 @@ define([
 
             var setting = new SettingView();
             setting.render();
-        },
-        loginPage: function(){
-            var login = new LoginView();
-            login.render();
         },
         inactiveReactiveAccount: function(id){
             var inactiveReactiveAccountView = new InactiveReactiveAccountView();

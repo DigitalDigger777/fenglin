@@ -1,6 +1,8 @@
 fenglin_login_homepage:
     path:     /
     defaults: { _controller: FenglinLoginBundle:Default:index }
+    options:
+        expose: true
 
 fenglin_login_example:
     path:     /example

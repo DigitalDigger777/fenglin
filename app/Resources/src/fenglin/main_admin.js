@@ -5,22 +5,28 @@
 define([
     'backbone',
     'marionette',
-    'admin/routers/ShopperRouter',
-    'admin/routers/AdminRouter'
+    'admin/routers/ShopperRouter'
 ], function(Backbone){
 
+    var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
+    if (matchApiKey) {
+        localStorage.setItem('apikey', matchApiKey[1]);
+    }
 
-    var fenglin = Backbone.Marionette.Application.extend({
+    if (!localStorage.getItem('apikey')) {
+        window.location = Routing.generate('fenglin_login_homepage');
+    } else {
 
-        onStart: function(options){
+        var fenglin = Backbone.Marionette.Application.extend({
 
-            var token = window.localStorage.getItem('token');
-            console.log(token);
-            Backbone.history.start();
+            onStart: function (options) {
+
+                Backbone.history.start();
 
 
-        }
-    });
+            }
+        });
 
-    return fenglin;
+        return fenglin;
+    }
 });

@@ -9,46 +9,24 @@ define([
     'shopper/routers/ConsumerRouter'
 ], function(Backbone){
 
+    var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
+    if (matchApiKey) {
+        localStorage.setItem('apikey', matchApiKey[1]);
+    }
 
-    var fenglin = Backbone.Marionette.Application.extend({
+    if (!localStorage.getItem('apikey')) {
+        window.location = Routing.generate('fenglin_login_homepage');
+    } else {
+        var fenglin = Backbone.Marionette.Application.extend({
 
-        onStart: function(options){
+            onStart: function (options) {
 
-            var token = window.localStorage.getItem('token');
-            console.log(token);
-            Backbone.history.start();
+                Backbone.history.start();
 
-            if (window.localStorage.getItem('token') !== null) {
-                //
-                //var receivedList = new ReceivedCollection();
-                //
-                //receivedList.fetch({
-                //    success: function(collection, response){
-                //        console.log(collection.toJSON());
-                //        var receivedListView = new ReceivedCompositeView({
-                //            collection: receivedList
-                //        });
-                //
-                //        receivedListView.render();
-                //    },
-                //    error: function(collection, response){
-                //        console.log('Error');
-                //    }
-                //});
-                //
-                //var header = new HeaderView();
-                //header.render();
-                //
-                //var mobileMenu = new MobileMenuView();
-                //mobileMenu.render();
-            } else {
-                //Backbone.history.navigate('#login', true);
-                //window.location.hash = '#login'
             }
+        });
 
+        return fenglin;
+    }
 
-        }
-    });
-
-    return fenglin;
 });

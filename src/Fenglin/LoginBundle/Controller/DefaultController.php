@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function indexAction(Request $request)
     {
         $tel = $request->request->get('tel');
@@ -15,13 +19,15 @@ class DefaultController extends Controller
 
         if ($tel && $password) {
             return $this->auth($request);
-
-
         }
 
         return $this->render('fenglin/login/login.html.twig');
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function exampleAction(Request $request)
     {
         $memberId = $request->query->get('member_id');
@@ -42,7 +48,7 @@ class DefaultController extends Controller
 
         $em          = $this->getDoctrine()->getManager();
         $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
-        $adminRepo = $em->getRepository('FenglinAdminBundle:Admin');
+        $adminRepo   = $em->getRepository('FenglinAdminBundle:Admin');
 
         $tel         = $request->request->get('tel');
         $password    = $request->request->get('password');
@@ -54,7 +60,11 @@ class DefaultController extends Controller
             $password = $encoder->encodePassword($shopper, $password);
 
             if ($password == $shopper->getPassword()) {
-                return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+                if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+                } else {
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+                }
             } else {
                 return new Response('Password not correct', 403);
             }
@@ -64,7 +74,11 @@ class DefaultController extends Controller
             $password = $encoder->encodePassword($admin, $password);
 
             if ($password == $admin->getPassword()) {
-                return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account');
+                if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account');
+                } else {
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account');
+                }
             } else {
                 return new Response('Password not correct', 403);
             }
