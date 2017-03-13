@@ -7,7 +7,8 @@ define(['marionette', 'shopper/controllers/PaymentController'], function(Marione
     var PaymentRouter = Marionette.AppRouter.extend({
         controller: PaymentController,
         appRoutes: {
-            'payment/calculate':'calculate'
+            'payment/calculate':'calculate',
+            'payment/confirm': 'confirm'
         }
     });
 
