@@ -9,7 +9,6 @@ define([
     'shopper/collections/CashBackConfirmCollection',
     'shopper/collections/CashBackStatementCollection',
     'shopper/views/cash_back/CashBackConfirmCompositeView',
-    'shopper/views/shopper/LoginView',
     'shopper/views/shopper/InactiveReactiveAccountView',
     'shopper/views/shopper/NewShopperView'
 ], function(ShopperHomeView,

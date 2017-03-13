@@ -42,8 +42,8 @@ requirejs.config({
 });
 
 console.log(window.location.pathname);
-var reg = /shopper/;
-if (reg.test(window.location.pathname)) {
+
+if (/shopper/.test(window.location.pathname)) {
 
     requirejs(['main.shopper'], function (Fenglin) {
         var fenglin = new Fenglin();

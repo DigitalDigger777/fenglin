@@ -2,7 +2,7 @@
  * Created by korman on 27.01.17.
  */
 
-define(['marionette', 'shopper/views/core/AdminMenuView'], function(Marionette, AdminMenuView){
+define(['marionette', 'shopper/views/core/MenuHomeView'], function(Marionette, MenuHomeView){
     return Marionette.View.extend({
         el:'#contentContainer',
         template: '#newShopperView',
@@ -11,7 +11,7 @@ define(['marionette', 'shopper/views/core/AdminMenuView'], function(Marionette, 
             $('#paginationContainer').empty();
             $('#menuContainer').empty();
 
-            var menu = new AdminMenuView();
+            var menu = new MenuHomeView();
             menu.render();
         }
     });
