@@ -17,11 +17,16 @@ define(['backbone'], function(Backbone){
 
             return url;
         },
+
         fetchByMemberId: function(success, error){
+            //console.log(this.memberId);
+
             this.fetch({
-                data: $.param({
-                    memberId: this.memberId
+                url: Routing.generate('panda_consumer_rest_load_by_member_id', {
+                    apikey:this.apikey,
+                    memberId: this.get('memberId')
                 }),
+                data: {},
                 success: success,
                 error: error
             });

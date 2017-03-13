@@ -7,7 +7,7 @@ define(['marionette', 'shopper/controllers/ConsumerController'], function(Marion
     var ShopperRouter = Marionette.AppRouter.extend({
         controller: ConsumerController,
         appRoutes: {
-            'consumer/search':'search'
+            'consumer/search/:memberId':'search'
         }
     });
 

@@ -5,3 +5,9 @@ panda_consumer_rest_index:
         id: \d+
     options:
         expose: true
+
+panda_consumer_rest_load_by_member_id:
+    path:     /load-by-member-id/
+    defaults: { _controller: PandaConsumerBundle:Rest/Consumer:loadByMemberId }
+    options:
+        expose: true

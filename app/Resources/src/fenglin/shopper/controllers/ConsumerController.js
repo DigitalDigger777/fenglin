@@ -17,44 +17,31 @@ define([
     errorToast.render();
 
     return {
-        search: function(){
+        search: function(memberId){
             console.log('consumer search page');
-            var memberId = $('#searchConsumer').val()
-            //var reg = /0+?([1-9]+)/;
-            //var memberIdParts = reg.exec(memberId);
+            //var memberId = $('#searchConsumer').val()
+            //console.log(memberId);
 
+            loadToast.show();
+            var consumerModel = new ConsumerModel();
+            consumerModel.set('memberId', memberId);
 
-            //if (memberIdParts !== null && memberIdParts[1] !== undefined) {
-                loadToast.show();
-                var consumerModel = new ConsumerModel();
-                consumerModel.set('memberId', memberId);
-
-                consumerModel.fetchByMemberId(function(model){
-                    loadToast.hide();
-                    var consumerSearchView = new ConsumerSearchView({
-                        model: model
-                    });
-                    consumerSearchView.render();
-                }, function(){
-                    errorToast.show();
+            console.log(consumerModel.toJSON());
+            consumerModel.fetchByMemberId(function(model){
+                loadToast.hide();
+                var consumerSearchView = new ConsumerSearchView({
+                    model: model
                 });
+                consumerSearchView.render();
+            }, function(){
+                loadToast.hide();
+                errorToast.show();
 
+                setTimeout(function(){
+                    errorToast.hide();
+                }, 3000);
+            });
 
-                //consumerModel.fetch({
-                //    success: function (model, response) {
-                //        loadToast.hide();
-                //        var consumerSearchView = new ConsumerSearchView({
-                //            model: model
-                //        });
-                //        consumerSearchView.render();
-                //    },
-                //    error: function (model, response) {
-                //        errorToast.show();
-                //    }
-                //});
-            //} else {
-            //    window.location.hash = 'shopper/home';
-            //}
         }
     };
 });

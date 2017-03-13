@@ -155,13 +155,21 @@ class ConsumerController extends Controller
          * @var \Doctrine\ORM\EntityManager $em
          */
         $em = $this->getDoctrine()->getManager();
-        $email = $this->getUser()->getUsername();
+        $memberId = $request->query->get('memberId');
 
         $qb = $em->createQueryBuilder();
         $qb->select('c')
-            ->from('PandaUserBundle:User', 'c')
-            ->where($qb->expr()->eq('c.email', ':email'))
-            ->setParameter(':email', $email);
+            ->from('PandaUserBundle:User', 'c');
+
+        if (!$memberId) {
+            $email = $this->getUser()->getUsername();
+            $qb->where($qb->expr()->eq('c.email', ':email'))
+                ->setParameter(':email', $email);
+        } else {
+
+            $qb->where($qb->expr()->eq('c.memberId', ':memberId'))
+                ->setParameter(':memberId', $memberId);
+        }
 
         $query = $qb->getQuery();
 
@@ -172,6 +180,68 @@ class ConsumerController extends Controller
             $this->setCode(500);
             $this->setMessage($e->getMessage() . ' ' . $email);
         }
+
+        $response = new JsonResponse($data, $this->getCode());
+
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function loadByMemberIdAction(Request $request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+        $shopperEmail = $this->getUser()->getUsername();
+        $qb = $em->createQueryBuilder();
+        $qb->select('s')
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->where($qb->expr()->eq('s.email', ':email'))
+            ->setParameter(':email', $shopperEmail);
+        $shopper = $qb->getQuery()->getSingleResult();
+        $shopperId = $shopper->getId();
+
+        $memberId = $request->query->get('memberId');
+        $qb = $em->createQueryBuilder();
+        $qb->select('c, ac, s, cs')
+            ->from('PandaConsumerBundle:Consumer', 'c')
+            ->join('c.amountConsumers', 'ac')
+            ->join('ac.shopper', 's')
+            ->join('ac.consumer', 'cs')
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('c.memberId', ':memberId'),
+                    $qb->expr()->eq('s.id', ':id')
+                )
+
+            )
+            ->setParameter(':memberId', $memberId)
+            ->setParameter(':id', $shopperId);
+
+        $query = $qb->getQuery();
+
+        try {
+            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+
+
+            $this->setData($data);
+        } catch (\Exception $e) {
+            $this->setCode(500);
+            $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
+        }
+
+        $data = $this->getData();
+        if (count($data) > 0) {
+            $response = new JsonResponse($data, $this->getCode());
+        } else {
+            $response = new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
+        return $response;
     }
 
     /**

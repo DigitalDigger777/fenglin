@@ -1,12 +1,16 @@
 <script id="consumerSearchView" type="text/html">
-    <a href="javascript:;" class="weui-btn weui-btn_primary mrg-b">搜索</a>
+    <a id="searchConsumerButton" href="#consumer/search" class="weui-btn weui-btn_primary mrg-b">搜索</a>
     <div class="member-detail">
         <br>
         <p><b><%=memberId %></b></p><br>
         <img src="<%=wechatData.headimgurl %>" alt="" style="width: 150px"><br><br>
         <p><%=wechatData.nickname %></p>
         <p>返利余额</p><br>
-        <p><h2>￥127.90</h2></p><br><br>
-        <a href="adm-calulate-this-bill-payment.html" class="weui-btn weui-btn_primary mrg-b">选择</a>
+        <% if (amountConsumers.length > 0) { %>
+            <p><h2>￥<%=amountConsumers[0].totalAmount%></h2></p><br><br>
+        <% } else { %>
+            <p><h2>￥0</h2></p><br><br>
+        <% } %>
+        <a href="#payment/calculate" class="weui-btn weui-btn_primary mrg-b">选择</a>
     </div>
 </script>

@@ -9,6 +9,7 @@ define(['marionette',
         el:'#contentContainer',
         template: '#paymentCalculateView',
         onRender: function(){
+            console.log('payment calculate');
             $('#searchBarContainer').empty();
             $('#paginationContainer').empty();
             $('#menuContainer').empty();
