@@ -61,9 +61,9 @@ class DefaultController extends Controller
 
             if ($password == $shopper->getPassword()) {
                 if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home', 200);
                 } else {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home');
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home', 200);
                 }
             } else {
                 return new Response('Password not correct', 403);
@@ -75,9 +75,9 @@ class DefaultController extends Controller
 
             if ($password == $admin->getPassword()) {
                 if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/admin?apikey=' . $admin->getApiKey() . '#/admin/shopper/inactive-reactive/account');
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account', 200);
                 } else {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#/admin/shopper/inactive-reactive/account');
+                    return $this->redirect($request->getSchemeAndHttpHost() . '/admin?apikey=' . $admin->getApiKey() . '#admin/shopper/inactive-reactive/account', 200);
                 }
             } else {
                 return new Response('Password not correct', 403);
