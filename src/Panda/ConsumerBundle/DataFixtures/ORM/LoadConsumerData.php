@@ -40,9 +40,13 @@ class LoadConsumerData implements FixtureInterface, OrderedFixtureInterface
      */
     private function loadConsumer(ObjectManager $manager)
     {
+        $email = 'user' . rand(0, 10000) . '@test.com';
+        $apikey = md5($email);
+
         $consumer = new Consumer();
-        $consumer->setEmail('user' . rand(0, 10000) . '@test.com');
+        $consumer->setEmail($email);
         $consumer->setPassword('');
+        $consumer->setApiKey($apikey);
         $consumer->setMemberId(rand(100000, 1000000));
         $consumer->setRole('ROLE_CONSUMER');
         $consumer->setStatus(Consumer::STATUS_ACTIVE);
