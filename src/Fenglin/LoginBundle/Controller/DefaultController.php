@@ -60,11 +60,7 @@ class DefaultController extends Controller
             $password = $encoder->encodePassword($shopper, $password);
 
             if ($password == $shopper->getPassword()) {
-                if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/app_dev.php/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home', 200);
-                } else {
-                    return $this->redirect($request->getSchemeAndHttpHost() . '/shopper?apikey=' . $shopper->getApiKey() . '#shopper/home', 200);
-                }
+                return $this->redirectToRoute('fenglin_fenglin_shopper', ['apikey'=> $shopper->getApiKey(), '_fragment' => 'shopper/home']);
             } else {
                 return new Response('Password not correct', 403);
             }
@@ -74,11 +70,7 @@ class DefaultController extends Controller
             $password = $encoder->encodePassword($admin, $password);
 
             if ($password == $admin->getPassword()) {
-                if ($this->container->get( 'kernel' )->getEnvironment() == 'dev') {
-                    return $this->redirectToRoute('fenglin_admin_homepage', ['apikey'=> $admin->getApiKey(), '_fragment' => 'admin/shopper/inactive-reactive/account']);
-                } else {
-                    return $this->redirectToRoute('fenglin_admin_homepage', ['apikey'=> $admin->getApiKey(), '_fragment' => 'admin/shopper/inactive-reactive/account']);
-                }
+                return $this->redirectToRoute('fenglin_admin_homepage', ['apikey'=> $admin->getApiKey(), '_fragment' => 'admin/shopper/inactive-reactive/account']);
             } else {
                 return new Response('Password not correct', 403);
             }
