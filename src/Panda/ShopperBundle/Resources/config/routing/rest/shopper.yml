@@ -21,3 +21,11 @@ panda_shopper_rest_cash_back_list:
         page: \d+
     options:
         expose: true
+
+
+#loadByName
+panda_shopper_rest_load_by_name:
+    path:     /load-by-name
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:loadByName }
+    options:
+        expose: true

@@ -9,7 +9,8 @@ define(['marionette', 'admin/controllers/ShopperController'], function(Marionett
         controller: ShopperController,
         appRoutes: {
             'admin/shopper/inactive-reactive/account': 'inactiveReactiveAccount',
-            'admin/shopper/new-shopper': 'newShopper'
+            'admin/shopper/new-shopper': 'newShopper',
+            'admin/shopper/search/:name': 'search'
         }
     });
 

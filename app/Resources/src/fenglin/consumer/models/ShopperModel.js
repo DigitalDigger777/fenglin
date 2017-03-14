@@ -16,6 +16,17 @@ define(['backbone'], function(Backbone){
             url = url + "?apikey=" + match[1];
 
             return url;
+        },
+        fetchByName: function(success, error){
+            this.fetch({
+                url: Routing.generate('panda_shopper_rest_load_by_name', {
+                    apikey:this.apikey,
+                    name: this.get('name')
+                }),
+                data: {},
+                success: success,
+                error: error
+            });
         }
     });
 
