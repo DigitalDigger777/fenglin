@@ -2,6 +2,10 @@ panda_shopper_login:
     path:     /login
     defaults: { _controller: PandaShopperBundle:Default:login }
 
+panda_shopper_read_qr:
+    path:     /read-qr/{memberId}
+    defaults: { _controller: PandaShopperBundle:Default:readQR }
+
 panda_shopper_rest:
     resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper.yml"
     prefix:   /rest/

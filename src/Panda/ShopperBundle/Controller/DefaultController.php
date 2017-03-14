@@ -43,4 +43,13 @@ class DefaultController extends Controller
 
         return new Response('Phone number or password is not correct', 403);
     }
+
+    public function readQRAction(Request $request)
+    {
+        $memberId = $request->get('memberId');
+
+        return $this->render('shopper/read_qr.html.twig', [
+            'memberId' => $memberId
+        ]);
+    }
 }

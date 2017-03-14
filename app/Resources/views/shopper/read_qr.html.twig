@@ -1,0 +1,13 @@
+{% extends 'base_shopper.html.twig' %}
+
+{% block content %}
+    <script type="text/javascript">
+        var apikey = window.localStorage.getItem('apikey');
+        if (!apikey) {
+            window.location = '/login';
+            window.localStorage.setItem('memberId', '{{ memberId }}');
+        } else {
+            window.location = '/shopper?apikey=' + apikey +'#consumer/search/' + {{ memberId }};
+        }
+    </script>
+{% endblock %}
