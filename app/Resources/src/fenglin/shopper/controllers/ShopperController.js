@@ -8,17 +8,13 @@ define([
     'shopper/views/cash_back/CashBackStatementCompositeView',
     'shopper/collections/CashBackConfirmCollection',
     'shopper/collections/CashBackStatementCollection',
-    'shopper/views/cash_back/CashBackConfirmCompositeView',
-    'shopper/views/shopper/InactiveReactiveAccountView',
-    'shopper/views/shopper/NewShopperView'
+    'shopper/views/cash_back/CashBackConfirmCompositeView'
 ], function(ShopperHomeView,
             SettingView,
             CashBackStatementCompositeView,
             CashBackConfirmCollection,
             CashBackStatementCollection,
-            CashBackConfirmCompositeView,
-            InactiveReactiveAccountView,
-            NewShopperView){
+            CashBackConfirmCompositeView){
 
 
     return {
@@ -62,14 +58,6 @@ define([
 
             var setting = new SettingView();
             setting.render();
-        },
-        inactiveReactiveAccount: function(id){
-            var inactiveReactiveAccountView = new InactiveReactiveAccountView();
-            inactiveReactiveAccountView.render();
-        },
-        newShopper: function(){
-            var newShopperView = new NewShopperView();
-            newShopperView.render();
         }
     };
 });

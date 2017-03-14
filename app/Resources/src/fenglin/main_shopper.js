@@ -8,7 +8,8 @@ define([
     'shopper/routers/ShopperRouter',
     'shopper/routers/ConsumerRouter',
     'shopper/routers/PaymentRouter',
-    'shopper/routers/CashbackRouter'
+    'shopper/routers/CashbackRouter',
+    'shopper/routers/StaffManagementRouter'
 ], function(Backbone){
 
     var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
