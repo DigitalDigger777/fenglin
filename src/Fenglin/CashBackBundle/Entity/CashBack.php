@@ -57,6 +57,11 @@ class CashBack
     private $logItems;
 
     /**
+     * @var string
+     */
+    private $transactionId;
+
+    /**
      * Get id
      *
      * @return int
@@ -232,6 +237,22 @@ class CashBack
     public function setLogItems($logItems)
     {
         $this->logItems = $logItems;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @param string $transactionId
+     */
+    public function setTransactionId($transactionId)
+    {
+        $this->transactionId = $transactionId;
     }
 }
 

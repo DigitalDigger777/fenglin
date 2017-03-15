@@ -30,6 +30,27 @@ class CashBackController extends Controller
      * @var array
      */
     private $requestObject = null;
+
+    /**
+     * @var \Panda\ShopperBundle\Entity\Shopper
+     */
+    private $shopper;
+
+    /**
+     * @var \Panda\ConsumerBundle\Entity\Consumer
+     */
+    private $consumer;
+
+    /**
+     * @var \Panda\ConsumerBundle\Entity\Consumer
+     */
+    private $consumerLevel2;
+
+    /**
+     * @var \Panda\ConsumerBundle\Entity\Consumer
+     */
+    private $consumerLevel3;
+
     /**
      * @return int
      */
@@ -72,6 +93,71 @@ class CashBackController extends Controller
     {
         $this->data = $data;
     }
+
+    /**
+     * @return \Panda\ShopperBundle\Entity\Shopper
+     */
+    public function getShopper()
+    {
+        return $this->shopper;
+    }
+
+    /**
+     * @param \Panda\ShopperBundle\Entity\Shopper $shopper
+     */
+    public function setShopper($shopper)
+    {
+        $this->shopper = $shopper;
+    }
+
+    /**
+     * @return \Panda\ConsumerBundle\Entity\Consumer
+     */
+    public function getConsumer()
+    {
+        return $this->consumer;
+    }
+
+    /**
+     * @param \Panda\ConsumerBundle\Entity\Consumer $consumer
+     */
+    public function setConsumer($consumer)
+    {
+        $this->consumer = $consumer;
+    }
+
+    /**
+     * @return \Panda\ConsumerBundle\Entity\Consumer
+     */
+    public function getConsumerLevel2()
+    {
+        return $this->consumerLevel2;
+    }
+
+    /**
+     * @param \Panda\ConsumerBundle\Entity\Consumer $consumerLevel2
+     */
+    public function setConsumerLevel2($consumerLevel2)
+    {
+        $this->consumerLevel2 = $consumerLevel2;
+    }
+
+    /**
+     * @return \Panda\ConsumerBundle\Entity\Consumer
+     */
+    public function getConsumerLevel3()
+    {
+        return $this->consumerLevel3;
+    }
+
+    /**
+     * @param \Panda\ConsumerBundle\Entity\Consumer $consumerLevel3
+     */
+    public function setConsumerLevel3($consumerLevel3)
+    {
+        $this->consumerLevel3 = $consumerLevel3;
+    }
+
     /**
      * Index action.
      *
@@ -139,6 +225,7 @@ class CashBackController extends Controller
         return $response;
     }
 
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -166,7 +253,8 @@ class CashBackController extends Controller
             'email' => $shopperEmail
         ]);
         $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->find($id);
-
+        $this->setConsumer($consumer);
+        $this->setShopper($shopper);
 
         if ($payable > 0) {
             $rebateLevel    = $shopper->getRebateLevelRate();
@@ -177,68 +265,10 @@ class CashBackController extends Controller
             $amountLevel2 = ($payable/100) * $rebateLevel2;
             $amountLevel3 = ($payable/100) * $rebateLevel3;
 
-            $cashBack = new CashBack();
-            $cashBack->setConsumer($consumer);
-            $cashBack->setShopper($shopper);
-            $cashBack->setAmount($amount);
-            $cashBack->setAmountLevel2($amountLevel2);
-            $cashBack->setAmountLevel3($amountLevel3);
-            $cashBack->setDate(new \DateTime());
-            $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+            $transactionId = $this->cashBack($amount, $amountLevel2, $amountLevel3);
+            $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3);
+            $data['transactionId'] = $transactionId;
 
-            $em->persist($cashBack);
-            $em->flush();
-
-            //update balance current consumer level 1
-            $shopperId = $shopper->getId();
-            $amountConsumers = $consumer->getAmountConsumers();
-
-            foreach($amountConsumers as $amountConsumer) {
-                $amountShopperId = $amountConsumer->getShopper()->getId();
-                if ($shopperId == $amountShopperId) {
-                    $amountConsumer->setTotalAmount($balance + $amount);
-                    $em->persist($amountConsumer);
-                    $em->flush();
-                }
-            }
-
-            //update balance consumer level 2
-            $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-                'shopper' => $shopper,
-                'consumer' => $consumer
-            ]);
-
-            $consumerLevel2 = $refreeTree->getReferalConsumer();
-
-            $amountConsumers = $consumerLevel2->getAmountConsumers();
-
-            foreach($amountConsumers as $amountConsumer) {
-                $amountShopperId = $amountConsumer->getShopper()->getId();
-                if ($shopperId == $amountShopperId) {
-                    $amountConsumer->setTotalAmount($balance + $amount);
-                    $em->persist($amountConsumer);
-                    $em->flush();
-                }
-            }
-
-            //update balance consumer level 3
-            $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-                'shopper' => $shopper,
-                'consumer' => $consumerLevel2
-            ]);
-
-            $consumerLevel3 = $refreeTree->getReferalConsumer();
-
-            $amountConsumers = $consumerLevel3->getAmountConsumers();
-
-            foreach($amountConsumers as $amountConsumer) {
-                $amountShopperId = $amountConsumer->getShopper()->getId();
-                if ($shopperId == $amountShopperId) {
-                    $amountConsumer->setTotalAmount($balance + $amount);
-                    $em->persist($amountConsumer);
-                    $em->flush();
-                }
-            }
         } else {
             $shopperId = $shopper->getId();
             $amountConsumers = $consumer->getAmountConsumers();
@@ -262,6 +292,212 @@ class CashBackController extends Controller
             ], $this->getCode());
         }
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function confirmCashBackListAction(Request $request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\ConsumerBundle\Entity\Consumer $consumer
+         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+         * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
+         * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTree
+         * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTreeLevel2
+         * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTreeLevel3
+         */
+        $consumerId = $this->getRequestParameters($request, 'consumerId');
+        $shopperEmail = $this->getUser()->getUsername();
+        $em = $this->getDoctrine()->getManager();
+        $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->find($consumerId);
+        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
+            'email' => $shopperEmail
+        ]);
+        $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+            'shopper' => $shopper,
+            'consumer' => $consumer
+        ]);
+
+        $refreeTreeLevel2 = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+            'shopper' => $shopper,
+            'consumer' => $refreeTree->getReferalConsumer()
+        ]);
+
+        $refreeTreeLevel3 = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+            'shopper' => $shopper,
+            'consumer' => $refreeTreeLevel2->getReferalConsumer()
+        ]);
+
+        $consumerIds = [
+            $refreeTree->getConsumer()->getId(),
+            $refreeTreeLevel2->getConsumer()->getId(),
+            $refreeTreeLevel3->getConsumer()->getId()
+        ];
+
+
+        $qb = $em->createQueryBuilder();
+        $qb->select('c, s, cns')
+            ->from('FenglinCashBackBundle:CashBack', 'c')
+            ->join('c.shopper', 's')
+            ->join('c.consumer', 'cns')
+            ->where($qb->expr()->andX(
+                    $qb->expr()->eq('s.email', ':shopperEmail'),
+                    $qb->expr()->in('cns.id', ':ids')
+                )
+            )
+            ->orderBy('c.id', 'DESC')
+
+            ->setParameter(':shopperEmail', $shopperEmail)
+            ->setParameter(':ids', $consumerIds);
+
+        $query = $qb->getQuery();
+
+        try {
+            $data = $query->getResult(Query::HYDRATE_ARRAY);
+            $this->setData($data);
+        } catch (\Exception $e) {
+            $this->setCode(500);
+            $this->setMessage($e->getMessage());
+        }
+
+        $data = $this->getData();
+        if (count($data) > 0) {
+            $response = new JsonResponse($data, $this->getCode());
+        } else {
+            $response = new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
+        return $response;
+    }
+
+    /**
+     * @param $amountLevel
+     * @param $amountLevel2
+     * @param $amountLevel3
+     * @return string
+     */
+    private function cashBack($amountLevel, $amountLevel2, $amountLevel3)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+        $consumer = $this->getConsumer();
+        $shopper = $this->getShopper();
+
+        $transactionId = $consumer->getId() . '|' . time();
+        $cashBack = new CashBack();
+        $cashBack->setConsumer($consumer);
+        $cashBack->setShopper($shopper);
+        $cashBack->setAmount($amountLevel);
+        $cashBack->setAmountLevel2($amountLevel2);
+        $cashBack->setAmountLevel3($amountLevel3);
+        $cashBack->setDate(new \DateTime());
+        $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+        $cashBack->setTransactionId($transactionId);
+        $em->persist($cashBack);
+        $em->flush();
+
+        //level 2
+        //echo $shopper->getId() . '|' . $consumer->getId(); exit;
+        $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+            'shopper'  => $shopper,
+            'consumer' => $consumer
+        ]);
+        $consumerLevel2 = $refreeTree->getReferalConsumer();
+        $this->setConsumerLevel2($consumerLevel2);
+
+        $cashBack = new CashBack();
+        $cashBack->setConsumer($consumerLevel2);
+        $cashBack->setShopper($shopper);
+        $cashBack->setAmount($amountLevel2);
+        $cashBack->setAmountLevel2(0);
+        $cashBack->setAmountLevel3(0);
+        $cashBack->setDate(new \DateTime());
+        $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+        $cashBack->setTransactionId($transactionId);
+        $em->persist($cashBack);
+        $em->flush();
+
+        //level 3
+        $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+            'shopper'  => $shopper,
+            'consumer' => $consumerLevel2
+        ]);
+        $consumerLevel3 = $refreeTree->getReferalConsumer();
+        $this->setConsumerLevel3($consumerLevel3);
+
+        $cashBack = new CashBack();
+        $cashBack->setConsumer($consumerLevel3);
+        $cashBack->setShopper($shopper);
+        $cashBack->setAmount($amountLevel3);
+        $cashBack->setAmountLevel2(0);
+        $cashBack->setAmountLevel3(0);
+        $cashBack->setDate(new \DateTime());
+        $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+        $cashBack->setTransactionId($transactionId);
+        $em->persist($cashBack);
+        $em->flush();
+
+        return $cashBack->getTransactionId();
+    }
+
+    private function calcBalance($balance, $amountLevel, $amountLevel2, $amountLevel3)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
+         */
+        $em = $this->getDoctrine()->getManager();
+
+        $consumer   = $this->getConsumer();
+        $consumerLevel2 = $this->getConsumerLevel2();
+        $consumerLevel3 = $this->getConsumerLevel3();
+
+        $shopper    = $this->getShopper();
+        $shopperId  = $shopper->getId();
+
+        //level 1
+        $amountConsumers = $consumer->getAmountConsumers();
+
+        foreach($amountConsumers as $amountConsumer) {
+            $amountShopperId = $amountConsumer->getShopper()->getId();
+            if ($shopperId == $amountShopperId) {
+                $amountConsumer->setTotalAmount($balance + $amountLevel);
+                $em->persist($amountConsumer);
+                $em->flush();
+            }
+        }
+
+        //level 2
+        $amountConsumers = $consumerLevel2->getAmountConsumers();
+
+        foreach($amountConsumers as $amountConsumer) {
+            $amountShopperId = $amountConsumer->getShopper()->getId();
+            if ($shopperId == $amountShopperId) {
+                $balanceLevel2 = $amountConsumer->getTotalAmount();
+                $amountConsumer->setTotalAmount($balanceLevel2 + $amountLevel2);
+                $em->persist($amountConsumer);
+                $em->flush();
+            }
+        }
+
+        //level 3
+        $amountConsumers = $consumerLevel3->getAmountConsumers();
+
+        foreach($amountConsumers as $amountConsumer) {
+            $amountShopperId = $amountConsumer->getShopper()->getId();
+            if ($shopperId == $amountShopperId) {
+                $balanceLevel3 = $amountConsumer->getTotalAmount();
+                $amountConsumer->setTotalAmount($balanceLevel3 + $amountLevel3);
+                $em->persist($amountConsumer);
+                $em->flush();
+            }
+        }
     }
 
     /**

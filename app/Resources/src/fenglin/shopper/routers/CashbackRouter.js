@@ -7,7 +7,7 @@ define(['marionette', 'shopper/controllers/CashbackController'], function(Marion
     var CashbackRouter = Marionette.AppRouter.extend({
         controller: CashbackController,
         appRoutes: {
-            'cashback/confirm': 'confirm'
+            'cashback/confirm/:memberId': 'confirm'
         }
     });
 

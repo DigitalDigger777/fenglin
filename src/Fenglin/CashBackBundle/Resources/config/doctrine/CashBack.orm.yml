@@ -25,6 +25,10 @@ Fenglin\CashBackBundle\Entity\CashBack:
         status:
             type: integer
             nullable: true
+        transactionId:
+            type: string
+            length: 255
+            nullable: true
     manyToOne:
         consumer:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

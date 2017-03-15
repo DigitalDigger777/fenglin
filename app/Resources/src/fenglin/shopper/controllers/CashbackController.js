@@ -25,7 +25,7 @@ define([
     errorToast.render();
 
     return {
-        confirm: function(){
+        confirm: function(memberId){
             loadToast.show();
             var cashBackConfirmCollection = new CashBackConfirmCollection();
             cashBackConfirmCollection.fetch({

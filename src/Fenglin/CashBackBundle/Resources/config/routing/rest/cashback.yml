@@ -15,5 +15,13 @@ fenglin_cash_back_rest_list:
 fenglin_cash_back_rest_confirm_cash_back:
     path:     /confirm-cash-back/{id}
     defaults: { _controller: FenglinCashBackBundle:Rest/CashBack:confirmCashBack }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+fenglin_cash_back_rest_confirm_cash_back_list:
+    path:     /confirm-cash-back/list
+    defaults: { _controller: FenglinCashBackBundle:Rest/CashBack:confirmCashBackList }
     options:
         expose: true
