@@ -27,8 +27,22 @@ define([
             consumerModel.set('memberId', memberId);
 
             console.log(consumerModel.toJSON());
+
             consumerModel.fetchByMemberId(function(model){
                 loadToast.hide();
+                //set balance
+                var memberId = model.get('id');
+                var amountConsumers = model.get('amountConsumers');
+                var totalAmount = amountConsumers[0].totalAmount;
+
+                if (amountConsumers.length > 0) {
+                    window.localStorage.setItem('member_total_amount', parseFloat(totalAmount));
+                } else {
+                    window.localStorage.setItem('member_total_amount', 0);
+                }
+                window.localStorage.setItem('member_id', memberId);
+                //end set balance
+
                 var consumerSearchView = new ConsumerSearchView({
                     model: model
                 });

@@ -50,6 +50,9 @@ define([
 
             var shopperModel = new ShopperModel();
             shopperModel.fetchCurrentShopper(function(model){
+                var memberTotalAmount = window.localStorage.getItem('member_total_amount');
+
+                model.set('member_total_amount', memberTotalAmount);
 
                 var paymentConfirmView = new PaymentConfirmView({
                     model: model

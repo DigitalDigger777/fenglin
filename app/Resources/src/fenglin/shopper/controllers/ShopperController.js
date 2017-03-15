@@ -8,14 +8,25 @@ define([
     'shopper/views/cash_back/CashBackStatementCompositeView',
     'shopper/collections/CashBackConfirmCollection',
     'shopper/collections/CashBackStatementCollection',
-    'shopper/views/cash_back/CashBackConfirmCompositeView'
+    'shopper/views/cash_back/CashBackConfirmCompositeView',
+    'consumer/models/ShopperModel',
+    'consumer/views/core/ErrorToastView',
+    'consumer/views/core/LoadingToastView',
 ], function(ShopperHomeView,
             SettingView,
             CashBackStatementCompositeView,
             CashBackConfirmCollection,
             CashBackStatementCollection,
-            CashBackConfirmCompositeView){
+            CashBackConfirmCompositeView,
+            ShopperModel,
+            ErrorToastView,
+            LoadingToastView){
 
+    var loadToast = new LoadingToastView();
+    var errorToast = new ErrorToastView();
+
+    loadToast.render();
+    errorToast.render();
 
     return {
         homePage: function(){
@@ -56,8 +67,23 @@ define([
         settingPage: function(){
             console.log('setting page');
 
-            var setting = new SettingView();
-            setting.render();
+            var shopperModel = new ShopperModel();
+            shopperModel.fetchCurrentShopper(function(model){
+
+                var setting = new SettingView({
+                    model:model
+                });
+                setting.render();
+
+                loadToast.hide();
+
+            }, function(){
+                errorToast.show();
+                loadToast.hide();
+                setTimeout(function(){
+                    errorToast.hide();
+                }, 3000);
+            });
         }
     };
 });

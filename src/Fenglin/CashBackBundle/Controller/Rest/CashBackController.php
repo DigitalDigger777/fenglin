@@ -141,6 +141,131 @@ class CashBackController extends Controller
 
     /**
      * @param Request $request
+     * @return JsonResponse
+     */
+    public function confirmCashBackAction(Request $request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\ConsumerBundle\Entity\Consumer $consumer
+         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+         * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
+         * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTree
+         */
+        $id = $request->get('id');
+        $data = [];
+        $shopperEmail = $this->getUser()->getUsername();
+        $data['shopper_email'] = $shopperEmail;
+        $payable = $this->getRequestParameters($request, 'payable');
+        $balance = $this->getRequestParameters($request, 'balance');
+        $data['payable'] = $payable;
+        $data['balance'] = $balance;
+
+        $em = $this->getDoctrine()->getManager();
+        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
+            'email' => $shopperEmail
+        ]);
+        $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->find($id);
+
+
+        if ($payable > 0) {
+            $rebateLevel    = $shopper->getRebateLevelRate();
+            $rebateLevel2   = $shopper->getRebateLevel2Rate();
+            $rebateLevel3   = $shopper->getRebateLevel3Rate();
+
+            $amount = ($payable/100) * $rebateLevel;
+            $amountLevel2 = ($payable/100) * $rebateLevel2;
+            $amountLevel3 = ($payable/100) * $rebateLevel3;
+
+            $cashBack = new CashBack();
+            $cashBack->setConsumer($consumer);
+            $cashBack->setShopper($shopper);
+            $cashBack->setAmount($amount);
+            $cashBack->setAmountLevel2($amountLevel2);
+            $cashBack->setAmountLevel3($amountLevel3);
+            $cashBack->setDate(new \DateTime());
+            $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+
+            $em->persist($cashBack);
+            $em->flush();
+
+            //update balance current consumer level 1
+            $shopperId = $shopper->getId();
+            $amountConsumers = $consumer->getAmountConsumers();
+
+            foreach($amountConsumers as $amountConsumer) {
+                $amountShopperId = $amountConsumer->getShopper()->getId();
+                if ($shopperId == $amountShopperId) {
+                    $amountConsumer->setTotalAmount($balance + $amount);
+                    $em->persist($amountConsumer);
+                    $em->flush();
+                }
+            }
+
+            //update balance consumer level 2
+            $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+                'shopper' => $shopper,
+                'consumer' => $consumer
+            ]);
+
+            $consumerLevel2 = $refreeTree->getReferalConsumer();
+
+            $amountConsumers = $consumerLevel2->getAmountConsumers();
+
+            foreach($amountConsumers as $amountConsumer) {
+                $amountShopperId = $amountConsumer->getShopper()->getId();
+                if ($shopperId == $amountShopperId) {
+                    $amountConsumer->setTotalAmount($balance + $amount);
+                    $em->persist($amountConsumer);
+                    $em->flush();
+                }
+            }
+
+            //update balance consumer level 3
+            $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+                'shopper' => $shopper,
+                'consumer' => $consumerLevel2
+            ]);
+
+            $consumerLevel3 = $refreeTree->getReferalConsumer();
+
+            $amountConsumers = $consumerLevel3->getAmountConsumers();
+
+            foreach($amountConsumers as $amountConsumer) {
+                $amountShopperId = $amountConsumer->getShopper()->getId();
+                if ($shopperId == $amountShopperId) {
+                    $amountConsumer->setTotalAmount($balance + $amount);
+                    $em->persist($amountConsumer);
+                    $em->flush();
+                }
+            }
+        } else {
+            $shopperId = $shopper->getId();
+            $amountConsumers = $consumer->getAmountConsumers();
+
+            foreach($amountConsumers as $amountConsumer) {
+                $amountShopperId = $amountConsumer->getShopper()->getId();
+                if ($shopperId == $amountShopperId) {
+                    $amountConsumer->setTotalAmount($balance);
+                    $em->persist($amountConsumer);
+                    $em->flush();
+                }
+            }
+        }
+
+        //$data = $this->getData();
+        if (count($data) > 0) {
+            $response = new JsonResponse($data, $this->getCode());
+        } else {
+            $response = new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
+        return $response;
+    }
+
+    /**
+     * @param Request $request
      * @return bool
      */
     private function save(Request $request)
