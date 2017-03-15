@@ -29,3 +29,10 @@ panda_shopper_rest_load_by_name:
     defaults: { _controller: PandaShopperBundle:Rest/Shopper:loadByName }
     options:
         expose: true
+
+#loadCurrentShopper
+panda_shopper_rest_load_current_shopper:
+    path:     /load-current-shopper
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:loadCurrent }
+    options:
+        expose: true

@@ -27,6 +27,16 @@ define(['backbone'], function(Backbone){
                 success: success,
                 error: error
             });
+        },
+        fetchCurrentShopper: function(success, error){
+            this.fetch({
+                url: Routing.generate('panda_shopper_rest_load_current_shopper', {
+                    apikey:this.apikey
+                }),
+                data: {},
+                success: success,
+                error: error
+            });
         }
     });
 

@@ -212,6 +212,52 @@ class ShopperController extends Controller
 
     /**
      * @param Request $request
+     * @return JsonResponse
+     */
+    public function loadCurrentAction(Request $request)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+        $apikey = $request->query->get('apikey');
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('s')
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->where($qb->expr()->eq('s.apiKey', ':apikey'))
+            ->setParameter(':apikey', $apikey);
+        $query = $qb->getQuery();
+
+        try {
+            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+            $this->setData($data);
+        } catch (\Exception $e) {
+            $this->setCode(500);
+            $this->setMessage($e->getMessage());
+        }
+
+        $data = $this->getData();
+
+        if (count($data) > 0) {
+            $response = new JsonResponse($data, $this->getCode());
+        } else {
+            $response = new JsonResponse([
+                'message' => $this->getMessage(),
+                'data' => $data
+            ], $this->getCode());
+        }
+
+        $callback = $this->getRequestParameters($request, 'callback');
+        if ($callback) {
+            $response->setCallback($callback);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param Request $request
      * @return bool
      */
     private function save(Request $request)

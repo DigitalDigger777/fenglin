@@ -4,13 +4,13 @@
 
 define([
     'shopper/views/consumer/ConsumerSearchView',
-    'consumer/models/ConsumerModel',
+    'consumer/models/ShopperModel',
     'shopper/views/payment/PaymentCalculateView',
     'shopper/views/payment/PaymentConfirmView',
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/LoadingToastView',
 ], function(ConsumerSearchView,
-            ConsumerModel,
+            ShopperModel,
             PaymentCalculateView,
             PaymentConfirmView,
             ErrorToastView,
@@ -26,12 +26,44 @@ define([
 
     return {
         calculate: function(){
-            var paymentView = new PaymentCalculateView();
-            paymentView.render();
+            loadToast.show();
+            var shopperModel = new ShopperModel();
+            shopperModel.fetchCurrentShopper(function(model){
+                console.log(model.toJSON());
+                var paymentView = new PaymentCalculateView({
+                    model: model
+                });
+                paymentView.render();
+                loadToast.hide();
+
+            }, function(){
+                errorToast.show();
+                loadToast.hide();
+                setTimeout(function(){
+                    errorToast.hide();
+                }, 3000);
+            });
+
         },
         confirm: function(){
-            var paymentConfirmView = new PaymentConfirmView();
-            paymentConfirmView.render();
+
+
+            var shopperModel = new ShopperModel();
+            shopperModel.fetchCurrentShopper(function(model){
+
+                var paymentConfirmView = new PaymentConfirmView({
+                    model: model
+                });
+                paymentConfirmView.render();
+                loadToast.hide();
+
+            }, function(){
+                errorToast.show();
+                loadToast.hide();
+                setTimeout(function(){
+                    errorToast.hide();
+                }, 3000);
+            });
         }
     };
 });
