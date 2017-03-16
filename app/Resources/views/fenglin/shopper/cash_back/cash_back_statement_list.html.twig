@@ -17,15 +17,17 @@
             <div class="weui-media-box__bd">
                 <div class="clearfix">
                     <div style="width: 69%; float: left;" class="dashed-line-right">
-                        <p>轻轻阳光 消费￥79.00 <br>
-                            得到 消费返利 ￥7.90 <br>
-                            2017/01/19
+                        <p>
+                            {#轻轻阳光 消费￥79.00 <br>#}
+                            得到 消费返利 ￥<%=Math.round10(amount, -2)%> <br>
+                            <% var date1 = new Date(date.date) %>
+                            <%=date1.toLocaleDateString()%>
                         </p>
                     </div>
                     <div style="width: 30%; float: left; text-align: right">
                         <p>
                             返利余额 <br><br>
-                            <b>￥127.90</b>
+                            <b>￥<%=Math.round10(consumer.amountConsumers[0].totalAmount)%></b>
                         </p>
                     </div>
                 </div>
