@@ -1,3 +1,7 @@
-panda_staff_homepage:
-    path:     /
-    defaults: { _controller: PandaStaffBundle:Default:index }
+#panda_staff_homepage:
+#    path:     /
+#    defaults: { _controller: PandaStaffBundle:Default:index }
+
+panda_staff_rest:
+    resource: "@PandaStaffBundle/Resources/config/routing/rest/staff.yml"
+    prefix:   /rest

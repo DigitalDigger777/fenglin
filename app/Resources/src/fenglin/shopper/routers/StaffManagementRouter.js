@@ -7,7 +7,9 @@ define(['marionette', 'shopper/controllers/StaffManagementController'], function
     var StaffManagementRouter = Marionette.AppRouter.extend({
         controller: StaffManagementController,
         appRoutes: {
-            'shopper/staff-management':'staffManagement'
+            'shopper/staff-management':'staffManagement',
+            'shopper/staff-save': 'save',
+            'shopper/staff-delete/:staffId': 'deleteStaff'
         }
     });
 

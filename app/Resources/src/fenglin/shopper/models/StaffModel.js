@@ -8,7 +8,7 @@ define(['backbone'], function(Backbone){
 
     return Backbone.Model.extend({
         apikey: match[1],
-        urlRoot: Routing.generate('panda_consumer_rest_index'),
+        urlRoot: Routing.generate('panda_staff_rest_index'),
         url: function(){
             this.id = this.id == undefined ? 0 : this.id;
 
@@ -16,20 +16,6 @@ define(['backbone'], function(Backbone){
             url = url + "?apikey=" + match[1];
 
             return url;
-        },
-
-        fetchByMemberId: function(success, error){
-            //console.log(this.memberId);
-
-            this.fetch({
-                url: Routing.generate('panda_consumer_rest_load_by_member_id', {
-                    apikey:this.apikey,
-                    memberId: this.get('memberId')
-                }),
-                data: {},
-                success: success,
-                error: error
-            });
         }
     });
 

@@ -9,7 +9,7 @@ define(['backbone', 'shopper/models/StaffModel'], function(Backbone, StaffModel)
     var match = reg.exec(location.search);
     return Backbone.Collection.extend({
         apikey: match[1],
-        url: Routing.generate('fenglin_cash_back_rest_list', {
+        url: Routing.generate('panda_staff_rest_list', {
             apikey: match[1]
         }),
         model: StaffModel

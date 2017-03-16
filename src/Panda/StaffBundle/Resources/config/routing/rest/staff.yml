@@ -1,0 +1,13 @@
+panda_staff_rest_index:
+    path:     /{id}
+    defaults: { _controller: PandaStaffBundle:Rest/Staff:index, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+panda_staff_rest_list:
+    path:     /list
+    defaults: { _controller: PandaStaffBundle:Rest/Staff:list }
+    options:
+        expose: true
