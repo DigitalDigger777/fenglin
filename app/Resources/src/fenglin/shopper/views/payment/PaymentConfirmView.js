@@ -68,11 +68,12 @@ define(['marionette',
 
                     loadToast.show();
                     cashBackConfirmModel.save(null, {
-                        success: function(){
-                            window.localStorage.removeItem('member_id');
-                            window.localStorage.removeItem('member_total_amount');
+                        success: function(model){
+                            //window.localStorage.removeItem('member_id');
+                            window.localStorage.setItem('member_total_amount', model.get('balance'));
+                            window.localStorage.setItem('payable', payable);
 
-                            window.location.hash = '#cashback/confirm/' + memberId;
+                            window.location.hash = '#cashback/confirm/' + model.get('transactionId');
                             loadToast.hide();
                         },
                         error: function(){

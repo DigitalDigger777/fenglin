@@ -3,13 +3,15 @@
  */
 
 define([
+    'backbone',
     'shopper/views/consumer/ConsumerSearchView',
     'consumer/models/ConsumerModel',
     'shopper/views/cash_back/CashBackConfirmCompositeView',
     'shopper/collections/CashBackConfirmCollection',
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/LoadingToastView',
-], function(ConsumerSearchView,
+], function(Backbone,
+            ConsumerSearchView,
             ConsumerModel,
             CashBackConfirmCompositeView,
             CashBackConfirmCollection,
@@ -25,13 +27,17 @@ define([
     errorToast.render();
 
     return {
-        confirm: function(memberId){
+        confirm: function(transactionId){
             loadToast.show();
-            var cashBackConfirmCollection = new CashBackConfirmCollection();
+            var cashBackConfirmCollection = new CashBackConfirmCollection([], {transactionId:transactionId});
             cashBackConfirmCollection.fetch({
                 success: function(collection, response){
+                    var model = new Backbone.Model({
+                        balance: window.localStorage.getItem('member_total_amount')
+                    });
                     var cashBackConfirmCompositeView = new CashBackConfirmCompositeView({
-                        collection: collection
+                        collection: collection,
+                        model: model
                     });
                     cashBackConfirmCompositeView.render();
                     loadToast.hide();

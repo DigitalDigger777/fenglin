@@ -83,13 +83,7 @@
         </div>
     </div>
 
-    {% block javascripts %}
-        <script data-main="{{ asset('fenglin/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>
-        {#<script src="{{ asset('vendor/zepto/zepto.js') }}"></script>#}
-        {#<script src="{{ asset('vendor/jweixin-bower/jweixin-1.0.0.js') }}"></script>#}
-        {#<script src="{{ asset('vendor/weui.js/dist/weui.js') }}"></script>#}
 
-    {% endblock %}
 
     {% include 'fenglin/shopper/cash_back/cash_back_confirm.html.twig' %}
     {% include 'fenglin/shopper/cash_back/cash_back_statement_list.html.twig' %}
@@ -106,5 +100,15 @@
     {% include 'fenglin/shopper/staff_management/staff_management_list.html.twig' %}
 
     {% include 'fenglin/consumer/core/toast.html.twig' %}
+
+    {% block javascripts %}
+        <script src="{{ asset('resources/js/round.js') }}"></script>
+        <script data-main="{{ asset('fenglin/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>
+
+        {#<script src="{{ asset('vendor/zepto/zepto.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/jweixin-bower/jweixin-1.0.0.js') }}"></script>#}
+        {#<script src="{{ asset('vendor/weui.js/dist/weui.js') }}"></script>#}
+
+    {% endblock %}
 </body>
 </html>

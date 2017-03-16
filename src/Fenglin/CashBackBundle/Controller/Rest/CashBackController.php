@@ -266,8 +266,9 @@ class CashBackController extends Controller
             $amountLevel3 = ($payable/100) * $rebateLevel3;
 
             $transactionId = $this->cashBack($amount, $amountLevel2, $amountLevel3);
-            $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3);
+            $returnBalance = $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3);
             $data['transactionId'] = $transactionId;
+            $data['balance'] = $returnBalance;
 
         } else {
             $shopperId = $shopper->getId();
@@ -309,49 +310,20 @@ class CashBackController extends Controller
          * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTreeLevel2
          * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTreeLevel3
          */
-        $consumerId = $this->getRequestParameters($request, 'consumerId');
-        $shopperEmail = $this->getUser()->getUsername();
         $em = $this->getDoctrine()->getManager();
-        $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->find($consumerId);
-        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
-            'email' => $shopperEmail
-        ]);
-        $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-            'shopper' => $shopper,
-            'consumer' => $consumer
-        ]);
+        $transactionId     = $this->getRequestParameters($request, 'transactionId');
 
-        $refreeTreeLevel2 = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-            'shopper' => $shopper,
-            'consumer' => $refreeTree->getReferalConsumer()
-        ]);
-
-        $refreeTreeLevel3 = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-            'shopper' => $shopper,
-            'consumer' => $refreeTreeLevel2->getReferalConsumer()
-        ]);
-
-        $consumerIds = [
-            $refreeTree->getConsumer()->getId(),
-            $refreeTreeLevel2->getConsumer()->getId(),
-            $refreeTreeLevel3->getConsumer()->getId()
-        ];
-
-
+        $shopperEmail = $this->getUser()->getUsername();
         $qb = $em->createQueryBuilder();
-        $qb->select('c, s, cns')
+        $qb->select('c, cns, ca, s')
             ->from('FenglinCashBackBundle:CashBack', 'c')
-            ->join('c.shopper', 's')
             ->join('c.consumer', 'cns')
-            ->where($qb->expr()->andX(
-                    $qb->expr()->eq('s.email', ':shopperEmail'),
-                    $qb->expr()->in('cns.id', ':ids')
-                )
-            )
-            ->orderBy('c.id', 'DESC')
-
-            ->setParameter(':shopperEmail', $shopperEmail)
-            ->setParameter(':ids', $consumerIds);
+            ->join('cns.amountConsumers', 'ca')
+            ->join('ca.shopper', 's', 'WITH', 's.email=:email')
+            ->where($qb->expr()->eq('c.transactionId', ':transactionId'))
+            ->orderBy('c.id', 'ASC')
+            ->setParameter(':transactionId', $transactionId)
+            ->setParameter(':email', $shopperEmail);
 
         $query = $qb->getQuery();
 
@@ -446,6 +418,13 @@ class CashBackController extends Controller
         return $cashBack->getTransactionId();
     }
 
+    /**
+     * @param $balance
+     * @param $amountLevel
+     * @param $amountLevel2
+     * @param $amountLevel3
+     * @return int
+     */
     private function calcBalance($balance, $amountLevel, $amountLevel2, $amountLevel3)
     {
         /**
@@ -460,6 +439,7 @@ class CashBackController extends Controller
 
         $shopper    = $this->getShopper();
         $shopperId  = $shopper->getId();
+        $returnBalanceForConsumer = 0;
 
         //level 1
         $amountConsumers = $consumer->getAmountConsumers();
@@ -470,6 +450,8 @@ class CashBackController extends Controller
                 $amountConsumer->setTotalAmount($balance + $amountLevel);
                 $em->persist($amountConsumer);
                 $em->flush();
+
+                $returnBalanceForConsumer = $balance + $amountLevel;
             }
         }
 
@@ -498,6 +480,8 @@ class CashBackController extends Controller
                 $em->flush();
             }
         }
+
+        return $returnBalanceForConsumer;
     }
 
     /**
