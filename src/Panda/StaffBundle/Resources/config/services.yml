@@ -1,0 +1,4 @@
+services:
+#    panda_staff.example:
+#        class: Panda\StaffBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

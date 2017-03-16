@@ -1,0 +1,28 @@
+Panda\StaffBundle\Entity\Staff:
+    type: entity
+    table: panda_staff
+    repositoryClass: Panda\StaffBundle\Repository\StaffRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        tel:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+    manyToOne:
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: staffs
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

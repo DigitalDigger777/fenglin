@@ -54,6 +54,9 @@ Panda\ShopperBundle\Entity\Shopper:
         consumerUseCashbacks:
             targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerUseCashBack
             mappedBy: shopper
+        staffs:
+            tragetEntity: \Panda\StaffBundle\Entity\Staff
+            mappedBy: shopper
     manyToMany:
         followConsumers:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

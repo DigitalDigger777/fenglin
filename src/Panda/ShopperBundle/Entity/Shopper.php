@@ -85,6 +85,11 @@ class Shopper extends User
     private $openPassword;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $staffs;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -394,6 +399,22 @@ class Shopper extends User
     public function setOpenPassword($openPassword)
     {
         $this->openPassword = $openPassword;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getStaffs()
+    {
+        return $this->staffs;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $staffs
+     */
+    public function setStaffs($staffs)
+    {
+        $this->staffs = $staffs;
     }
 }
 

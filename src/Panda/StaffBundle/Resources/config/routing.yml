@@ -1,0 +1,3 @@
+panda_staff_homepage:
+    path:     /
+    defaults: { _controller: PandaStaffBundle:Default:index }

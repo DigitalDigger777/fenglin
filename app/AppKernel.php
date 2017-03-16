@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Panda\MockWeChatOAuthBundle\PandaMockWeChatOAuthBundle(),
             new Fenglin\AdminBundle\FenglinAdminBundle(),
             new Fenglin\LoginBundle\FenglinLoginBundle(),
+            new Panda\StaffBundle\PandaStaffBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

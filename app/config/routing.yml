@@ -1,3 +1,7 @@
+panda_staff:
+    resource: "@PandaStaffBundle/Resources/config/routing.yml"
+    prefix:   /staff
+
 fenglin_login:
     resource: "@FenglinLoginBundle/Resources/config/routing.yml"
     prefix:   /login
