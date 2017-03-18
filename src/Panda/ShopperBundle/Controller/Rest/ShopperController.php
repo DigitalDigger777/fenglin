@@ -337,13 +337,15 @@ class ShopperController extends Controller
             $item->setPassword($password);
             $item->setOpenPassword($pass);
             $item->setStatus(Shopper::STATUS_ACTIVE);
+            $item->setApiKey(md5($pass));
             $item->setRole('ROLE_SHOPPER');
 
             $em->persist($item);
             $em->flush();
             $this->setMessage('Item save successful');
             $this->setData([
-                'id' => $item->getId()
+                'id' => $item->getId(),
+                'password' => $item->getOpenPassword()
             ]);
         } catch(\Exception $e) {
             $this->setCode(500);

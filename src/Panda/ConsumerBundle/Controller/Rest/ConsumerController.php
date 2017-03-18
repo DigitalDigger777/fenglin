@@ -2,6 +2,8 @@
 
 namespace Panda\ConsumerBundle\Controller\Rest;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Panda\ConsumerBundle\Entity\Consumer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -201,8 +203,13 @@ class ConsumerController extends Controller
             ->from('PandaShopperBundle:Shopper', 's')
             ->where($qb->expr()->eq('s.email', ':email'))
             ->setParameter(':email', $shopperEmail);
-        $shopper = $qb->getQuery()->getSingleResult();
-        $shopperId = $shopper->getId();
+        try {
+            $shopper = $qb->getQuery()->getSingleResult();
+            $shopperId = $shopper->getId();
+        } catch (NonUniqueResultException $e) {
+            $shoppers = $qb->getQuery()->getResult();
+            $shopperId = $shoppers[0]->getId();
+        }
 
         $memberId = $request->query->get('memberId');
         $qb = $em->createQueryBuilder();
@@ -225,13 +232,31 @@ class ConsumerController extends Controller
 
         try {
             $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
-
-
             $this->setData($data);
-        } catch (\Exception $e) {
-            $this->setCode(500);
-            $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
+        } catch (NoResultException $e){
+            $qb = $em->createQueryBuilder();
+            $qb->select('c, ac, s, cs')
+                ->from('PandaConsumerBundle:Consumer', 'c')
+                ->join('c.amountConsumers', 'ac')
+                ->join('ac.shopper', 's')
+                ->join('ac.consumer', 'cs')
+                ->where($qb->expr()->eq('c.memberId', ':memberId'))
+                ->setParameter(':memberId', $memberId);
+
+            $query = $qb->getQuery();
+            try {
+                $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+                $this->setData($data);
+
+            } catch (\Exception $e) {
+
+                $this->setCode(500);
+                $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
+            }
         }
+
+
+
 
         $data = $this->getData();
         if (count($data) > 0) {

@@ -7,12 +7,14 @@ define(['marionette',
         'consumer/models/ShopperModel',
         'consumer/views/core/LoadingToastView',
         'consumer/views/core/ErrorToastView',
-        'consumer/views/core/SuccessToastView'], function(Marionette,
+        'consumer/views/core/SuccessToastView',
+        'admin/views/shopper/PasswordView'], function(Marionette,
                                                         AdminMenuView,
                                                         ShopperModel,
                                                         LoadingToastView,
                                                         ErrorToastView,
-                                                        SuccessToastView){
+                                                        SuccessToastView,
+                                                        PasswordView){
     var loadToast  = new LoadingToastView();
     loadToast.render();
 
@@ -65,6 +67,10 @@ define(['marionette',
                         $('#shopperId').val(data.id);
                         setTimeout(function(){
                             successToast.hide();
+                            var passwordView = new PasswordView({
+                                model: data
+                            });
+                            passwordView.render();
                         }, 2000);
 
                     },
