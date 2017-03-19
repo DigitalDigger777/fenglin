@@ -237,7 +237,7 @@ class ConsumerController extends Controller
             $qb = $em->createQueryBuilder();
             $qb->select('c, ac, s, cs')
                 ->from('PandaConsumerBundle:Consumer', 'c')
-                ->join('c.amountConsumers', 'ac')
+                ->leftJoin('c.amountConsumers', 'ac')
                 ->join('ac.shopper', 's')
                 ->join('ac.consumer', 'cs')
                 ->where($qb->expr()->eq('c.memberId', ':memberId'))
