@@ -75,7 +75,7 @@ class MockOauthController extends Controller
 
                     if ($state == 'consumer') {
                         if (!$user) {
-                            $user = new User();
+                            $user = new Consumer();
                         }
                     } elseif ($state == 'shopper') {
                         if (!$user) {

@@ -237,9 +237,9 @@ class ConsumerController extends Controller
             $qb = $em->createQueryBuilder();
             $qb->select('c, ac, s, cs')
                 ->from('PandaConsumerBundle:Consumer', 'c')
-                ->leftJoin('c.amountConsumers', 'ac')
-                ->leftJoin('ac.shopper', 's')
-                ->leftJoin('ac.consumer', 'cs')
+                ->join('c.amountConsumers', 'ac')
+                ->join('ac.shopper', 's')
+                ->join('ac.consumer', 'cs')
                 ->where($qb->expr()->eq('c.memberId', ':memberId'))
                 ->setParameter(':memberId', $memberId);
 
@@ -251,7 +251,7 @@ class ConsumerController extends Controller
             } catch (\Exception $e) {
 
                 $this->setCode(500);
-                $this->setMessage($e->getMessage() . ' memberId:' . $memberId . '||' . $query->getSQL());
+                $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
             }
         }
 
