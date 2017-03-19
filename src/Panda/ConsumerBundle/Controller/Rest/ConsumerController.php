@@ -251,7 +251,7 @@ class ConsumerController extends Controller
             } catch (\Exception $e) {
 
                 $this->setCode(500);
-                $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
+                $this->setMessage($e->getMessage() . ' memberId:' . $memberId . '||' . $query->getSQL());
             }
         }
 
