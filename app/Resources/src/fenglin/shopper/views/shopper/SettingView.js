@@ -46,6 +46,7 @@ define([
                 var rebate_level_1 = $('#rebate_level_1').val();
                 var rebate_level_2 = $('#rebate_level_2').val();
                 var rebate_level_3 = $('#rebate_level_3').val();
+                var logo = $('#previewImage').attr('data-src');
 
                 var shopperModel = new ShopperModel();
 
@@ -60,6 +61,7 @@ define([
                 shopperModel.set('rebateLevelRate', rebate_level_1.replace('%',''));
                 shopperModel.set('rebateLevel2Rate', rebate_level_2.replace('%',''));
                 shopperModel.set('rebateLevel3Rate', rebate_level_3.replace('%',''));
+                shopperModel.set('logo', logo);
 
                 shopperModel.save(null, {
                     success: function(data){
@@ -90,6 +92,23 @@ define([
 
             var menu = new MenuHomeView();
             menu.render();
+
+            $('#uploaderInput').change(function(){
+                var fd = new FormData();
+                fd.append("photo", $('input[type=file]')[0].files[0]);
+                $.ajax({
+                    url: Routing.generate('panda_shopper_rest_upload'),
+                    type: "POST",
+                    data: fd,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+                }).done(function( data ) {
+                    console.log("PHP Output:");
+                    console.log( data );
+                    $('#previewImage').attr('src', '/uploads/shoppers/' + data[0]);
+                    $('#previewImage').attr('data-src', data[0]);
+                });
+            });
         }
     });
 });

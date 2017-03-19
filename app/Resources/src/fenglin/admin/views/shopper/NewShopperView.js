@@ -44,6 +44,7 @@ define(['marionette',
                 var rebate_level_1 = $('#rebate_level_1').val();
                 var rebate_level_2 = $('#rebate_level_2').val();
                 var rebate_level_3 = $('#rebate_level_3').val();
+                var preview_image = $('#previewImage').attr('data-src');
 
                 var shopperModel = new ShopperModel();
 
@@ -55,9 +56,10 @@ define(['marionette',
                 shopperModel.set('address', address);
                 shopperModel.set('tel', tel);
                 shopperModel.set('schedule', schedule);
-                shopperModel.set('rebate_level_1', rebate_level_1);
-                shopperModel.set('rebate_level_2', rebate_level_2);
-                shopperModel.set('rebate_level_3', rebate_level_3);
+                shopperModel.set('rebateLevelRate', rebate_level_1);
+                shopperModel.set('rebateLevel2Rate', rebate_level_2);
+                shopperModel.set('rebateLevel3Rate', rebate_level_3);
+                shopperModel.set('logo', preview_image);
 
                 shopperModel.save(null, {
                     success: function(data){
@@ -92,6 +94,28 @@ define(['marionette',
 
             var menu = new AdminMenuView();
             menu.render();
+
+
+            // $('#uploadPhoto').click(function(){
+            //     $('#photo').click();
+            // });
+
+            $('#uploaderInput').change(function(){
+                var fd = new FormData();
+                fd.append("photo", $('input[type=file]')[0].files[0]);
+                $.ajax({
+                    url: Routing.generate('panda_shopper_rest_upload'),
+                    type: "POST",
+                    data: fd,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+                }).done(function( data ) {
+                    console.log("PHP Output:");
+                    console.log( data );
+                    $('#previewImage').attr('src', '/uploads/shoppers/' + data[0]);
+                    $('#previewImage').attr('data-src', data[0]);
+                });
+            });
         }
     });
 });

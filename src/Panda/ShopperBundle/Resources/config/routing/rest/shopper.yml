@@ -22,6 +22,13 @@ panda_shopper_rest_cash_back_list:
     options:
         expose: true
 
+panda_shopper_rest_upload:
+    path:     /upload-image
+    defaults: { _controller: PandaShopperBundle:Rest/Shopper:uploadImage }
+    requirements:
+        id: \d+
+    options:
+        expose: true
 
 #loadByName
 panda_shopper_rest_load_by_name:

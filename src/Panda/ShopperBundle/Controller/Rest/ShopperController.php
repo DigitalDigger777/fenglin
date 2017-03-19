@@ -258,6 +258,32 @@ class ShopperController extends Controller
 
     /**
      * @param Request $request
+     * @return array
+     */
+    public function uploadImageAction(Request $request)
+    {
+        /**
+         * @var \Symfony\Component\HttpFoundation\File\UploadedFile $file
+         */
+
+        $files = $request->files;
+        $responseFiles = [];
+
+        foreach ($files as $file) {
+
+            $name = time() . '.jpg';
+
+            if ($file) {
+                $file->move('uploads/shoppers', $name);
+                $responseFiles[] = $name;
+            }
+        }
+
+        return new JsonResponse($responseFiles, 200);
+    }
+
+    /**
+     * @param Request $request
      * @return bool
      */
     private function save(Request $request)
@@ -334,10 +360,15 @@ class ShopperController extends Controller
             $password = $encoder->encodePassword($item, $pass);
 
             $item->setEmail($tel.'@wxfenling.com');
-            $item->setPassword($password);
-            $item->setOpenPassword($pass);
+
+            if ($this->getMethod($request) == 'POST') {
+                $item->setPassword($password);
+                $item->setOpenPassword($pass);
+                $item->setApiKey(md5($pass));
+            }
+
             $item->setStatus(Shopper::STATUS_ACTIVE);
-            $item->setApiKey(md5($pass));
+
             $item->setRole('ROLE_SHOPPER');
 
             $em->persist($item);
