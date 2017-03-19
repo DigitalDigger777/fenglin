@@ -1,0 +1,15 @@
+fenglin_admin_rest_index:
+    path:     /{id}
+    defaults: { _controller: FenglinAdminBundle:Rest/Admin:index, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+fenglin_admin_rest_list:
+    path:     /list
+    defaults: { _controller: FenglinAdminBundle:Rest/Admin:list, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true

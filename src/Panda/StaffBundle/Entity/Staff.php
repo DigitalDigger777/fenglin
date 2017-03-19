@@ -2,15 +2,13 @@
 
 namespace Panda\StaffBundle\Entity;
 
+use Panda\UserBundle\Entity\User;
+
 /**
  * Staff
  */
-class Staff
+class Staff extends User
 {
-    /**
-     * @var int
-     */
-    private $id;
 
     /**
      * @var string
@@ -23,24 +21,9 @@ class Staff
     private $tel;
 
     /**
-     * @var string
-     */
-    private $password;
-
-    /**
      * @var \Panda\ShopperBundle\Entity\Shopper
      */
     private $shopper;
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name
@@ -88,30 +71,6 @@ class Staff
     public function getTel()
     {
         return $this->tel;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return Staff
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**

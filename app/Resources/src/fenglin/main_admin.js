@@ -5,7 +5,8 @@
 define([
     'backbone',
     'marionette',
-    'admin/routers/ShopperRouter'
+    'admin/routers/ShopperRouter',
+    'admin/routers/StaffManagementRouter'
 ], function(Backbone){
 
     var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
