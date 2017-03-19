@@ -383,40 +383,46 @@ class CashBackController extends Controller
             'shopper'  => $shopper,
             'consumer' => $consumer
         ]);
-        $consumerLevel2 = $refreeTree->getReferalConsumer();
-        $this->setConsumerLevel2($consumerLevel2);
 
-        $cashBack = new CashBack();
-        $cashBack->setConsumer($consumerLevel2);
-        $cashBack->setShopper($shopper);
-        $cashBack->setAmount($amountLevel2);
-        $cashBack->setAmountLevel2(0);
-        $cashBack->setAmountLevel3(0);
-        $cashBack->setDate(new \DateTime());
-        $cashBack->setStatus(CashBack::STATUS_CONFIRM);
-        $cashBack->setTransactionId($transactionId);
-        $em->persist($cashBack);
-        $em->flush();
+        if ($refreeTree) {
+            $consumerLevel2 = $refreeTree->getReferalConsumer();
+            $this->setConsumerLevel2($consumerLevel2);
 
-        //level 3
-        $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
-            'shopper'  => $shopper,
-            'consumer' => $consumerLevel2
-        ]);
-        $consumerLevel3 = $refreeTree->getReferalConsumer();
-        $this->setConsumerLevel3($consumerLevel3);
+            $cashBack = new CashBack();
+            $cashBack->setConsumer($consumerLevel2);
+            $cashBack->setShopper($shopper);
+            $cashBack->setAmount($amountLevel2);
+            $cashBack->setAmountLevel2(0);
+            $cashBack->setAmountLevel3(0);
+            $cashBack->setDate(new \DateTime());
+            $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+            $cashBack->setTransactionId($transactionId);
+            $em->persist($cashBack);
+            $em->flush();
 
-        $cashBack = new CashBack();
-        $cashBack->setConsumer($consumerLevel3);
-        $cashBack->setShopper($shopper);
-        $cashBack->setAmount($amountLevel3);
-        $cashBack->setAmountLevel2(0);
-        $cashBack->setAmountLevel3(0);
-        $cashBack->setDate(new \DateTime());
-        $cashBack->setStatus(CashBack::STATUS_CONFIRM);
-        $cashBack->setTransactionId($transactionId);
-        $em->persist($cashBack);
-        $em->flush();
+            //level 3
+            $refreeTree = $em->getRepository('FenglinFenglinBundle:RefreeTree')->findOneBy([
+                'shopper'  => $shopper,
+                'consumer' => $consumerLevel2
+            ]);
+
+            if ($refreeTree) {
+                $consumerLevel3 = $refreeTree->getReferalConsumer();
+                $this->setConsumerLevel3($consumerLevel3);
+
+                $cashBack = new CashBack();
+                $cashBack->setConsumer($consumerLevel3);
+                $cashBack->setShopper($shopper);
+                $cashBack->setAmount($amountLevel3);
+                $cashBack->setAmountLevel2(0);
+                $cashBack->setAmountLevel3(0);
+                $cashBack->setDate(new \DateTime());
+                $cashBack->setStatus(CashBack::STATUS_CONFIRM);
+                $cashBack->setTransactionId($transactionId);
+                $em->persist($cashBack);
+                $em->flush();
+            }
+        }
 
         return $cashBack->getTransactionId();
     }
