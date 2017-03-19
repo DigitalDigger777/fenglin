@@ -2,6 +2,8 @@
 
 namespace Fenglin\FenglinBundle\Repository;
 
+use Fenglin\FenglinBundle\Entity\ConsumerAmount;
+
 /**
  * ConsumerAmountRepository
  *
@@ -10,4 +12,27 @@ namespace Fenglin\FenglinBundle\Repository;
  */
 class ConsumerAmountRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $shopper
+     * @param $consumer
+     * @return ConsumerAmount|null|object
+     */
+    public function createIfNotExist($shopper, $consumer)
+    {
+        $consumerAmount = $this->findOneBy([
+            'shopper'   => $shopper,
+            'consumer'  => $consumer
+        ]);
+
+        if (!$consumerAmount) {
+            $consumerAmount = new ConsumerAmount();
+            $consumerAmount->setShopper($shopper);
+            $consumerAmount->setConsumer($consumer);
+            $consumerAmount->setTotalAmount(0);
+            $this->_em->persist($consumerAmount);
+            $this->_em->flush();
+        }
+
+        return $consumerAmount;
+    }
 }

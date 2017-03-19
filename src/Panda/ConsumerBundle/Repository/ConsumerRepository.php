@@ -10,4 +10,22 @@ namespace Panda\ConsumerBundle\Repository;
  */
 class ConsumerRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @var \Panda\ConsumerBundle\Entity\Consumer | null
+     */
+    private $consumer = null;
+
+    /**
+     * @param $memberId
+     * @param bool $chain
+     * @return null | ConsumerRepository | \Panda\ConsumerBundle\Entity\Consumer
+     */
+    public function findByMemberId($memberId, $chain = false)
+    {
+        $this->consumer = $this->findOneBy([
+            'memberId' => $memberId
+        ]);
+
+        return $chain ? $this : $this->consumer;
+    }
 }

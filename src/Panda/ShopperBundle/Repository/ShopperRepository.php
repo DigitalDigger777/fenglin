@@ -10,4 +10,22 @@ namespace Panda\ShopperBundle\Repository;
  */
 class ShopperRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @var \Panda\ShopperBundle\Entity\Shopper | null
+     */
+    private $shopper = null;
+
+    /**
+     * @param $email
+     * @param bool $chain
+     * @return null|object|\Panda\ShopperBundle\Entity\Shopper|ShopperRepository
+     */
+    public function findByEmail($email, $chain = false)
+    {
+        $this->shopper = $this->findOneBy([
+            'email' => $email
+        ]);
+
+        return $chain ? $this : $this->shopper;
+    }
 }

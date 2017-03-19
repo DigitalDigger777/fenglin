@@ -195,66 +195,64 @@ class ConsumerController extends Controller
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\ShopperBundle\Repository\ShopperRepository $shopperRepo
+         * @var \Panda\ConsumerBundle\Repository\ConsumerRepository $consumerRepo
+         * @var \Fenglin\FenglinBundle\Repository\ConsumerAmountRepository $consumerAmountRepo
          */
         $em = $this->getDoctrine()->getManager();
+        $shopperRepo        = $this->getDoctrine()->getRepository('\Panda\ShopperBundle\Entity\Shopper');
+        $consumerRepo       = $this->getDoctrine()->getRepository('\Panda\ConsumerBundle\Entity\Consumer');
+        $consumerAmountRepo = $this->getDoctrine()->getRepository('\Fenglin\FenglinBundle\Entity\ConsumerAmount');
+
         $shopperEmail = $this->getUser()->getUsername();
-        $qb = $em->createQueryBuilder();
-        $qb->select('s')
-            ->from('PandaShopperBundle:Shopper', 's')
-            ->where($qb->expr()->eq('s.email', ':email'))
-            ->setParameter(':email', $shopperEmail);
-        try {
-            $shopper = $qb->getQuery()->getSingleResult();
-            $shopperId = $shopper->getId();
-        } catch (NonUniqueResultException $e) {
-            $shoppers = $qb->getQuery()->getResult();
-            $shopperId = $shoppers[0]->getId();
-        }
+        $shopper      = $shopperRepo->findByEmail($shopperEmail);
 
-        $memberId = $request->query->get('memberId');
-        $qb = $em->createQueryBuilder();
-        $qb->select('c, ac, s, cs')
-            ->from('PandaConsumerBundle:Consumer', 'c')
-            ->join('c.amountConsumers', 'ac')
-            ->join('ac.shopper', 's')
-            ->join('ac.consumer', 'cs')
-            ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->eq('c.memberId', ':memberId'),
-                    $qb->expr()->eq('s.id', ':id')
-                )
+        if (!$shopper) {
+            $this->setCode(500);
+            $this->setMessage('shopper not found email:' . $shopperEmail);
+        } else {
+            $shopperId    = $shopper->getId();
+            $memberId     = $request->query->get('memberId');
+            $consumer     = $consumerRepo->findByMemberId($memberId);
 
-            )
-            ->setParameter(':memberId', $memberId)
-            ->setParameter(':id', $shopperId);
-
-        $query = $qb->getQuery();
-
-        try {
-            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
-            $this->setData($data);
-        } catch (NoResultException $e){
-            $qb = $em->createQueryBuilder();
-            $qb->select('c, ac, s, cs')
-                ->from('PandaConsumerBundle:Consumer', 'c')
-                ->leftJoin('c.amountConsumers', 'ac')
-                ->leftJoin('ac.shopper', 's')
-                ->leftJoin('ac.consumer', 'cs')
-                ->where($qb->expr()->eq('c.memberId', ':memberId'))
-                ->setParameter(':memberId', $memberId);
-
-            $query = $qb->getQuery();
-            try {
-                $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
-                $this->setData($data);
-
-            } catch (\Exception $e) {
-
+            if (!$consumer) {
                 $this->setCode(500);
-                $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
-            }
-        }
+                $this->setMessage('consumer not found memberId:' . $memberId);
+            } else {
+                $consumerAmount = $consumerAmountRepo->createIfNotExist($shopper, $consumer);
 
+                if ($consumerAmount) {
+                    $qb = $em->createQueryBuilder();
+                    $qb->select('c, ac, s, cs')
+                        ->from('PandaConsumerBundle:Consumer', 'c')
+                        ->join('c.amountConsumers', 'ac')
+                        ->join('ac.shopper', 's')
+                        ->join('ac.consumer', 'cs')
+                        ->where(
+                            $qb->expr()->andX(
+                                $qb->expr()->eq('c.memberId', ':memberId'),
+                                $qb->expr()->eq('s.id', ':id')
+                            )
+
+                        )
+                        ->setParameter(':memberId', $memberId)
+                        ->setParameter(':id', $shopperId);
+
+                    $query = $qb->getQuery();
+
+                    try {
+                        $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+                        $this->setData($data);
+
+                    } catch (\Exception $e) {
+
+                        $this->setCode(500);
+                        $this->setMessage($e->getMessage() . ' memberId:' . $memberId);
+                    }
+                }
+            }
+
+        }
 
 
 
