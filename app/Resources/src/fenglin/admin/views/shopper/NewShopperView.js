@@ -34,57 +34,61 @@ define(['marionette',
             'click @ui.saveButton': function(e){
                 e.preventDefault();
                 console.log('click');
-                loadToast.show();
 
-                var shopperId = $('#shopperId').val();
-                var name = $('#name').val();
-                var address = $('#address').val();
-                var tel = $('#tel').val();
-                var schedule = $('#schedule').val();
-                var rebate_level_1 = $('#rebate_level_1').val();
-                var rebate_level_2 = $('#rebate_level_2').val();
-                var rebate_level_3 = $('#rebate_level_3').val();
-                var preview_image = $('#previewImage').attr('data-src');
+                if (this.validate()) {
+                    loadToast.show();
 
-                var shopperModel = new ShopperModel();
+                    var shopperId       = $('#shopperId').val();
+                    var name            = $('#name').val();
+                    var address         = $('#address').val();
+                    var tel             = $('#tel').val();
+                    var shedule        = $('#schedule').val();
+                    var rebate_level_1  = $('#rebate_level_1').val();
+                    var rebate_level_2  = $('#rebate_level_2').val();
+                    var rebate_level_3  = $('#rebate_level_3').val();
+                    var preview_image   = $('#previewImage').attr('data-src');
 
-                if (shopperId != 0) {
-                    shopperModel.set('id', shopperId);
-                }
+                    var shopperModel = new ShopperModel();
 
-                shopperModel.set('name', name);
-                shopperModel.set('address', address);
-                shopperModel.set('tel', tel);
-                shopperModel.set('schedule', schedule);
-                shopperModel.set('rebateLevelRate', rebate_level_1);
-                shopperModel.set('rebateLevel2Rate', rebate_level_2);
-                shopperModel.set('rebateLevel3Rate', rebate_level_3);
-                shopperModel.set('logo', preview_image);
-
-                shopperModel.save(null, {
-                    success: function(data){
-                        console.log(data);
-                        loadToast.hide();
-                        successToast.show();
-                        $('#shopperId').val(data.id);
-                        setTimeout(function(){
-                            successToast.hide();
-                            var passwordView = new PasswordView({
-                                model: data
-                            });
-                            passwordView.render();
-                        }, 2000);
-
-                    },
-                    error: function(error){
-                        console.log(error);
-                        loadToast.hide();
-                        errorToast.show();
-                        setTimeout(function(){
-                            errorToast.hide();
-                        }, 3000);
+                    if (shopperId != 0) {
+                        shopperModel.set('id', shopperId);
                     }
-                });
+
+                    shopperModel.set('name', name);
+                    shopperModel.set('address', address);
+                    shopperModel.set('tel', tel);
+                    shopperModel.set('shedule', shedule);
+                    shopperModel.set('rebateLevelRate', rebate_level_1);
+                    shopperModel.set('rebateLevel2Rate', rebate_level_2);
+                    shopperModel.set('rebateLevel3Rate', rebate_level_3);
+                    shopperModel.set('logo', preview_image);
+
+                    console.log(shopperModel.toJSON());
+                    shopperModel.save(null, {
+                        success: function (data) {
+                            console.log(data);
+                            loadToast.hide();
+                            successToast.show();
+                            $('#shopperId').val(data.id);
+                            setTimeout(function () {
+                                successToast.hide();
+                                var passwordView = new PasswordView({
+                                    model: data
+                                });
+                                passwordView.render();
+                            }, 2000);
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            loadToast.hide();
+                            errorToast.show();
+                            setTimeout(function () {
+                                errorToast.hide();
+                            }, 3000);
+                        }
+                    });
+                }
             }
         },
         onRender: function(){
@@ -116,6 +120,20 @@ define(['marionette',
                     $('#previewImage').attr('data-src', data[0]);
                 });
             });
+        },
+        validate: function(){
+            var valid   = true;
+            $('.weui-cell').each(function(){
+
+                var input   = $(this).find('input');
+                var val     = input.val();
+
+                if (input.attr('required') && val == '') {
+                    $(this).addClass('weui-cell_warn');
+                    valid = false;
+                }
+            });
+            return valid;
         }
     });
 });

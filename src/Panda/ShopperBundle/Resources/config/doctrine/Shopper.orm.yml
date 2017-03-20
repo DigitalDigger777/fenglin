@@ -40,6 +40,9 @@ Panda\ShopperBundle\Entity\Shopper:
             type: string
             length: 255
             nullable: true
+        shedule:
+            type: text
+            nullable: false
 
     oneToMany:
         amountConsumers:

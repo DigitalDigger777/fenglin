@@ -90,6 +90,11 @@ class Shopper extends User
     private $staffs;
 
     /**
+     * @var string
+     */
+    private $shedule;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -415,6 +420,22 @@ class Shopper extends User
     public function setStaffs($staffs)
     {
         $this->staffs = $staffs;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShedule()
+    {
+        return $this->shedule;
+    }
+
+    /**
+     * @param string $shedule
+     */
+    public function setShedule($shedule)
+    {
+        $this->shedule = $shedule;
     }
 }
 
