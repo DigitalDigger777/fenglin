@@ -44,6 +44,8 @@ body,
   background-color: #fff;
   width: 25%;
   float: left;
+  height: 44px;
+  padding-top: 7px;
 }
 .footer-group-three-button .weui-btn:first-child + .weui-btn {
   width: 25%;

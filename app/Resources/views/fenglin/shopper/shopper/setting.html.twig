@@ -15,19 +15,19 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">商户名：</label></div>
             <div class="weui-cell__bd">
-                <input id="name" class="weui-input text-right" type="text" placeholder="无锡面点王" value="<%=name%>">
+                <input id="name" class="weui-input text-right" type="text" placeholder="输入商户名" value="<%=name%>">
             </div>
         </div>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">地址：</label></div>
             <div class="weui-cell__bd">
-                <input id="address" class="weui-input text-right" type="text" placeholder="无锡市曹张新村282号309室" value="<%=address%>">
+                <input id="address" class="weui-input text-right" type="text" placeholder="商户地址" value="<%=address%>">
             </div>
         </div>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
             <div class="weui-cell__bd">
-                <input id="tel" class="weui-input text-right" type="text" pattern="[0-9]*" placeholder="1858928278" value="<%=tel%>">
+                <input id="tel" class="weui-input text-right" type="text" pattern="[0-9]*" placeholder="商户联系电话" value="<%=tel%>">
             </div>
         </div>
 
@@ -38,22 +38,34 @@
                 <!--<input class="weui-input text-right" type="text" value="周一至周五 08:00 - 22:00, 周六、周日09:00 - 22:00">-->
             </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell weui-cell_vcode">
             <div class="weui-cell__hd"><label class="weui-label">消费返利：</label></div>
             <div class="weui-cell__bd">
-                <input id="rebate_level_1" class="weui-input text-right" type="text" placeholder="5%" value="<%=rebateLevelRate%>%">
+                <input id="rebate_level_1" class="weui-input text-right" type="text" placeholder="5" value="<%=rebateLevelRate%>">
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+                <span class="weui-vcode-btn">%</span>
             </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell weui-cell_vcode">
             <div class="weui-cell__hd"><label class="weui-label">第一层推广返利：</label></div>
             <div class="weui-cell__bd">
-                <input id="rebate_level_2" class="weui-input text-right" type="text" placeholder="1.5%" value="<%=rebateLevel2Rate%>%">
+                <input id="rebate_level_2" class="weui-input text-right" type="text" placeholder="1.5" value="<%=rebateLevel2Rate%>">
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+                <span class="weui-vcode-btn">%</span>
             </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell weui-cell_vcode">
             <div class="weui-cell__hd"><label class="weui-label">第二层推广返利：</label></div>
             <div class="weui-cell__bd">
-                <input id="rebate_level_3" class="weui-input text-right" type="text" placeholder="0.5%" value="<%=rebateLevel3Rate%>%">
+                <input id="rebate_level_3" class="weui-input text-right" type="text" placeholder="0.5" value="<%=rebateLevel3Rate%>">
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+                <span class="weui-vcode-btn">%</span>
             </div>
         </div>
     </div>
