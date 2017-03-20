@@ -29,6 +29,10 @@ Fenglin\CashBackBundle\Entity\CashBack:
             type: string
             length: 255
             nullable: true
+        payable:
+            type: float
+            nullable: true
+            column: payable
     manyToOne:
         consumer:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

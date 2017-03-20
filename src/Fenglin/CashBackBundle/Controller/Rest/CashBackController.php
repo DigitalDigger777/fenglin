@@ -268,7 +268,7 @@ class CashBackController extends Controller
             $amountLevel2 = ($payable/100) * $rebateLevel2;
             $amountLevel3 = ($payable/100) * $rebateLevel3;
 
-            $transactionId = $this->cashBack($amount, $amountLevel2, $amountLevel3);
+            $transactionId = $this->cashBack($payable, $amount, $amountLevel2, $amountLevel3);
             $returnBalance = $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3);
             $data['transactionId'] = $transactionId;
             $data['balance'] = $returnBalance;
@@ -350,12 +350,13 @@ class CashBackController extends Controller
     }
 
     /**
+     * @param $payable
      * @param $amountLevel
      * @param $amountLevel2
      * @param $amountLevel3
      * @return string
      */
-    private function cashBack($amountLevel, $amountLevel2, $amountLevel3)
+    private function cashBack($payable, $amountLevel, $amountLevel2, $amountLevel3)
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
@@ -368,6 +369,7 @@ class CashBackController extends Controller
         $cashBack = new CashBack();
         $cashBack->setConsumer($consumer);
         $cashBack->setShopper($shopper);
+        $cashBack->setPayable($payable);
         $cashBack->setAmount($amountLevel);
         $cashBack->setAmountLevel2($amountLevel2);
         $cashBack->setAmountLevel3($amountLevel3);

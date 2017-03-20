@@ -62,6 +62,11 @@ class CashBack
     private $transactionId;
 
     /**
+     * @var float
+     */
+    private $payable;
+
+    /**
      * Get id
      *
      * @return int
@@ -253,6 +258,22 @@ class CashBack
     public function setTransactionId($transactionId)
     {
         $this->transactionId = $transactionId;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPayable()
+    {
+        return $this->payable;
+    }
+
+    /**
+     * @param float $payable
+     */
+    public function setPayable($payable)
+    {
+        $this->payable = $payable;
     }
 }
 
