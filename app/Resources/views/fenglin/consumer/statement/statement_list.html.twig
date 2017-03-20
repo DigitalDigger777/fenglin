@@ -27,14 +27,19 @@
             <div class="weui-media-box__bd">
                 <div class="clearfix">
                     <div style="width: 69%; float: left;" class="dashed-line-right">
-                        <p>轻轻阳光 消费￥79.00 <br>
+                        <p>
+                            <% if (payable) { %>
+                                轻轻阳光 消费￥<%=Math.round10(payable, -2) %>
+                                <br>
+                            <% } %>
+
                             得到 消费返利 ￥7.90 <br>
                             2017/01/19
                         </p>
                     </div>
                     <div style="width: 30%; float: left; text-align: right">
                         <p>
-                            返利余额 <br><br>
+                            返利余额 <br>
                             <b>￥127.90</b>
                         </p>
                     </div>
