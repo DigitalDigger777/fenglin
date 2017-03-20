@@ -20,7 +20,7 @@ define(['marionette',
                 var amount = $('#calculateInput').val();
                 var rebate = $('[data-rebate]').attr('data-rebate');
                 var cashBack = (parseInt(amount)/100) * rebate;
-                $('#calculateCashBackValue').text(cashBack);
+                //$('#calculateCashBackValue').text(cashBack);
                 //console.log(amount, '-', rebate, '-', cashBack);
             },
             'click @ui.confirm': function(e){

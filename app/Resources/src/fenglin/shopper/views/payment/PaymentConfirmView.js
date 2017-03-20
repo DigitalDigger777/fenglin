@@ -23,6 +23,8 @@ define(['marionette',
     loadToast.render();
     errorToast.render();
 
+    var _self = this;
+
     return Marionette.View.extend({
         el:'#contentContainer',
         template: '#paymentConfirmView',
@@ -34,13 +36,6 @@ define(['marionette',
             calculateButton: '#calculateButton'
         },
         events: {
-            //'keyup @ui.calculateInput': function(e){
-            //    var amount = $('#calculateInput').val();
-            //    var rebate = $('[data-rebate]').attr('data-rebate');
-            //    var cashBack = (parseInt(amount)/100) * rebate;
-            //    $('#calculateCashBackValue').text(cashBack);
-            //    //console.log(amount, '-', rebate, '-', cashBack);
-            //},
             'click @ui.calculateButton': function(){
                 var calcVal             = parseFloat($('#calculateInput').val());
                 var calcCashBackValue   = window.localStorage.getItem('member_total_amount');
@@ -50,17 +45,20 @@ define(['marionette',
                     payable = calcVal - calcCashBackValue;
                 } else {
                     balance = calcCashBackValue - calcVal;
+                    payable = 0;
                 }
 
                 $('#payable').text(payable);
-                $('#calculateCashBackValue').text(balance);
+                //$('#calculateCashBackValue').text(balance);
                 console.log(calcVal, '-', calcCashBackValue, '-payable:', payable, '-balance:', balance);
             },
             'click @ui.cashBackButton': function(e){
                 e.preventDefault();
+
                 var calculateInput = $('#calculateInput').val();
                 if (calculateInput != '') {
                     var memberId = window.localStorage.getItem('member_id');
+
                     var cashBackConfirmModel = new CashBackConfirmModel();
                     cashBackConfirmModel.set('id', memberId);
                     cashBackConfirmModel.set('payable', payable);
@@ -69,12 +67,14 @@ define(['marionette',
                     loadToast.show();
                     cashBackConfirmModel.save(null, {
                         success: function(model){
-                            //window.localStorage.removeItem('member_id');
                             window.localStorage.setItem('member_total_amount', model.get('balance'));
                             window.localStorage.setItem('payable', payable);
+                            loadToast.hide();
+
+                            $('#contentContainer').off('click', '#cashBackButton');
 
                             window.location.hash = '#cashback/confirm/' + model.get('transactionId');
-                            loadToast.hide();
+
                         },
                         error: function(){
                             loadToast.hide();
