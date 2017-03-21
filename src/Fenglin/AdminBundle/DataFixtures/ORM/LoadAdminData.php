@@ -46,13 +46,13 @@ class LoadAdminData implements FixtureInterface, ContainerAwareInterface, Ordere
         $memberId = crc32($apiKey);
 
         $admin = new Admin();
-        $password = $encoder->encodePassword($admin, '1demo!');
+        $password = $encoder->encodePassword($admin, '123456');
 
         $admin->setEmail('admin' . rand(0, 1000) . '@test.com');
         $admin->setApiKey($apiKey);
         $admin->setMemberId($memberId);
         $admin->setPassword($password);
-        $admin->setTel('+190017777'.rand(10,99));
+        $admin->setTel('123456');
         $admin->setStatus(Admin::STATUS_ACTIVE);
         $admin->setRole('ROLE_ADMIN');
         $manager->persist($admin);
