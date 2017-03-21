@@ -30,6 +30,12 @@ security:
         - { path: ^/mock-wechat-oauth/, roles: ROLE_ANONYMOUSLY }
         - { path: ^/login, roles: ROLE_ANONYMOUSLY }
         - { path: ^/shopper, roles: ROLE_SHOPPER }
+        - { path: ^/staff/rest, roles: [ROLE_STAFF, ROLE_SHOPPER] }
+        - { path: ^/panda-consumer/rest, roles: [ROLE_STAFF, ROLE_SHOPPER, ROLE_CONSUMER, ROLE_ADMIN] }
+        - { path: ^/fenglin-cash-back/rest, roles: [ROLE_STAFF, ROLE_SHOPPER, ROLE_CONSUMER, ROLE_ADMIN] }
+
+
+        - { path: ^/staff, roles: ROLE_STAFF }
 
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: [ROLE_CONSUMER, ROLE_SHOPPER] }
@@ -44,6 +50,8 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
     encoders:
            Panda\ShopperBundle\Entity\Shopper:
+               algorithm: md5
+           Panda\StaffBundle\Entity\Staff:
                algorithm: md5
            Fenglin\AdminBundle\Entity\Admin:
                algorithm: md5

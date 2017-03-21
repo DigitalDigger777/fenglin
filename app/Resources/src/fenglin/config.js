@@ -51,6 +51,14 @@ if (/shopper/.test(window.location.pathname)) {
     });
 }
 
+if (/staff/.test(window.location.pathname)) {
+
+    requirejs(['main.shopper'], function (Fenglin) {
+        var fenglin = new Fenglin();
+        fenglin.start();
+    });
+}
+
 if (/consumer/.test(window.location.pathname)) {
     requirejs(['main'], function (Fenglin) {
         var fenglin = new Fenglin();

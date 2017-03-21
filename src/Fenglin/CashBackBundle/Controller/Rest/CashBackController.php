@@ -196,6 +196,16 @@ class CashBackController extends Controller
          * @var \Doctrine\ORM\EntityManager $em
          */
         $em = $this->getDoctrine()->getManager();
+        $roles = $this->getUser()->getRoles();
+
+        if ($roles[0] == 'ROLE_STAFF') {
+            $this->setCode(403);
+            $this->setMessage('Access Denied');
+
+            return new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
 
         $shopperEmail = $this->getUser()->getUsername();
         $qb = $em->createQueryBuilder();
@@ -232,6 +242,7 @@ class CashBackController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws \Exception
      */
     public function confirmCashBackAction(Request $request)
     {
@@ -242,16 +253,21 @@ class CashBackController extends Controller
          * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
          * @var \Fenglin\FenglinBundle\Entity\RefreeTree $refreeTree
          */
+        $em = $this->getDoctrine()->getManager();
+
+
         $id = $request->get('id');
         $data = [];
-        $shopperEmail = $this->getUser()->getUsername();
+
+        $shopperEmail = $this->getShopperEmail();
+
         $data['shopper_email'] = $shopperEmail;
         $payable = $this->getRequestParameters($request, 'payable');
         $balance = $this->getRequestParameters($request, 'balance');
         $data['payable'] = $payable;
         $data['balance'] = $balance;
 
-        $em = $this->getDoctrine()->getManager();
+
         $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
             'email' => $shopperEmail
         ]);
@@ -301,6 +317,7 @@ class CashBackController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws \Exception
      */
     public function confirmCashBackListAction(Request $request)
     {
@@ -316,7 +333,8 @@ class CashBackController extends Controller
         $em = $this->getDoctrine()->getManager();
         $transactionId     = $this->getRequestParameters($request, 'transactionId');
 
-        $shopperEmail = $this->getUser()->getUsername();
+        $shopperEmail = $this->getShopperEmail();
+
         $qb = $em->createQueryBuilder();
         $qb->select('c, cns, ca, s')
             ->from('FenglinCashBackBundle:CashBack', 'c')
@@ -645,6 +663,34 @@ class CashBackController extends Controller
             $this->setMessage('Item not found');
         }
     }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    private function getShopperEmail()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $roles = $this->getUser()->getRoles();
+
+        if ($roles[0] == 'ROLE_SHOPPER') {
+
+            $shopperEmail = $this->getUser()->getUsername();
+
+        } elseif ($roles[0] == 'ROLE_STAFF') {
+
+            $staffEmail   = $this->getUser()->getUsername();
+            $staffRepo    = $em->getRepository('PandaStaffBundle:Staff');
+            $staff        = $staffRepo->findOneBy(['email'=>$staffEmail]);
+            $shopperEmail = $staff->getShopper()->getEmail();
+
+        } else {
+            throw new \Exception('Access Denied');
+        }
+
+        return $shopperEmail;
+    }
+
     /**
      * Get request parameter.
      *

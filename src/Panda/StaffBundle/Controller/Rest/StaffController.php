@@ -111,6 +111,17 @@ class StaffController extends Controller
          */
         $em = $this->getDoctrine()->getManager();
 
+        $roles = $this->getUser()->getRoles();
+
+        if ($roles[0] == 'ROLE_STAFF') {
+            $this->setCode(403);
+            $this->setMessage('Access Denied');
+
+            return new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
+
         $shopperEmail = $this->getUser()->getUsername();
 
         $qb = $em->createQueryBuilder();
@@ -141,6 +152,9 @@ class StaffController extends Controller
 
         if ($request->getMethod() == 'POST') {
             $item = new Staff();
+            $item->setStatus(Staff::STATUS_ACTIVE);
+            $item->setRole('ROLE_STAFF');
+
         }
         if ($request->getMethod() == 'PUT') {
             $id = $request->get('id');
@@ -159,6 +173,7 @@ class StaffController extends Controller
         }
         if ($tel = $this->getRequestParameters($request, 'tel')) {
             $item->setTel($tel);
+            $item->setEmail($tel . '@test.com');
         } else {
             $this->setCode(500);
             $this->setMessage('tel not found');
@@ -167,14 +182,18 @@ class StaffController extends Controller
 
         if ($password = $this->getRequestParameters($request, 'password')) {
             //$item->setTel($password);
-//            $encoder = $this->container->get('security.password_encoder');
-//            $password = $encoder->encodePassword($item, $password);
+            $encoder = $this->container->get('security.password_encoder');
+            $password = $encoder->encodePassword($item, $password);
             $item->setPassword($password);
-
+            $item->setApiKey(md5($tel . $password));
         } else {
             $this->setCode(500);
             $this->setMessage('tel not found');
             return false;
+        }
+
+        if ($status = $this->getRequestParameters($request, 'status')) {
+            $item->setStatus($status);
         }
 
         $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([

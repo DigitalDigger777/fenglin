@@ -28,4 +28,18 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
 
         return $chain ? $this : $this->shopper;
     }
+
+    /**
+     * @param $apiKey
+     * @param bool $chain
+     * @return null|object|\Panda\ShopperBundle\Entity\Shopper|ShopperRepository
+     */
+    public function findByApiKey($apiKey, $chain = false)
+    {
+        $this->shopper = $this->findOneBy([
+            'apiKey' => $apiKey
+        ]);
+
+        return $chain ? $this : $this->shopper;
+    }
 }

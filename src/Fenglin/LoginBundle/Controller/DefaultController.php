@@ -43,18 +43,21 @@ class DefaultController extends Controller
         /**
          * @var \Doctrine\ORM\EntityManager $em
          * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+         * @var \Panda\StaffBundle\Entity\Staff $staff
          */
         $encoder = $this->container->get('security.password_encoder');
 
         $em          = $this->getDoctrine()->getManager();
         $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
         $adminRepo   = $em->getRepository('FenglinAdminBundle:Admin');
+        $staffRepo   = $em->getRepository('PandaStaffBundle:Staff');
 
         $tel         = $request->request->get('tel');
         $password    = $request->request->get('password');
 
         $shopper = $shopperRepo->findOneBy(['tel' => $tel]);
-        $admin = $adminRepo->findOneBy(['tel' => $tel]);
+        $admin   = $adminRepo->findOneBy(['tel' => $tel]);
+        $staff   = $staffRepo->findOneBy(['tel' => $tel]);
 
         if ($shopper) {
             $password = $encoder->encodePassword($shopper, $password);
@@ -76,8 +79,16 @@ class DefaultController extends Controller
             }
 
 
+        } elseif($staff) {
+            $password = $encoder->encodePassword($staff, $password);
+
+            if ($password == $staff->getPassword()) {
+                return $this->redirectToRoute('panda_staff_homepage', ['apikey'=> $staff->getApiKey(), '_fragment' => 'shopper/home']);
+            } else {
+                return new Response('Password not correct', 403);
+            }
         } else {
-            return new Response('Shopper with tel ' . $tel . 'not found', 403);
+            return new Response('User with tel ' . $tel . 'not found', 403);
         }
 
         return new Response('Phone number or password is not correct', 403);

@@ -196,15 +196,28 @@ class ConsumerController extends Controller
         /**
          * @var \Doctrine\ORM\EntityManager $em
          * @var \Panda\ShopperBundle\Repository\ShopperRepository $shopperRepo
+         * @var \Panda\StaffBundle\Repository\StaffRepository $staffRepo
          * @var \Panda\ConsumerBundle\Repository\ConsumerRepository $consumerRepo
          * @var \Fenglin\FenglinBundle\Repository\ConsumerAmountRepository $consumerAmountRepo
+         * @var \Panda\StaffBundle\Entity\Staff $staff
          */
         $em = $this->getDoctrine()->getManager();
         $shopperRepo        = $this->getDoctrine()->getRepository('\Panda\ShopperBundle\Entity\Shopper');
+        $staffRepo        = $this->getDoctrine()->getRepository('\Panda\StaffBundle\Entity\Staff');
         $consumerRepo       = $this->getDoctrine()->getRepository('\Panda\ConsumerBundle\Entity\Consumer');
         $consumerAmountRepo = $this->getDoctrine()->getRepository('\Fenglin\FenglinBundle\Entity\ConsumerAmount');
 
-        $shopperEmail = $this->getUser()->getUsername();
+        $roles = $this->getUser()->getRoles();
+        if ($roles[0] == 'ROLE_STAFF') {
+            $staffEmail = $this->getUser()->getUsername();
+            $staff = $staffRepo->findOneBy([
+                'email' => $staffEmail
+            ]);
+            $shopperEmail = $staff->getShopper()->getEmail();
+        } else {
+            $shopperEmail = $this->getUser()->getUsername();
+        }
+
         $shopper      = $shopperRepo->findByEmail($shopperEmail);
 
         if (!$shopper) {

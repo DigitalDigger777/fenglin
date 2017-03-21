@@ -213,20 +213,43 @@ class ShopperController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws \Exception
      */
     public function loadCurrentAction(Request $request)
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\ShopperBundle\Repository\ShopperRepository $shopperRepo
+         * @var \Panda\StaffBundle\Repository\StaffRepository $staffRepo
+         * @var \Panda\StaffBundle\Entity\Staff $staff
          */
         $em = $this->getDoctrine()->getManager();
+
+        $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
+        $staffRepo   = $em->getRepository('PandaStaffBundle:Staff');
+
         $apikey = $request->query->get('apikey');
         $qb = $em->createQueryBuilder();
 
+        if ($user = $shopperRepo->findOneBy(['apiKey' => $apikey])) {
+            $shopperId = $user->getId();
+        } elseif ($user = $staffRepo->findOneBy(['apiKey' => $apikey])) {
+            $this->setCode(403);
+            $this->setMessage('Access Denied');
+
+            return new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        } else {
+            throw new \Exception('Access Denied');
+        }
+
         $qb->select('s')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->where($qb->expr()->eq('s.apiKey', ':apikey'))
-            ->setParameter(':apikey', $apikey);
+            ->where($qb->expr()->eq('s.id', ':id'))
+            ->setParameter(':id', $shopperId);
+
+
         $query = $qb->getQuery();
 
         try {
