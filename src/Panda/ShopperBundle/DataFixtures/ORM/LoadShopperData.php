@@ -56,7 +56,7 @@ class LoadShopperData implements FixtureInterface, ContainerAwareInterface, Orde
         $shopper->setEmail($email);
         $shopper->setPassword($password);
         $shopper->setName('Shopper ' . rand(1, 200000));
-        $shopper->setLogo('fixture_resources/shopper/logo/1.png');
+        $shopper->setLogo('1.png');
         $shopper->setAddress('C1070AAM Capital Federal, Piedras No 623, Piso2 Dto.4');
         $shopper->setTel($tel);
         $shopper->setShedule('周一至周五 08:00 - 22:00, 周六、周日09:00 - 22:00');
