@@ -18,7 +18,7 @@
                     <div style="width: 69%; float: left;" class="dashed-line-right">
                         <p>
                             <% if (payable) { %>
-                                轻轻阳光 消费￥<%=Math.round10(payable, -2) %>
+                                <%=typeof consumer.wechatData.nickname != 'undefined' ? consumer.wechatData.nickname : ''   %> 消费￥<%=Math.round10(payable, -2) %>
                                 <br>
                             <% } %>
                             得到 消费返利 ￥<%=Math.round10(amount,-2)%> <br>
