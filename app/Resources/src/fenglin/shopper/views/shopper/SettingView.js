@@ -38,15 +38,15 @@ define([
                 console.log('click');
                 loadToast.show();
 
-                var shopperId = $('#shopperId').val();
-                var name = $('#name').val();
-                var address = $('#address').val();
-                var tel = $('#tel').val();
-                var schedule = $('#schedule').val();
-                var rebate_level_1 = $('#rebate_level_1').val();
-                var rebate_level_2 = $('#rebate_level_2').val();
-                var rebate_level_3 = $('#rebate_level_3').val();
-                var logo = $('#previewImage').attr('data-src');
+                var shopperId       = $('#shopperId').val();
+                var name            = $('#name').val();
+                var address         = $('#address').val();
+                var tel             = $('#tel').val();
+                var schedule        = $('#schedule').val();
+                var rebate_level_1  = $('#rebate_level_1').val();
+                var rebate_level_2  = $('#rebate_level_2').val();
+                var rebate_level_3  = $('#rebate_level_3').val();
+                var logo            = $('#previewImage').attr('data-src');
 
                 var shopperModel = new ShopperModel();
 
@@ -57,7 +57,7 @@ define([
                 shopperModel.set('name', name);
                 shopperModel.set('address', address);
                 shopperModel.set('tel', tel);
-                shopperModel.set('schedule', schedule);
+                shopperModel.set('shedule', schedule);
                 shopperModel.set('rebateLevelRate', rebate_level_1.replace('%',''));
                 shopperModel.set('rebateLevel2Rate', rebate_level_2.replace('%',''));
                 shopperModel.set('rebateLevel3Rate', rebate_level_3.replace('%',''));
@@ -109,6 +109,10 @@ define([
                     $('#previewImage').attr('data-src', data[0]);
                 });
             });
+
+        },
+        initialize: function () {
+            //$('#contentContainer').off('click', '#saveShopperButton');
         }
     });
 });
