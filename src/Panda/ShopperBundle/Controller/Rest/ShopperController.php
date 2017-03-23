@@ -186,13 +186,18 @@ class ShopperController extends Controller
 
         $qb->select('s')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->where($qb->expr()->eq('s.name', ':name'))
-            ->setParameter(':name', $id);
+            ->where($qb->expr()->like('s.name', ':name'))
+            ->setParameter(':name', '%' . $id . '%');
         $query = $qb->getQuery();
 
         try {
-            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
-            $this->setData($data);
+            $data = $query->getResult(Query::HYDRATE_ARRAY);
+            if (count($data) > 0) {
+                $this->setData($data[0]);
+            } else {
+                $this->setCode(500);
+                $this->setMessage('not found');
+            }
         } catch (\Exception $e) {
             $this->setCode(500);
             $this->setMessage($e->getMessage());
