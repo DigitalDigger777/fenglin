@@ -7,7 +7,7 @@
         <p><%=wechatData.nickname %></p>
         <p>返利余额</p><br>
         <% if (amountConsumers.length > 0) { %>
-            <p><h2>￥<%=amountConsumers[0].totalAmount%></h2></p><br><br>
+            <p><h2>￥<%=Math.round10(amountConsumers[0].totalAmount, -2) %></h2></p><br><br>
         <% } else { %>
             <p><h2>￥0</h2></p><br><br>
         <% } %>
