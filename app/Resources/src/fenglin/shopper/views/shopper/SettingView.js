@@ -47,6 +47,7 @@ define([
                 var rebate_level_2  = $('#rebate_level_2').val();
                 var rebate_level_3  = $('#rebate_level_3').val();
                 var logo            = $('#previewImage').attr('data-src');
+                var contactTel      = $('#contactTel').val();
 
                 var shopperModel = new ShopperModel();
 
@@ -62,6 +63,7 @@ define([
                 shopperModel.set('rebateLevel2Rate', rebate_level_2.replace('%',''));
                 shopperModel.set('rebateLevel3Rate', rebate_level_3.replace('%',''));
                 shopperModel.set('logo', logo);
+                shopperModel.set('contactTel', contactTel);
 
                 shopperModel.save(null, {
                     success: function(data){

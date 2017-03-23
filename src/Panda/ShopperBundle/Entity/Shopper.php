@@ -1,6 +1,7 @@
 <?php
 
 namespace Panda\ShopperBundle\Entity;
+
 use Panda\UserBundle\Entity\User;
 
 /**
@@ -93,6 +94,11 @@ class Shopper extends User
      * @var string
      */
     private $shedule;
+
+    /**
+     * @var string
+     */
+    private $contactTel;
 
     /**
      * Set name
@@ -436,6 +442,22 @@ class Shopper extends User
     public function setShedule($shedule)
     {
         $this->shedule = $shedule;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContactTel()
+    {
+        return $this->contactTel;
+    }
+
+    /**
+     * @param string $contactTel
+     */
+    public function setContactTel($contactTel)
+    {
+        $this->contactTel = $contactTel;
     }
 }
 

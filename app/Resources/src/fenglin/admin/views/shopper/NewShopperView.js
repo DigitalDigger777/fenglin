@@ -47,6 +47,7 @@ define(['marionette',
                     var rebate_level_2  = $('#rebate_level_2').val();
                     var rebate_level_3  = $('#rebate_level_3').val();
                     var preview_image   = $('#previewImage').attr('data-src');
+                    var contactTel      = $('#contactTel').val();
 
                     var shopperModel = new ShopperModel();
 
@@ -62,6 +63,7 @@ define(['marionette',
                     shopperModel.set('rebateLevel2Rate', rebate_level_2);
                     shopperModel.set('rebateLevel3Rate', rebate_level_3);
                     shopperModel.set('logo', preview_image);
+                    shopperModel.set('contactTel', contactTel);
 
                     console.log(shopperModel.toJSON());
                     shopperModel.save(null, {

@@ -42,8 +42,11 @@ Panda\ShopperBundle\Entity\Shopper:
             nullable: true
         shedule:
             type: text
-            nullable: false
-
+            nullable: true
+        contactTel:
+            type: string
+            length: 255
+            nullable: true
     oneToMany:
         amountConsumers:
             targetEntity: \Fenglin\FenglinBundle\Entity\ConsumerAmount

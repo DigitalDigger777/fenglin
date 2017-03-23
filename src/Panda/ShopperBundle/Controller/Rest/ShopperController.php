@@ -355,7 +355,8 @@ class ShopperController extends Controller
             'rebateLevelRate'   => [],
             'rebateLevel2Rate'  => [],
             'rebateLevel3Rate'  => [],
-            'shedule'           => []
+            'shedule'           => [],
+            'contactTel'        => []
         ];
 
         foreach($fields as $fieldName => $rule) {
