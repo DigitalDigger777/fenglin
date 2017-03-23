@@ -30,24 +30,32 @@ define(['marionette',
                 e.preventDefault();
                 var shopperId = $('#shopperId').val();
                 var memberId = $('#memberId').val();
-                var consumerModel = new ConsumerModel();
-                consumerModel.set('shopperId', shopperId);
-                consumerModel.set('consumerId', memberId);
 
-                loadingToast.show();
-                consumerModel.joinRefree(function(){
-                    loadingToast.hide();
+                if (memberId != '') {
+                    var consumerModel = new ConsumerModel();
+                    consumerModel.set('shopperId', shopperId);
+                    consumerModel.set('consumerId', memberId);
+
+                    loadingToast.show();
+                    consumerModel.joinRefree(function () {
+                        loadingToast.hide();
+                        successToast.show();
+                        setTimeout(function () {
+                            successToast.hide();
+                        }, 3000);
+                    }, function () {
+                        loadingToast.hide();
+                        errorToast.show();
+                        setTimeout(function () {
+                            errorToast.hide();
+                        }, 3000);
+                    });
+                } else {
                     successToast.show();
                     setTimeout(function () {
                         successToast.hide();
                     }, 3000);
-                }, function(){
-                    loadingToast.hide();
-                    errorToast.show();
-                    setTimeout(function () {
-                        errorToast.hide();
-                    }, 3000);
-                });
+                }
             }
         },
         onRender: function(){
