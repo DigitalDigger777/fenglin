@@ -158,6 +158,7 @@ class AdminController extends Controller
             $encoder = $this->container->get('security.password_encoder');
             $password = $encoder->encodePassword($item, $password);
             $item->setPassword($password);
+            $item->setApiKey(md5($password));
         } else {
             $this->setCode(500);
             $this->setMessage('password not found');
