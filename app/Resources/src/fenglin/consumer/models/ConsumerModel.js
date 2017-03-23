@@ -30,6 +30,31 @@ define(['backbone'], function(Backbone){
                 success: success,
                 error: error
             });
+        },
+        joinToShopper: function (success, error) {
+            $.ajax({
+                url: Routing.generate('panda_consumer_rest_join_to_shopper', {
+                    apikey: this.apikey,
+                    shopperId: this.get('shopperId')
+                }),
+                data: 'json',
+                method: 'post',
+                success: success,
+                error: error
+            });
+        },
+        joinRefree: function(success, error) {
+            $.ajax({
+                url: Routing.generate('fenglin_fenglin_rest_index', {
+                    apikey: this.apikey,
+                    shopperId: this.get('shopperId'),
+                    consumerId: this.get('consumerId')
+                }),
+                data: 'json',
+                method: 'post',
+                success: success,
+                error: error
+            });
         }
     });
 

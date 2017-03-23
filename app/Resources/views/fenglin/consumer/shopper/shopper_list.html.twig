@@ -4,23 +4,46 @@
 
 <script id="shopperItemView" type="text/html">
     <div class="weui-panel__bd">
-        <a href="#consumer/shopper/detail/<%=id %>" class="weui-media-box weui-media-box_appmsg">
-            <div class="weui-media-box__hd">
-                <img class="weui-media-box__thumb" src="<%=logo?'/uploads/shoppers/' + logo : '' %>" alt="">
-            </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title"><%=name %></h4>
-                <p class="weui-media-box__desc">
-                    消费返利： <%=rebateLevelRate %>%<br>
-                    推广返利： 第一层 <%=rebateLevel2Rate %>%；第二层：<%=rebateLevel3Rate %>%
-                </p>
-            </div>
-        </a>
+        <% if (followConsumers.length > 0) { %>
+            <a href="#consumer/shopper/detail/<%=id %>" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="<%=logo?'/uploads/shoppers/' + logo : '' %>" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title"><%=name %></h4>
+                    <p class="weui-media-box__desc">
+                        消费返利： <%=rebateLevelRate %>%<br>
+                        推广返利： 第一层 <%=rebateLevel2Rate %>%；第二层：<%=rebateLevel3Rate %>%
+                    </p>
+                </div>
+            </a>
+        <% } else { %>
+            <a href="#consumer/join-to-shopper/<%=id %>" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="<%=logo?'/uploads/shoppers/' + logo : '' %>" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title"><%=name %></h4>
+                    <p class="weui-media-box__desc">
+                        消费返利： <%=rebateLevelRate %>%<br>
+                        推广返利： 第一层 <%=rebateLevel2Rate %>%；第二层：<%=rebateLevel3Rate %>%
+                    </p>
+                </div>
+            </a>
+        <% } %>
     </div>
     <div class="weui-panel__ft">
-        <a href="#consumer/shopper/detail/<%=id %>" class="weui-cell weui-cell_access weui-cell_link">
-            <div class="weui-cell__bd">返利金额： $<%=totalAmount %></div>
-            <span class="weui-cell__ft">详情</span>
-        </a>
+        {#consumer/join-to-shopper/:shopperId#}
+        <% if (followConsumers.length > 0) { %>
+            <a href="#consumer/shopper/detail/<%=id %>" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">返利金额： $<%=totalAmount %></div>
+                <span class="weui-cell__ft">详情</span>
+            </a>
+        <% } else { %>
+            <a href="#consumer/join-to-shopper/<%=id %>" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">尚未开通返利</div>
+                <span class="weui-cell__ft">开通#</span>
+            </a>
+        <% } %>
     </div>
 </script>

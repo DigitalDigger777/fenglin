@@ -127,13 +127,20 @@ class ShopperController extends Controller
 //        $qb->select('COUNT(s)')
 //            ->from('PandaShopperBundle:Shopper', 's');
 //        $count = $qb->getQuery()->getSingleScalarResult();
-
+        $apiKey = $request->query->get('apikey');
         $search = $request->query->get('search');
 
-        $qb->select('s')
+        $qb->select('s, fc')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->where($qb->expr()->like('s.name', ':name'))
-            ->setParameter(':name', '%' . $search . '%');
+            ->leftJoin('s.followConsumers', 'fc', 'WITH', ' fc.apiKey=:apiKey');
+
+        if ($search) {
+            $qb->where($qb->expr()->like('s.name', ':name'))
+                ->setParameter(':name', '%' . $search . '%');
+        }
+
+        $qb->setParameter(':apiKey', $apiKey);
+
 
         $result = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
 

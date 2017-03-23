@@ -9,3 +9,7 @@ fenglin_fenglin_shopper:
 fenglin_fenglin_consumer:
     path:     /consumer
     defaults: { _controller: FenglinFenglinBundle:Default:consumer }
+
+fenglin_fenglin_rest:
+    resource: "@FenglinFenglinBundle/Resources/config/routing/rest/refree.yml"
+    prefix:   /rest

@@ -9,7 +9,8 @@ define(['marionette', 'consumer/controllers/ConsumerController'], function(Mario
         appRoutes: {
             'consumer/home':'homePage',
             'consumer/show-member-number': 'memberNumberPage',
-            'consumer/member-id': 'memberNumberPage'
+            'consumer/member-id': 'memberNumberPage',
+            'consumer/join-to-shopper/:shopperId': 'joinToShopper'
         }
     });
 

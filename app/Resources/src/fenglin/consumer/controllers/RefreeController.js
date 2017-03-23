@@ -4,13 +4,19 @@
 
 
 define([
+    'backbone',
     'consumer/views/refree/RefreeView',
     'consumer/views/refree/RefreeConfirmView'
-], function(RefreeView, RefreeConfirmView){
+], function(Backbone, RefreeView, RefreeConfirmView){
 
     return {
-        refreePage: function(){
-            var refreeView = new RefreeView();
+        refreePage: function(shopperId){
+            var model = new Backbone.Model();
+            model.set('shopperId', shopperId);
+
+            var refreeView = new RefreeView({
+                model: model
+            });
             refreeView.render();
         },
         confirmPage: function(){

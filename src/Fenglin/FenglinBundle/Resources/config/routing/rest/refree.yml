@@ -1,0 +1,7 @@
+fenglin_fenglin_rest_index:
+    path:     /{id}
+    defaults: { _controller: FenglinFenglinBundle:Rest/Refree:index, id:0 }
+    requirements:
+        id: \d+
+    options:
+        expose: true

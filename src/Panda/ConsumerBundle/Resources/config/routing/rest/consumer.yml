@@ -11,3 +11,9 @@ panda_consumer_rest_load_by_member_id:
     defaults: { _controller: PandaConsumerBundle:Rest/Consumer:loadByMemberId }
     options:
         expose: true
+
+panda_consumer_rest_join_to_shopper:
+    path:     /join-to-shopper
+    defaults: { _controller: PandaConsumerBundle:Rest/Consumer:joinToShopper }
+    options:
+        expose: true

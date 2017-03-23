@@ -7,6 +7,7 @@ define([
     'consumer/collections/ShopperCollections',
     'consumer/views/consumer/MemberIdView',
     'consumer/models/ConsumerModel',
+    'consumer/views/consumer/JoinToShopperConfirmView',
     'consumer/views/core/LoadingToastView',
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/SearchBarView'
@@ -14,6 +15,7 @@ define([
             ShopperCollections,
             MemberIdView,
             ConsumerModel,
+            JoinToShopperConfirmView,
             LoadingToastView,
             ErrorToastView,
             SearchBarView){
@@ -74,6 +76,24 @@ define([
                     errorToast.show();
                 }
             });
+        },
+        joinToShopper: function(shopperId){
+            var consumerModel = new ConsumerModel();
+            consumerModel.set('shopperId', shopperId);
+
+            consumerModel.joinToShopper(function(){
+                var joinToShopperConfirmView = new JoinToShopperConfirmView({
+                    model: consumerModel
+                });
+                joinToShopperConfirmView.render();
+
+            }, function () {
+                errorToast.show();
+                setTimeout(function () {
+                    errorToast.hide();
+                }, 3000);
+            });
+
         }
 
     }

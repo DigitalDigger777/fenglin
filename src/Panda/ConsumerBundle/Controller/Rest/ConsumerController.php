@@ -101,6 +101,51 @@ class ConsumerController extends Controller
         }
         return $response;
     }
+
+
+    public function joinToShopperAction(Request $request)
+    {
+       /**
+        * @var \Doctrine\ORM\EntityManager $em
+        * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+        */
+       $em = $this->getDoctrine()->getEntityManager();
+       $shopperId = $this->getRequestParameters($request, 'shopperId');
+       $shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($shopperId);
+
+       if ($shopper) {
+           $consumerApiKey = $this->getRequestParameters($request, 'apikey');
+           $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->findOneBy([
+               'apiKey' => $consumerApiKey
+           ]);
+
+           if ($consumer) {
+               $followConsumers = $shopper->getFollowConsumers();
+               $followConsumers->add($consumer);
+
+               $shopper->setFollowConsumers($followConsumers);
+
+               $em->persist($shopper);
+               $em->flush();
+           } else {
+               $this->setMessage('access denied');
+               $this->setCode(403);
+           }
+        } else {
+           $this->setMessage('Shopper not found');
+           $this->setCode(500);
+        }
+        $data = $this->getData();
+        if (count($data) > 0) {
+            $response = new JsonResponse($data, $this->getCode());
+        } else {
+            $response = new JsonResponse([
+                'message' => $this->getMessage()
+            ], $this->getCode());
+        }
+        return $response;
+    }
+
     /**
      * @param Request $request
      * @return bool
