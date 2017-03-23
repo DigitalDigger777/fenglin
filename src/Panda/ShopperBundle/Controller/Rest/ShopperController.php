@@ -431,12 +431,17 @@ class ShopperController extends Controller
          */
         $em = $this->getDoctrine()->getManager();
         $id = $request->get('id');
+        $apikey = $this->getRequestParameters($request, 'apikey');
         $qb = $em->createQueryBuilder();
 
-        $qb->select('s')
+        $qb->select('s, a')
             ->from('PandaShopperBundle:Shopper', 's')
+            ->join('s.amountConsumers', 'a')
+            ->leftJoin('a.consumer','c', 'WITH', 'c.apiKey=:apikey')
             ->where($qb->expr()->eq('s.id', ':id'))
-            ->setParameter(':id', $id);
+            ->setParameter(':id', $id)
+            ->setParameter(':apikey', $apikey);
+
         $query = $qb->getQuery();
 
         try {
