@@ -41,8 +41,19 @@ class DefaultController extends Controller
         return $this->render('base.html.twig');
     }
 
-    public function shopperAction()
+    public function shopperAction(Request $request)
     {
-        return $this->render('base_shopper.html.twig');
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+        $apikey = $request->query->get('apikey');
+        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
+            'apiKey' => $apikey
+        ]);
+
+        return $this->render('base_shopper.html.twig', [
+            'shopper' => $shopper
+        ]);
     }
 }

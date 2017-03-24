@@ -40,12 +40,12 @@ class CustomMenuController extends Controller
                 'button' => [
                     [
                         "type" => "view",
-                        "name" => "Consumer",
+                        "name" => "我的返现",
                         "url"  => $wechatService->buildAuthUrl('snsapi_userinfo', 'consumer')
                     ],
                     [
                         "type" => "view",
-                        "name" => "Shopper",
+                        "name" => "商户入口",
                         "url"  => 'http://wxfenling.com/login'
                     ]
                 ]

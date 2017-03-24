@@ -132,7 +132,8 @@ class ShopperController extends Controller
 
         $qb->select('s, fc')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->leftJoin('s.followConsumers', 'fc', 'WITH', ' fc.apiKey=:apiKey');
+            ->leftJoin('s.followConsumers', 'fc', 'WITH', ' fc.apiKey=:apiKey')
+            ->where($qb->expr()->isNotNull('s.rebateLevelRate'));
 
         if ($search) {
             $qb->where($qb->expr()->like('s.name', ':name'))

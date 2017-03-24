@@ -10,12 +10,13 @@ define(['marionette'], function(Marionette){
         },
         initialize: function () {
 
-
-            if ( /[\/app_dev.php\/shopper]/.test(window.location.pathname) ) {
+            // console.log(/[\/shopper]/.test(window.location.pathname));
+            if ( /\/shopper/.test(window.location.pathname) ) {
                 this.template = '#menuHomeView';
             }
 
-            if ( /[\/app_dev.php\/staff]/.test(window.location.pathname) ) {
+            // console.log(/[\/staff]/.test(window.location.pathname));
+            if ( /\/staff/.test(window.location.pathname) ) {
                 this.template = '#menuHomeStaffView';
             }
         }
