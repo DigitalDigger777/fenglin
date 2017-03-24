@@ -22,7 +22,8 @@
                                 <br>
                             <% } %>
                             得到 消费返利 ￥<%=Math.round10(amount,-2)%> <br>
-                            <% var date1 = new Date(date.date) %>
+                            <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
+                            <% var date1 = new Date(dateMatch[1]) %>
                             <%=date1.toLocaleDateString() + '|' + date.date %>
                         </p>
                     </div>
