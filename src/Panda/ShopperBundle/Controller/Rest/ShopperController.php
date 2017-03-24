@@ -144,6 +144,28 @@ class ShopperController extends Controller
 
         $result = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
 
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('cu, c, s')
+            ->from('FenglinFenglinBundle:ConsumerAmount', 'cu')
+            ->join('cu.consumer', 'c')
+            ->join('cu.shopper', 's')
+            ->where($qb->expr()->eq('c.apiKey', ':apiKey'))
+            ->setParameter(':apiKey', $apiKey);
+
+        $amounts = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
+
+//        print_r($amounts); exit;
+        foreach ($result as $key => $item) {
+            $result[$key]['amount'] = 0;
+
+            foreach ($amounts as $amountItem) {
+                if ($item['id'] == $amountItem['shopper']['id'] ) {
+                    $result[$key]['amount'] = $amountItem['totalAmount'];
+                }
+            }
+        }
+
         return new JsonResponse($result);
     }
 
