@@ -436,7 +436,7 @@ class ShopperController extends Controller
 
         $qb->select('s, a')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->join('s.amountConsumers', 'a')
+            ->leftJoin('s.amountConsumers', 'a')
             ->leftJoin('a.consumer','c', 'WITH', 'c.apiKey=:apikey')
             ->where($qb->expr()->eq('s.id', ':id'))
             ->setParameter(':id', $id)
