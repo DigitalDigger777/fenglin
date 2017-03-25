@@ -32,27 +32,30 @@ class CustomMenuController extends Controller
             'base_uri' => 'https://api.wechat.com'
         ]);
 
+        $body = json_encode([
+            'button' => [
+                [
+                    "type" => "view",
+                    "name" => "我的返现",
+                    "url"  => $wechatService->buildAuthUrl('snsapi_userinfo', 'consumer')
+                ],
+                [
+                    "type" => "view",
+                    "name" => "商户入口",
+                    "url"  => 'http://wxfenling.com/login'
+                ]
+            ],
+            JSON_UNESCAPED_UNICODE
+        ]);
+
         $response = $client->request('POST', '/cgi-bin/menu/create', [
             'query' => [
                 'access_token' => $accessToken->getAccessToken()
             ],
-            'body' => json_encode([
-                'button' => [
-                    [
-                        "type" => "view",
-                        "name" => "我的返现",
-                        "url"  => $wechatService->buildAuthUrl('snsapi_userinfo', 'consumer')
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "商户入口",
-                        "url"  => 'http://wxfenling.com/login'
-                    ]
-                ],
-                JSON_UNESCAPED_UNICODE
-            ])
+            'body' => $body
         ]);
 
+        echo $body; exit;
         $statusCode = $response->getStatusCode();
 
         if ($statusCode == 200) {
