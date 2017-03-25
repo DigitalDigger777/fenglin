@@ -183,9 +183,10 @@ class ShopperController extends Controller
         $id = $this->getRequestParameters($request, 'id');
 
         $qb = $em->createQueryBuilder();
-        $qb->select('c')
+        $qb->select('c, cns')
             ->from('FenglinCashBackBundle:CashBack', 'c')
             ->join('c.shopper', 's')
+            ->join('c.consumer', 'cns')
             ->where($qb->expr()->eq('s.id', ':id'))
             ->setParameter(':id', $id);
 
@@ -216,7 +217,7 @@ class ShopperController extends Controller
         try {
             $data = $query->getResult(Query::HYDRATE_ARRAY);
             if (count($data) > 0) {
-                $this->setData($data[0]);
+                $this->setData($data);
             } else {
                 $this->setCode(500);
                 $this->setMessage('not found');
