@@ -44,9 +44,8 @@ class CustomMenuController extends Controller
                     "name" => "商户入口",
                     "url"  => 'http://wxfenling.com/login'
                 ]
-            ],
-            JSON_UNESCAPED_UNICODE
-        ]);
+            ]
+        ], JSON_UNESCAPED_UNICODE);
 
         $response = $client->request('POST', '/cgi-bin/menu/create', [
             'query' => [
