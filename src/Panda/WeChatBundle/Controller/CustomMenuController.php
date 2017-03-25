@@ -54,7 +54,6 @@ class CustomMenuController extends Controller
             'body' => $body
         ]);
 
-        echo $body; exit;
         $statusCode = $response->getStatusCode();
 
         if ($statusCode == 200) {
