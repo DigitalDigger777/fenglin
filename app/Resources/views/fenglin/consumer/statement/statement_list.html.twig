@@ -38,15 +38,15 @@
                             <br>
 
                             <% if (level == 1) { %>
-                                <%=consumerPayable.wechatData.nickname%> 得到 消费返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> 得到 消费返利 ￥<%=Math.round10(amount, -2)%> <br>
                             <% } %>
 
                             <% if (level == 2) { %>
-                                <%=consumerPayable.wechatData.nickname%> 得到 一层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> 得到 一层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
-                                <%=consumerPayable.wechatData.nickname%> 得到 二层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> 得到 二层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
                             <% } %>
 
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
