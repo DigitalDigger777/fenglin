@@ -9,7 +9,7 @@
                _locale: 'zh'
            }),
            success: function (data) {
-               alert(data.role);
+               //alert(data.role);
                if (!apikey) {
                    window.location = '/login';
                    window.localStorage.setItem('memberId', '{{ memberId }}');
