@@ -40,13 +40,15 @@
                             <% } %>
 
                             得到 消费返利 ￥7.90 <br>
-                            2017/01/19
+                            <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
+                            <% var date1 = new Date(dateMatch[1]) %>
+                            <%=date1.toLocaleDateString() %>
                         </p>
                     </div>
                     <div style="width: 30%; float: left; text-align: right">
                         <p>
                             返利余额 <br>
-                            <b>￥127.90</b>
+                            <b>￥<%=Math.round10(consumer.amountConsumers[0].totalAmount)%></b>
                         </p>
                     </div>
                 </div>
