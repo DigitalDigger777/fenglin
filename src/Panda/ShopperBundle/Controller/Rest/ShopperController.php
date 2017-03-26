@@ -181,14 +181,16 @@ class ShopperController extends Controller
          */
         $em = $this->getDoctrine()->getManager();
         $id = $this->getRequestParameters($request, 'id');
+        $apiKey = $this->getRequestParameters($request, 'apikey');
 
         $qb = $em->createQueryBuilder();
         $qb->select('c, cns')
             ->from('FenglinCashBackBundle:CashBack', 'c')
             ->join('c.shopper', 's')
-            ->join('c.consumer', 'cns')
+            ->join('c.consumer', 'cns', 'WITH', 'cns.apiKey=:apikey')
             ->where($qb->expr()->eq('s.id', ':id'))
-            ->setParameter(':id', $id);
+            ->setParameter(':id', $id)
+            ->setParameter(':apikey', $apiKey);
 
         $result = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
 
