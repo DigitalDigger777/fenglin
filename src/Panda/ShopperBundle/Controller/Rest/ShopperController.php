@@ -184,12 +184,13 @@ class ShopperController extends Controller
         $apiKey = $this->getRequestParameters($request, 'apikey');
 
         $qb = $em->createQueryBuilder();
-        $qb->select('c, cns, ac')
+        $qb->select('c, cns, ac, cp')
             ->from('FenglinCashBackBundle:CashBack', 'c')
             ->join('c.shopper', 's')
             ->join('c.consumer', 'cns', 'WITH', 'cns.apiKey=:apikey')
             ->join('cns.amountConsumers', 'ac')
             ->join('ac.shopper', 'acs', 'WITH', 'acs.id=:id')
+            ->join('c.consumerPayable', 'cp')
             ->where($qb->expr()->eq('s.id', ':id'))
             ->setParameter(':id', $id)
             ->setParameter(':apikey', $apiKey);

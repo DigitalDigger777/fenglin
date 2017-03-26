@@ -72,6 +72,11 @@ class CashBack
     private $consumerPayable;
 
     /**
+     * @var int
+     */
+    private $level;
+
+    /**
      * Get id
      *
      * @return int
@@ -295,6 +300,22 @@ class CashBack
     public function setConsumerPayable($consumerPayable)
     {
         $this->consumerPayable = $consumerPayable;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
     }
 }
 

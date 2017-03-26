@@ -209,11 +209,12 @@ class CashBackController extends Controller
 
         $shopperEmail = $this->getUser()->getUsername();
         $qb = $em->createQueryBuilder();
-        $qb->select('c, cns, ca, s')
+        $qb->select('c, cns, ca, s, cp')
             ->from('FenglinCashBackBundle:CashBack', 'c')
             ->join('c.shopper', 's')
             ->join('c.consumer', 'cns')
             ->join('cns.amountConsumers', 'ca')
+            ->join('c.consumerPayable', 'cp')
             ->join('ca.shopper', 'ss', 'WITH', 'ss.email=:shopperEmail')
 
             ->where($qb->expr()->eq('s.email', ':shopperEmail'))
