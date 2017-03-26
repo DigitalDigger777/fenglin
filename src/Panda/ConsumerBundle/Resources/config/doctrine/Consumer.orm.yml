@@ -9,6 +9,9 @@ Panda\ConsumerBundle\Entity\Consumer:
         cashbacks:
             targetEntity: \Fenglin\CashBackBundle\Entity\CashBack
             mappedBy: consumer
+        consumerPayables:
+            targetEntity: \Fenglin\CashBackBundle\Entity\CashBack
+            mappedBy: consumerPayable
         inviteFreindConsumersFrom:
             targetEntity: \Fenglin\FenglinBundle\Entity\InviteFriend
             mappedBy: consumerFrom

@@ -49,6 +49,10 @@ class Consumer extends User
      */
     private $followShoppers;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $consumerPayables;
 
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
@@ -176,6 +180,22 @@ class Consumer extends User
     public function setFollowShoppers($followShoppers)
     {
         $this->followShoppers = $followShoppers;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getConsumerPayables()
+    {
+        return $this->consumerPayables;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $consumerPayables
+     */
+    public function setConsumerPayables($consumerPayables)
+    {
+        $this->consumerPayables = $consumerPayables;
     }
 }
 

@@ -215,6 +215,7 @@ class CashBackController extends Controller
             ->join('c.consumer', 'cns')
             ->join('cns.amountConsumers', 'ca')
             ->join('ca.shopper', 'ss', 'WITH', 'ss.email=:shopperEmail')
+
             ->where($qb->expr()->eq('s.email', ':shopperEmail'))
             ->orderBy('c.date', 'DESC')
             ->setParameter(':shopperEmail', $shopperEmail);
@@ -389,6 +390,7 @@ class CashBackController extends Controller
         $cashBack->setConsumer($consumer);
         $cashBack->setShopper($shopper);
         $cashBack->setPayable($payable);
+        $cashBack->setConsumerPayable($consumer);
         $cashBack->setAmount($amountLevel);
         $cashBack->setAmountLevel2($amountLevel2);
         $cashBack->setAmountLevel3($amountLevel3);
@@ -411,6 +413,7 @@ class CashBackController extends Controller
 
             $cashBack = new CashBack();
             $cashBack->setConsumer($consumerLevel2);
+            $cashBack->setConsumerPayable($consumer);
             $cashBack->setShopper($shopper);
             $cashBack->setAmount($amountLevel2);
             $cashBack->setAmountLevel2(0);
@@ -433,6 +436,7 @@ class CashBackController extends Controller
 
                 $cashBack = new CashBack();
                 $cashBack->setConsumer($consumerLevel3);
+                $cashBack->setConsumerPayable($consumer);
                 $cashBack->setShopper($shopper);
                 $cashBack->setAmount($amountLevel3);
                 $cashBack->setAmountLevel2(0);

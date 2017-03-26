@@ -67,6 +67,11 @@ class CashBack
     private $payable;
 
     /**
+     * @var \Panda\ConsumerBundle\Entity\Consumer
+     */
+    private $consumerPayable;
+
+    /**
      * Get id
      *
      * @return int
@@ -274,6 +279,22 @@ class CashBack
     public function setPayable($payable)
     {
         $this->payable = $payable;
+    }
+
+    /**
+     * @return \Panda\ConsumerBundle\Entity\Consumer
+     */
+    public function getConsumerPayable()
+    {
+        return $this->consumerPayable;
+    }
+
+    /**
+     * @param \Panda\ConsumerBundle\Entity\Consumer $consumerPayable
+     */
+    public function setConsumerPayable($consumerPayable)
+    {
+        $this->consumerPayable = $consumerPayable;
     }
 }
 

@@ -40,6 +40,12 @@ Fenglin\CashBackBundle\Entity\CashBack:
             joinColumn:
                 name: consumer_id
                 referencedColumnName: id
+        consumerPayable:
+            targetEntity: \Panda\ConsumerBundle\Entity\Consumer
+            inversedBy: consumerPayables
+            joinColumn:
+                name: consumer_payable_id
+                referencedColumnName: id
         shopper:
             targetEntity: \Panda\ShopperBundle\Entity\Shopper
             inversedBy: cashbacks
