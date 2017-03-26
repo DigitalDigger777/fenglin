@@ -5,7 +5,8 @@
         var apikey = window.localStorage.getItem('apikey');
         $.ajax({
            url: Routing.generate('user_role_rest_load', {
-               apikey: apikey
+               apikey: apikey,
+               _locale: 'zh'
            }),
            success: function (data) {
                if (!apikey) {
