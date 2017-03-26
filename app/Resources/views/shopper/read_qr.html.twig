@@ -3,11 +3,29 @@
 {% block content %}
     <script type="text/javascript">
         var apikey = window.localStorage.getItem('apikey');
-        if (!apikey) {
-            window.location = '/login';
-            window.localStorage.setItem('memberId', '{{ memberId }}');
-        } else {
-            window.location = '/shopper?apikey=' + apikey +'#consumer/search/' + {{ memberId }};
-        }
+        $.ajax({
+           url: Routing.generate('user_role_rest_load', {
+               apikey: apikey
+           }),
+           success: function (data) {
+               if (!apikey) {
+                   window.location = '/login';
+                   window.localStorage.setItem('memberId', '{{ memberId }}');
+               } else {
+                   if (data['role'] == 'ROLE_SHOPPER') {
+                       window.location = '/shopper?apikey=' + apikey + '#consumer/search/' + {{ memberId }};
+                   }
+
+                   if (data['role'] == 'ROLE_STAFF') {
+                       window.location = '/staff?apikey=' + apikey + '#consumer/search/' + {{ memberId }};
+                   }
+               }
+           },
+           error: function (error) {
+               window.location = '/login';
+           }
+        });
+
+
     </script>
 {% endblock %}

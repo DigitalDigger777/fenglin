@@ -29,4 +29,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository implements UserLoade
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @param $apiKey
+     * @return mixed
+     */
+    public function loadUserByApiKey($apiKey)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.apiKey=:apiKey')
+            ->setParameter('apiKey', $apiKey)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

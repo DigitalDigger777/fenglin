@@ -48,6 +48,12 @@ panda_user_rest:
     requirements:
         _locale: "|en|zh"
 
+panda_user_role_rest:
+    resource: "@PandaUserBundle/Resources/config/routing/rest/role.yml"
+    prefix:   /{_locale}/core-user/role/rest
+    requirements:
+        _locale: "|en|zh"
+
 #panda_user_homepage:
 #    path:     /
 #    defaults: { _controller: PandaUserBundle:Default:index }

@@ -1,0 +1,6 @@
+user_role_rest_load:
+    path:     /load
+    defaults: { _controller: "PandaUserBundle:Rest/RestRole:load" }
+    methods:  [GET]
+    options:
+        expose: true
