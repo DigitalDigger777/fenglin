@@ -216,6 +216,7 @@ class CashBackController extends Controller
             ->join('cns.amountConsumers', 'ca')
             ->join('ca.shopper', 'ss', 'WITH', 'ss.email=:shopperEmail')
             ->where($qb->expr()->eq('s.email', ':shopperEmail'))
+            ->orderBy('c.date', 'DESC')
             ->setParameter(':shopperEmail', $shopperEmail);
 
         $query = $qb->getQuery();
