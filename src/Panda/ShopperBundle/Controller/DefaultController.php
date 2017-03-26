@@ -44,6 +44,10 @@ class DefaultController extends Controller
         return new Response('Phone number or password is not correct', 403);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function readQRAction(Request $request)
     {
         $memberId = $request->get('memberId');
