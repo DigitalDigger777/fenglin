@@ -54,6 +54,10 @@ panda_user_role_rest:
     requirements:
         _locale: "|en|zh"
 
+panda_user_validate_rest:
+    resource: "@PandaUserBundle/Resources/config/routing/rest/validate.yml"
+    prefix:   /validate
+
 #panda_user_homepage:
 #    path:     /
 #    defaults: { _controller: PandaUserBundle:Default:index }

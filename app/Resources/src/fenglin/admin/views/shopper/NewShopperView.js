@@ -8,13 +8,19 @@ define(['marionette',
         'consumer/views/core/LoadingToastView',
         'consumer/views/core/ErrorToastView',
         'consumer/views/core/SuccessToastView',
-        'admin/views/shopper/PasswordView'], function(Marionette,
-                                                        AdminMenuView,
-                                                        ShopperModel,
-                                                        LoadingToastView,
-                                                        ErrorToastView,
-                                                        SuccessToastView,
-                                                        PasswordView){
+        'admin/views/shopper/PasswordView',
+        'consumer/views/core/CustomToastView'
+], function(Marionette,
+            AdminMenuView,
+            ShopperModel,
+            LoadingToastView,
+            ErrorToastView,
+            SuccessToastView,
+            PasswordView,
+            CustomToastView){
+    var reg = /\?apikey=([\w\W]+)/;
+    var match = reg.exec(location.search);
+
     var loadToast  = new LoadingToastView();
     loadToast.render();
 
@@ -25,10 +31,12 @@ define(['marionette',
     successToast.render();
 
     return Marionette.View.extend({
+        apikey: match[1],
         el:'#contentContainer',
         template: '#newShopperView',
         ui: {
-            saveButton: '#saveShopperButton'
+            saveButton: '#saveShopperButton',
+            telInput: '#tel'
         },
         events: {
             'click @ui.saveButton': function(e){
@@ -91,6 +99,44 @@ define(['marionette',
                         }
                     });
                 }
+            },
+            'change @ui.telInput': function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: Routing.generate('user_rest_validate_index'),
+                    dataType: 'json',
+                    data: {
+                        apikey: this.apikey,
+                        method: 'ISSET_TEL',
+                        tel: $('#tel').val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+
+                        if (data.isset_tel == 1) {
+                            var model = new Backbone.Model({
+                                message: '電話存在',
+                                className: 'weui-icon-warn'
+                            });
+                            var customToast = new CustomToastView({
+                                model: model
+                            });
+                            customToast.render();
+                            customToast.show();
+
+                            setTimeout(function () {
+                                customToast.hide();
+                            }, 2000);
+                        }
+                    },
+                    error: function (error) {
+                        errorToast.show();
+                        setTimeout(function () {
+                            errorToast.hide();
+                        }, 3000);
+                    }
+                });
             }
         },
         onRender: function(){

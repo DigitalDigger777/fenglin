@@ -1,0 +1,6 @@
+user_rest_validate_index:
+    path:     /
+    defaults: { _controller: "PandaUserBundle:Rest/RestValidate:index" }
+    options:
+        expose: true
+
