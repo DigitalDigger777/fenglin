@@ -42,6 +42,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $role;
 
     /**
+     * @var string
+     */
+    private $tel;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $requestsRecoveryPassword;
@@ -412,6 +417,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setMemberId($memberId)
     {
         $this->memberId = $memberId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param string $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
     }
 }
 

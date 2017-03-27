@@ -13,10 +13,6 @@ Panda\ShopperBundle\Entity\Shopper:
             type: string
             length: 255
             nullable: true
-        tel:
-            type: string
-            length: 255
-            nullable: true
         totalAmount:
             type: float
             nullable: true

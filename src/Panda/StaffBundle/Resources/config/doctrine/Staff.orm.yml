@@ -7,9 +7,6 @@ Panda\StaffBundle\Entity\Staff:
         name:
             type: string
             length: 255
-        tel:
-            type: string
-            length: 255
     manyToOne:
         shopper:
             targetEntity: \Panda\ShopperBundle\Entity\Shopper

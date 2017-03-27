@@ -13,11 +13,6 @@ class Admin extends User
      */
     private $id;
 
-    /**
-     * @var string
-     */
-    private $tel;
-
 
     /**
      * Get id
@@ -27,30 +22,6 @@ class Admin extends User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set tel
-     *
-     * @param string $tel
-     *
-     * @return Admin
-     */
-    public function setTel($tel)
-    {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    /**
-     * Get tel
-     *
-     * @return string
-     */
-    public function getTel()
-    {
-        return $this->tel;
     }
 }
 

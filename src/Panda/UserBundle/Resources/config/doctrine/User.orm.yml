@@ -48,6 +48,10 @@ Panda\UserBundle\Entity\User:
             type: string
             column: member_id
             nullable: true
+        tel:
+            type: string
+            length: '255'
+            nullable: true
     oneToMany:
         requestsRecoveryPassword:
             targetEntity: RequestRecoveryPassword

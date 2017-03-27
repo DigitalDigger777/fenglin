@@ -26,11 +26,6 @@ class Shopper extends User
     private $address;
 
     /**
-     * @var string
-     */
-    private $tel;
-
-    /**
      * @var float
      */
     private $totalAmount;
@@ -170,30 +165,6 @@ class Shopper extends User
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set tel
-     *
-     * @param string $tel
-     *
-     * @return Shopper
-     */
-    public function setTel($tel)
-    {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    /**
-     * Get tel
-     *
-     * @return string
-     */
-    public function getTel()
-    {
-        return $this->tel;
     }
 
     /**
