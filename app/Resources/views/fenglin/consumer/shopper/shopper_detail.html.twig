@@ -49,11 +49,7 @@
         <div class="weui-panel__bd">
             <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__bd">
-                    <% if (amountConsumers.length > 0) { %>
-                    <h4 class="weui-media-box__title" style="text-align: center">返利余额：<b>$<%=Math.round10(amountConsumers[0].totalAmount, -2) %></b></h4>
-                    <% } else { %>
-                    <h4 class="weui-media-box__title" style="text-align: center">返利余额：<b>$0</b></h4>
-                    <% } %>
+                    <h4 class="weui-media-box__title" style="text-align: center">返利余额：<b>$<%=Math.round10(amount, -2) %></b></h4>
                 </div>
             </a>
         </div>

@@ -124,9 +124,7 @@ class ShopperController extends Controller
         $page = $request->get('page');
 
         $qb = $em->createQueryBuilder();
-//        $qb->select('COUNT(s)')
-//            ->from('PandaShopperBundle:Shopper', 's');
-//        $count = $qb->getQuery()->getSingleScalarResult();
+
         $apiKey = $request->query->get('apikey');
         $search = $request->query->get('search');
 
@@ -452,6 +450,8 @@ class ShopperController extends Controller
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+         * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
          */
         $em = $this->getDoctrine()->getManager();
         $id = $request->get('id');
@@ -461,16 +461,28 @@ class ShopperController extends Controller
         $qb->select('s, a')
             ->from('PandaShopperBundle:Shopper', 's')
             ->leftJoin('s.amountConsumers', 'a')
-            ->leftJoin('a.consumer','c', 'WITH', 'c.apiKey=:apikey')
             ->where($qb->expr()->eq('s.id', ':id'))
-            ->setParameter(':id', $id)
-            ->setParameter(':apikey', $apikey);
+            ->setParameter(':id', $id);
 
         $query = $qb->getQuery();
 
+
         try {
-            $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
-            $this->setData($data);
+            $shopper = $query->getSingleResult();
+            $shopperArray = $query->getSingleResult(Query::HYDRATE_ARRAY);
+
+            $amountConsumers = $shopper->getAmountConsumers();
+
+            foreach ($amountConsumers as $amountConsumer)
+            {
+                $_apikey = $amountConsumer->getConsumer()->getApiKey();
+                if ($apikey == $_apikey) {
+                    $shopperArray['amount'] = $amountConsumer->getTotalAmount();
+                }
+            }
+
+            $shopperArray['amount'] = isset($shopperArray['amount']) ? $shopperArray['amount'] : 0;
+            $this->setData($shopperArray);
         } catch (\Exception $e) {
             $this->setCode(500);
             $this->setMessage($e->getMessage());
