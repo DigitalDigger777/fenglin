@@ -281,8 +281,9 @@ class ConsumerController extends Controller
 
                 if ($consumerAmount) {
                     $qb = $em->createQueryBuilder();
-                    $qb->select('c, ac, s, cs')
+                    $qb->select('c, ac, s, cs, fc')
                         ->from('PandaConsumerBundle:Consumer', 'c')
+                        ->leftJoin('c.followShoppers', 'fc', 'WITH', 'fc.id=:id')
                         ->join('c.amountConsumers', 'ac')
                         ->join('ac.shopper', 's')
                         ->join('ac.consumer', 'cs')

@@ -5,12 +5,19 @@
         <p><b><%=memberId %></b></p><br>
         <img src="<%=wechatData.headimgurl %>" alt="" style="width: 150px"><br><br>
         <p><%=wechatData.nickname %></p>
-        <p>返利余额</p><br>
-        <% if (amountConsumers.length > 0) { %>
-            <p><h2>￥<%=Math.round10(amountConsumers[0].totalAmount, -2) %></h2></p><br><br>
+
+        <% if (followShoppers.length > 0) { %>
+            <p>返利余额</p><br>
+            <% if (amountConsumers.length > 0) { %>
+                <p><h2>￥<%=Math.round10(amountConsumers[0].totalAmount, -2) %></h2></p><br><br>
+            <% } else { %>
+                <p><h2>￥0</h2></p><br><br>
+            <% } %>
+            <a href="#payment/confirm" class="weui-btn weui-btn_primary mrg-b">选择</a>
         <% } else { %>
-            <p><h2>￥0</h2></p><br><br>
+            <br>
+            用户还没有加入返利计划。<br>
+            请先让用户加入！
         <% } %>
-        <a href="#payment/confirm" class="weui-btn weui-btn_primary mrg-b">选择</a>
     </div>
 </script>
