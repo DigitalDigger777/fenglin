@@ -35,7 +35,7 @@
     <div class="weui-panel__ft">
         {#consumer/join-to-shopper/:shopperId#}
         <% if (followConsumers.length > 0) { %>
-            <a href="#consumer/refree/<%=id %>" class="weui-cell weui-cell_access weui-cell_link">
+            <a href="#consumer/shopper/detail/<%=id %>" class="weui-cell weui-cell_access weui-cell_link">
                 <div class="weui-cell__bd">返利金额： $<%=amount ? Math.round10(amount, -2) : 0 %></div>
                 <span class="weui-cell__ft">详情</span>
             </a>
