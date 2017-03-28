@@ -19,8 +19,14 @@ define([
             });
             refreeView.render();
         },
-        confirmPage: function(){
-            var confirmView = new RefreeConfirmView();
+        confirmPage: function(shopperId){
+            var model = new Backbone.Model();
+            model.set('shopperId', shopperId);
+
+            console.log(model.toJSON());
+            var confirmView = new RefreeConfirmView({
+                model: model
+            });
             confirmView.render();
         }
     };

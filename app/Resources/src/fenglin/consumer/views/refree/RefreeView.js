@@ -7,9 +7,13 @@ define(['marionette',
     'consumer/models/ConsumerModel',
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/SuccessToastView',
-    'consumer/views/core/LoadingToastView'], function(
+    'consumer/views/core/LoadingToastView',
+    'consumer/views/consumer/JoinToShopperConfirmView',
+    'consumer/routers/RefreeRouter'
+], function(
         Marionette, MenuView, ConsumerModel,
-        ErrorToastView, SuccessToastView, LoadingToastView){
+        ErrorToastView, SuccessToastView, LoadingToastView,
+        JoinToShopperConfirmView, RefreeRouter){
 
     var errorToast = new ErrorToastView();
     var successToast = new SuccessToastView();
@@ -31,18 +35,21 @@ define(['marionette',
                 var shopperId = $('#shopperId').val();
                 var memberId = $('#memberId').val();
 
+                var consumerModel = new ConsumerModel();
+
                 if (memberId != '') {
-                    var consumerModel = new ConsumerModel();
+
                     consumerModel.set('shopperId', shopperId);
                     consumerModel.set('consumerId', memberId);
 
                     loadingToast.show();
                     consumerModel.joinRefree(function () {
                         loadingToast.hide();
-                        successToast.show();
-                        setTimeout(function () {
-                            successToast.hide();
-                        }, 3000);
+                        window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
+                        // successToast.show();
+                        // setTimeout(function () {
+                        //     successToast.hide();
+                        // }, 3000);
                     }, function () {
                         loadingToast.hide();
                         errorToast.show();
@@ -51,10 +58,29 @@ define(['marionette',
                         }, 3000);
                     });
                 } else {
-                    successToast.show();
-                    setTimeout(function () {
-                        successToast.hide();
-                    }, 3000);
+
+                    consumerModel.set('shopperId', shopperId);
+
+                    consumerModel.joinToShopper(function(){
+                        // var joinToShopperConfirmView = new JoinToShopperConfirmView({
+                        //     model: consumerModel
+                        // });
+                        // joinToShopperConfirmView.render();
+
+                        window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
+
+                    }, function () {
+                        errorToast.show();
+                        setTimeout(function () {
+                            errorToast.hide();
+                        }, 3000);
+                    });
+                    //
+                    // successToast.show();
+                    //
+                    // setTimeout(function () {
+                    //     successToast.hide();
+                    // }, 3000);
                 }
             }
         },

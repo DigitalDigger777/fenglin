@@ -35,7 +35,6 @@ security:
         - { path: ^/fenglin-cash-back/rest, roles: [ROLE_STAFF, ROLE_SHOPPER, ROLE_CONSUMER, ROLE_ADMIN] }
 
         - { path: ^/panda-user, roles: [ROLE_STAFF, ROLE_SHOPPER, ROLE_CONSUMER, ROLE_ADMIN] }
-
         - { path: ^/staff, roles: ROLE_STAFF }
 
         - { path: ^/admin, roles: ROLE_ADMIN }

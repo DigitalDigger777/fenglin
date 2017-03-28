@@ -9,8 +9,9 @@ define(['marionette',
     var RefreeRouter = Marionette.AppRouter.extend({
         controller: RefreeController,
         appRoutes: {
+            'consumer/refree/join/confirm/:shopperId': 'confirmPage',
             'consumer/refree/:shopperId': 'refreePage',
-            'consumer/refree/confirm': 'confirmPage'
+
         }
     });
 

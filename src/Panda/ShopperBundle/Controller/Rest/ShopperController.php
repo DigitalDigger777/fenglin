@@ -269,20 +269,15 @@ class ShopperController extends Controller
         $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
         $staffRepo   = $em->getRepository('PandaStaffBundle:Staff');
 
-        $apikey = $request->query->get('apikey');
+        $apikey = $this->getRequestParameters($request, 'apikey');
         $qb = $em->createQueryBuilder();
 
         if ($user = $shopperRepo->findOneBy(['apiKey' => $apikey])) {
             $shopperId = $user->getId();
         } elseif ($user = $staffRepo->findOneBy(['apiKey' => $apikey])) {
-            $this->setCode(403);
-            $this->setMessage('Access Denied');
-
-            return new JsonResponse([
-                'message' => $this->getMessage()
-            ], $this->getCode());
+            $shopperId = $user->getShopper()->getId();
         } else {
-            throw new \Exception('Access Denied');
+            throw new \Exception('Access Denied 11');
         }
 
         $qb->select('s')
