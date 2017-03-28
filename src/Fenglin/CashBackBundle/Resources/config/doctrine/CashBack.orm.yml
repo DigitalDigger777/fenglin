@@ -36,6 +36,10 @@ Fenglin\CashBackBundle\Entity\CashBack:
         level:
             type: integer
             nullable: true
+        rebateBalance:
+            type: float
+            nullable: true
+            column: rebate_balance
     manyToOne:
         consumer:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

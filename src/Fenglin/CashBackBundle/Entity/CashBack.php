@@ -77,6 +77,11 @@ class CashBack
     private $level;
 
     /**
+     * @var float
+     */
+    private $rebateBalance;
+
+    /**
      * Get id
      *
      * @return int
@@ -316,6 +321,22 @@ class CashBack
     public function setLevel($level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRebateBalance()
+    {
+        return $this->rebateBalance;
+    }
+
+    /**
+     * @param float $rebateBalance
+     */
+    public function setRebateBalance($rebateBalance)
+    {
+        $this->rebateBalance = $rebateBalance;
     }
 }
 

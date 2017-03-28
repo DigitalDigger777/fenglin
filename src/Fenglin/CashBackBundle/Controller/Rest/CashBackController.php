@@ -288,7 +288,8 @@ class CashBackController extends Controller
             $amountLevel3 = ($payable/100) * $rebateLevel3;
 
             $transactionId = $this->cashBack($payable, $amount, $amountLevel2, $amountLevel3);
-            $returnBalance = $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3);
+            $returnBalance = $this->calcBalance($balance, $amount, $amountLevel2, $amountLevel3, $transactionId);
+
             $data['transactionId'] = $transactionId;
             $data['balance'] = $returnBalance;
 
@@ -458,9 +459,10 @@ class CashBackController extends Controller
      * @param $amountLevel
      * @param $amountLevel2
      * @param $amountLevel3
+     * @param $transactionId
      * @return int
      */
-    private function calcBalance($balance, $amountLevel, $amountLevel2, $amountLevel3)
+    private function calcBalance($balance, $amountLevel, $amountLevel2, $amountLevel3, $transactionId)
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
@@ -486,6 +488,8 @@ class CashBackController extends Controller
                 $em->persist($amountConsumer);
                 $em->flush();
 
+                $_consumer = $amountConsumer->getConsumer();
+                $this->calcRebateBalance($_consumer, $transactionId, $balance + $amountLevel);
                 $returnBalanceForConsumer = $balance + $amountLevel;
             }
         }
@@ -501,6 +505,9 @@ class CashBackController extends Controller
                     $amountConsumer->setTotalAmount($balanceLevel2 + $amountLevel2);
                     $em->persist($amountConsumer);
                     $em->flush();
+
+                    $_consumer = $amountConsumer->getConsumer();
+                    $this->calcRebateBalance($_consumer, $transactionId, $balanceLevel2 + $amountLevel2);
                 }
             }
         }
@@ -516,11 +523,40 @@ class CashBackController extends Controller
                     $amountConsumer->setTotalAmount($balanceLevel3 + $amountLevel3);
                     $em->persist($amountConsumer);
                     $em->flush();
+
+                    $_consumer = $amountConsumer->getConsumer();
+                    $this->calcRebateBalance($_consumer, $transactionId, $balanceLevel3 + $amountLevel3);
                 }
             }
         }
 
         return $returnBalanceForConsumer;
+    }
+
+    /**
+     * @param $consumer
+     * @param $transactionId
+     * @param $rebateBalance
+     */
+    private function calcRebateBalance($consumer, $transactionId, $rebateBalance)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \Fenglin\CashBackBundle\Entity\CashBack $cashBack
+         */
+        $em = $this->getDoctrine()->getManager();
+        $cashBack = $em->getRepository('FenglinCashBackBundle:CashBack')->findOneBy([
+            'consumer' => $consumer,
+            'transactionId' => $transactionId
+        ]);
+
+        if ($cashBack) {
+            $cashBack->setRebateBalance($rebateBalance);
+            $em->persist($cashBack);
+            $em->flush();
+        } else {
+            echo $transactionId . ' || ' . $consumer->getId();
+        }
     }
 
     /**
