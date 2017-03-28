@@ -71,9 +71,9 @@
                             <br>
 
                             <% if (consumer.amountConsumers.length > 0 ) { %>
-                            使用 消费返利￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%><br>
+                                使用 消费返利￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%><br>
                             <% } else { %>
-                            使用 消费返利￥0
+                                使用 消费返利￥0
                             <% } %>
 
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
@@ -84,7 +84,7 @@
                     <div style="width: 30%; float: left; text-align: right">
                         <p>
                             返利余额 <br>
-                            <b>￥0</b>
+                            <b>￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%></b>
                         </p>
                     </div>
 
