@@ -12,6 +12,10 @@ Fenglin\FenglinBundle\Entity\ConsumerAmount:
         totalAmount:
             type: float
             column: total_amount
+        totalCashBack:
+            type: float
+            column: total_cashback
+            nullable: true
     manyToOne:
         consumer:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

@@ -28,6 +28,11 @@ class ConsumerAmount
     private $shopper;
 
     /**
+     * @var float
+     */
+    private $totalCashBack;
+
+    /**
      * Get id
      *
      * @return int
@@ -91,6 +96,22 @@ class ConsumerAmount
     public function setShopper($shopper)
     {
         $this->shopper = $shopper;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalCashBack()
+    {
+        return $this->totalCashBack;
+    }
+
+    /**
+     * @param float $totalCashBack
+     */
+    public function setTotalCashBack($totalCashBack)
+    {
+        $this->totalCashBack = $totalCashBack;
     }
 }
 

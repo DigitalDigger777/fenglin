@@ -484,7 +484,12 @@ class CashBackController extends Controller
         foreach($amountConsumers as $amountConsumer) {
             $amountShopperId = $amountConsumer->getShopper()->getId();
             if ($shopperId == $amountShopperId) {
-                $amountConsumer->setTotalAmount($balance + $amountLevel);
+                $totalCashBack = $amountConsumer->getTotalCashBack();
+                $totalCashBack = $totalCashBack ? $totalCashBack : 0;
+                $totalAmount = $balance + $amountLevel;
+
+                $amountConsumer->setTotalAmount($totalAmount);
+                $amountConsumer->setTotalCashBack($totalCashBack + $amountLevel);
                 $em->persist($amountConsumer);
                 $em->flush();
 
@@ -501,8 +506,13 @@ class CashBackController extends Controller
             foreach ($amountConsumers as $amountConsumer) {
                 $amountShopperId = $amountConsumer->getShopper()->getId();
                 if ($shopperId == $amountShopperId) {
+                    $totalCashBack2 = $amountConsumer->getTotalCashBack();
+                    $totalCashBack2 = $totalCashBack2 ? $totalCashBack2 : 0;
+
                     $balanceLevel2 = $amountConsumer->getTotalAmount();
                     $amountConsumer->setTotalAmount($balanceLevel2 + $amountLevel2);
+                    $amountConsumer->setTotalCashBack($totalCashBack2 + $amountLevel2);
+
                     $em->persist($amountConsumer);
                     $em->flush();
 
@@ -519,8 +529,14 @@ class CashBackController extends Controller
             foreach ($amountConsumers as $amountConsumer) {
                 $amountShopperId = $amountConsumer->getShopper()->getId();
                 if ($shopperId == $amountShopperId) {
+                    $totalCashBack3 = $amountConsumer->getTotalCashBack();
+                    $totalCashBack3 = $totalCashBack3 ? $totalCashBack3 : 0;
+
                     $balanceLevel3 = $amountConsumer->getTotalAmount();
+
                     $amountConsumer->setTotalAmount($balanceLevel3 + $amountLevel3);
+                    $amountConsumer->setTotalCashBack($totalCashBack3 + $amountLevel3);
+
                     $em->persist($amountConsumer);
                     $em->flush();
 
