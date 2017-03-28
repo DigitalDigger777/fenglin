@@ -305,6 +305,12 @@ class CashBackController extends Controller
                     $em->flush();
                 }
             }
+
+            $transactionId = $this->cashBack($payable, 0, 0,0);
+            $this->calcRebateBalance($consumer, $transactionId, $balance);
+            $returnBalance = $this->calcBalance($balance, 0, 0, 0, $transactionId);
+            $data['transactionId'] = $transactionId;
+            $data['balance'] = $returnBalance;
         }
 
         //$data = $this->getData();

@@ -29,11 +29,15 @@ define([
     return {
         confirm: function(transactionId){
             loadToast.show();
-            var cashBackConfirmCollection = new CashBackConfirmCollection([], {transactionId:transactionId});
+            var cashBackConfirmCollection = new CashBackConfirmCollection([], {
+                transactionId:transactionId
+            });
             cashBackConfirmCollection.fetch({
                 success: function(collection, response){
+
                     var model = new Backbone.Model({
-                        balance: window.localStorage.getItem('member_total_amount')
+                        balance: window.localStorage.getItem('member_total_amount'),
+                        payable: collection.first().get('payable')
                     });
                     var cashBackConfirmCompositeView = new CashBackConfirmCompositeView({
                         collection: collection,

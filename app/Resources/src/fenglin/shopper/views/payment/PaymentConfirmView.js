@@ -72,7 +72,7 @@ define(['marionette',
                             loadToast.hide();
 
                             $('#contentContainer').off('click', '#cashBackButton');
-
+                            // console.log(model.toJSON());
                             window.location.hash = '#cashback/confirm/' + model.get('transactionId');
 
                         },
