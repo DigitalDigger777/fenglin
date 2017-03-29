@@ -137,7 +137,7 @@ class ShopperController extends Controller
             $qb->where($qb->expr()->like('s.name', ':name'))
                 ->setParameter(':name', '%' . $search . '%');
         }
-
+        $qb->orderBy('s.id', 'DESC');
         $qb->setParameter(':apiKey', $apiKey);
 
 
