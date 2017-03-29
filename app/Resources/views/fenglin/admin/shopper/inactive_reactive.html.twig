@@ -9,18 +9,49 @@
         </div>
         <a id="searchShopperButton" href="" class="weui-btn weui-btn_primary" style="margin-top: 30px">搜索</a>
 
-        <div id="shopperResultContainer">
+        <div id="shopperResultContainer" style="margin-top: 10px">
 
         </div>
     </div>
 </script>
 
 <script id="shopperSearchResultView" type="text/html">
-    <div class="shopper-logo">
-        <div class="circle">
-            <img src="/uploads/shoppers/<%=logo %>" alt="">
+    <div class="weui-flex">
+        <div class="weui-flex__item">
+            <div class="shopper-logo">
+                <div>
+                    <img  style="width: 80px" src="/uploads/shoppers/<%=logo %>" alt="">
+                </div>
+                <p><%=name %></p>
+            </div>
         </div>
-        <p><%=name %></p>
+        <div class="weui-flex__item" style="padding: 10px 0">
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="font-weight: bold">
+                    登录电话：
+                </div>
+                <div class="weui-flex__item">
+                    <%=tel %>
+                </div>
+            </div>
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="font-weight: bold">
+                    密码：
+                </div>
+                <div class="weui-flex__item">
+                    <%=openPassword %>
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="javascript:;" class="weui-btn weui-btn_warn">注销账号</a>
+    <div class="weui-flex">
+        <div class="weui-flex__item">
+            <% if (status == 1) { %>
+                <a data-active-button="<%=id %>" href="#" class="weui-btn weui-btn_warn">注销账号</a>
+            <% } else { %>
+                <a data-active-button="<%=id %>" href="#" class="weui-btn weui-btn_primary">注销账号</a>
+            <% } %>
+        </div>
+    </div>
+
 </script>

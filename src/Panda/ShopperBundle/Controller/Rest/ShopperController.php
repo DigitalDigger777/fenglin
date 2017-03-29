@@ -383,8 +383,10 @@ class ShopperController extends Controller
             'rebateLevel2Rate'  => [],
             'rebateLevel3Rate'  => [],
             'shedule'           => [],
-            'contactTel'        => []
+            'contactTel'        => [],
+            'status'            => []
         ];
+
 
         foreach($fields as $fieldName => $rule) {
             $fieldValue = $this->getRequestParameters($request, $fieldName);
@@ -392,7 +394,7 @@ class ShopperController extends Controller
             //check rule
             if (count($rule) == 0) {
 
-                if ($fieldValue) {
+                if ($fieldValue !== null) {
 
                     $item->{"set" . ucfirst($fieldName)}($fieldValue);
                 }
@@ -426,7 +428,9 @@ class ShopperController extends Controller
                 $item->setApiKey(md5($pass));
             }
 
-            $item->setStatus(Shopper::STATUS_ACTIVE);
+            if ($this->getMethod($request) == 'POST') {
+                $item->setStatus(Shopper::STATUS_ACTIVE);
+            }
 
             $item->setRole('ROLE_SHOPPER');
 

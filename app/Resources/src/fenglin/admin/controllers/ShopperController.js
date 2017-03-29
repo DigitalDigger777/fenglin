@@ -29,8 +29,33 @@ define(['admin/views/shopper/InactiveReactiveAccountView',
             loadToast.render();
             errorToast.render();
 
+            var inactiveReactiveCollection = new InactiveReactiveCollection();
+
             var inactiveReactiveAccountView = new InactiveReactiveAccountView();
             inactiveReactiveAccountView.render();
+
+
+            inactiveReactiveCollection.fetch({
+                success: function (collection) {
+                    // var shopperSearchResultView = new ShopperSearchResultView({
+                    //     model: model
+                    // });
+                    console.log(collection.toJSON());
+                    //shopperSearchResultView.render();
+                    var inactiveReactiveCompositeView = new InactiveReactiveCompositeView({
+                        collection: collection
+                    });
+                    inactiveReactiveCompositeView.render();
+                    loadToast.hide();
+                },
+                error: function () {
+                    loadToast.hide();
+                    errorToast.show();
+                    setTimeout(function(){
+                        errorToast.hide();
+                    }, 3000);
+                }
+            });
         },
         newShopper: function(){
             var newShopperView = new NewShopperView();
@@ -66,23 +91,6 @@ define(['admin/views/shopper/InactiveReactiveAccountView',
                     }, 3000);
                 }
             });
-
-            // var shopperModel = new ShopperModel();
-            // shopperModel.set('name', name);
-            // shopperModel.fetchByName(function(model, response){
-            //     console.log(model.toJSON());
-            //     var shopperSearchResultView = new ShopperSearchResultView({
-            //         model: model
-            //     });
-            //     shopperSearchResultView.render();
-            //     loadToast.hide();
-            // }, function(model, response){
-            //     loadToast.hide();
-            //     errorToast.show();
-            //     setTimeout(function(){
-            //         errorToast.hide();
-            //     }, 3000);
-            // });
         }
     };
 

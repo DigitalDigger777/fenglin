@@ -33,6 +33,16 @@ class ConsumerAmount
     private $totalCashBack;
 
     /**
+     * @var int
+     */
+    private $consumerId;
+
+    /**
+     * @var int
+     */
+    private $shopperId;
+
+    /**
      * Get id
      *
      * @return int
@@ -112,6 +122,38 @@ class ConsumerAmount
     public function setTotalCashBack($totalCashBack)
     {
         $this->totalCashBack = $totalCashBack;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConsumerId()
+    {
+        return $this->consumerId;
+    }
+
+    /**
+     * @param int $consumerId
+     */
+    public function setConsumerId($consumerId)
+    {
+        $this->consumerId = $consumerId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getShopperId()
+    {
+        return $this->shopperId;
+    }
+
+    /**
+     * @param int $shopperId
+     */
+    public function setShopperId($shopperId)
+    {
+        $this->shopperId = $shopperId;
     }
 }
 

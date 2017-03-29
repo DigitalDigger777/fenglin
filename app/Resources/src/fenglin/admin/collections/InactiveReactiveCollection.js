@@ -9,7 +9,7 @@ define(['backbone', 'consumer/models/ShopperModel'], function(Backbone, ShopperM
     var match = reg.exec(location.search);
     return Backbone.Collection.extend({
         apikey: match[1],
-        url: Routing.generate('panda_shopper_rest_load_by_name', {
+        url: Routing.generate('panda_shopper_rest_list', {
             apikey: match[1]
         }),
         model: ShopperModel
