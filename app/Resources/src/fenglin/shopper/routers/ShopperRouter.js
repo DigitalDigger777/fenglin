@@ -10,7 +10,9 @@ define(['marionette', 'shopper/controllers/ShopperController'], function(Marione
             'shopper/home':'homePage',
             'shopper/cash-back-statement': 'cashBackStatementPage',
             'shopper/setting': 'settingPage',
-            'shopper/cash-back/confirm': 'cashBackConfirm'
+            'shopper/cash-back/confirm': 'cashBackConfirm',
+            'shopper/change-password/:shopperId': 'changePasswordPage',
+            'shopper/qr/:shopperId': 'qrPage'
         }
     });
 

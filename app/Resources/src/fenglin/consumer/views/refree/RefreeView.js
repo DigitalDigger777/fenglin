@@ -23,6 +23,8 @@ define(['marionette',
     successToast.render();
     loadingToast.render();
 
+
+
     return Marionette.View.extend({
         el:'#contentContainer',
         template: '#refreeView',
@@ -32,6 +34,9 @@ define(['marionette',
         events: {
             'click @ui.inviteConsumer': function(e){
                 e.preventDefault();
+
+                $('#contentContainer').off('click', '#inviteConsumer');
+
                 var shopperId = $('#shopperId').val();
                 var memberId = $('#memberId').val();
 
@@ -45,7 +50,19 @@ define(['marionette',
                     loadingToast.show();
                     consumerModel.joinRefree(function () {
                         loadingToast.hide();
-                        window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
+
+                        consumerModel.joinToShopper(function(){
+
+                            window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
+
+                        }, function () {
+                            errorToast.show();
+                            setTimeout(function () {
+                                errorToast.hide();
+                            }, 3000);
+                        });
+
+                        // window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
                         // successToast.show();
                         // setTimeout(function () {
                         //     successToast.hide();
@@ -62,10 +79,6 @@ define(['marionette',
                     consumerModel.set('shopperId', shopperId);
 
                     consumerModel.joinToShopper(function(){
-                        // var joinToShopperConfirmView = new JoinToShopperConfirmView({
-                        //     model: consumerModel
-                        // });
-                        // joinToShopperConfirmView.render();
 
                         window.location.hash = '#consumer/refree/join/confirm/' + shopperId;
 
@@ -75,12 +88,6 @@ define(['marionette',
                             errorToast.hide();
                         }, 3000);
                     });
-                    //
-                    // successToast.show();
-                    //
-                    // setTimeout(function () {
-                    //     successToast.hide();
-                    // }, 3000);
                 }
             }
         },

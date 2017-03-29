@@ -417,14 +417,21 @@ class ShopperController extends Controller
 
         try {
             $tel = $item->getTel();
-            $pass = $this->getRandomPassword();
+            $pass = $this->getRequestParameters($request, 'password');
+            if (!$pass) {
+                $pass = $this->getRandomPassword();
+            }
+
             $password = $encoder->encodePassword($item, $pass);
 
             $item->setEmail($tel.'@wxfenling.com');
 
-            if ($this->getMethod($request) == 'POST') {
+            if ($this->getMethod($request) == 'POST' || $this->getMethod($request) == 'PUT') {
                 $item->setPassword($password);
                 $item->setOpenPassword($pass);
+            }
+
+            if ($this->getMethod($request) == 'POST') {
                 $item->setApiKey(md5($pass));
             }
 

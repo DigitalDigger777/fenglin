@@ -12,6 +12,8 @@ define([
     'consumer/models/ShopperModel',
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/LoadingToastView',
+    'shopper/views/shopper/ShopperChangePasswordView',
+    'shopper/views/shopper/ShopperQRView'
 ], function(ShopperHomeView,
             SettingView,
             CashBackStatementCompositeView,
@@ -20,7 +22,9 @@ define([
             CashBackConfirmCompositeView,
             ShopperModel,
             ErrorToastView,
-            LoadingToastView){
+            LoadingToastView,
+            ShopperChangePasswordView,
+            ShopperQRView){
 
     var loadToast = new LoadingToastView();
     var errorToast = new ErrorToastView();
@@ -84,6 +88,35 @@ define([
                     errorToast.hide();
                 }, 3000);
             });
+        },
+        changePasswordPage: function (shopperId) {
+            var shopperModel = new ShopperModel();
+            shopperModel.set('id', shopperId);
+
+            shopperModel.fetch({
+                success: function (model) {
+                    var shopperChangePasswordView = new ShopperChangePasswordView({
+                        model: model
+                    });
+                    shopperChangePasswordView.render();
+                }
+            });
+
+        },
+        qrPage: function (shopperId) {
+            var shopperModel = new ShopperModel();
+            shopperModel.set('id', shopperId);
+
+            shopperModel.fetch({
+                success: function (model) {
+
+                    var shopperQRView = new ShopperQRView({
+                        model: model
+                    });
+                    shopperQRView.render();
+                }
+            });
+
         }
     };
 });
