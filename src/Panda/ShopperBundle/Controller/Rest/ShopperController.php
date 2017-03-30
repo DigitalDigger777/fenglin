@@ -427,7 +427,7 @@ class ShopperController extends Controller
 
         try {
             $tel = $item->getTel();
-            $pass = $this->getRequestParameters($request, 'password');
+            $pass = $this->getRequestParameters($request, 'openPassword');
             if (!$pass) {
                 $pass = $this->getRandomPassword();
             }

@@ -62,6 +62,10 @@ class DefaultController extends Controller
         if ($shopper) {
             $password = $encoder->encodePassword($shopper, $password);
 
+            if ($shopper->getStatus() === 0 ){
+                return new Response('Shopper not active', 403);
+            }
+
             if ($password == $shopper->getPassword()) {
                 return $this->redirectToRoute('fenglin_fenglin_shopper', ['apikey'=> $shopper->getApiKey(), '_fragment' => 'shopper/home']);
             } else {
@@ -82,6 +86,10 @@ class DefaultController extends Controller
         } elseif($staff) {
             $password = $encoder->encodePassword($staff, $password);
 
+            if ($shopper->getStatus() === 0 ){
+                return new Response('Staff not active', 403);
+            }
+
             if ($password == $staff->getPassword()) {
                 return $this->redirectToRoute('panda_staff_homepage', ['apikey'=> $staff->getApiKey(), '_fragment' => 'shopper/home']);
             } else {
@@ -91,6 +99,8 @@ class DefaultController extends Controller
             return new Response('User with tel ' . $tel . 'not found', 403);
         }
 
+
         return new Response('Phone number or password is not correct', 403);
+
     }
 }
