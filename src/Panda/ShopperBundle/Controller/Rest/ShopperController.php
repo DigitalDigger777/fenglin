@@ -119,14 +119,18 @@ class ShopperController extends Controller
     {
         /**
          * @var \Doctrine\ORM\EntityManager $em
+         * @var \Panda\UserBundle\Repository\UserRepository $userRepo
+         * @var \Panda\UserBundle\Entity\User $user
          */
         $em = $this->getDoctrine()->getManager();
+        $userRepo = $this->getDoctrine()->getRepository('PandaUserBundle:User');
         $page = $request->get('page');
 
         $qb = $em->createQueryBuilder();
 
         $apiKey = $request->query->get('apikey');
         $search = $request->query->get('search');
+        $user   = $userRepo->loadUserByApiKey($apiKey);
 
         $qb->select('s, fc')
             ->from('PandaShopperBundle:Shopper', 's')
@@ -137,6 +141,12 @@ class ShopperController extends Controller
             $qb->where($qb->expr()->like('s.name', ':name'))
                 ->setParameter(':name', '%' . $search . '%');
         }
+
+        if ($user->getRole() != 'ROLE_ADMIN') {
+            $qb->andWhere($qb->expr()->eq('s.status', ':status'));
+            $qb->setParameter(':status', 1);
+        }
+
         $qb->orderBy('s.id', 'DESC');
         $qb->setParameter(':apiKey', $apiKey);
 
