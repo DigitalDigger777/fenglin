@@ -22,22 +22,27 @@
                 <div class="clearfix">
                     <div style="width: 69%; float: left;" class="dashed-line-right">
                         <p>
-                            <%=consumerPayable.wechatData.nickname%> 消费￥<%=Math.round10(payable, -2) %>
+
                             <br>
 
                             <% if (level == 1) { %>
-                                <%=consumer.wechatData.nickname%> 得到 消费返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> 得到 Spent ￥<%=Math.round10(spent, -2)%> <br>
+                                used cashback ￥<%=Math.round10(usedCashback,-2)%> <br>
+                                payable ￥<%=Math.round10(payable,-2)%> <br>
+
                             <% } %>
 
                             <% if (level == 2) { %>
-                                <%=consumer.wechatData.nickname%> 得到 一层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumerPayable.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2) %><br>
+                                <%=consumer.wechatData.nickname%> get referal cashback L1 ￥<%=Math.round10(amount, -2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
-                                <%=consumer.wechatData.nickname%> 得到 二层推广返利 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumerPayable.wechatData.nickname%> 消费￥<%=Math.round10(payable, -2) %><br>
+                                <%=consumer.wechatData.nickname%> get referal cashback L2 ￥<%=Math.round10(amount, -2)%> <br>
                             <% } %>
 
-                            得到 消费返利 ￥<%=Math.round10(amount, -2)%> <br>
+                            consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
                             <% var date1 = new Date(dateMatch[1]) %>
                             <%=date1.toLocaleDateString() %>
@@ -52,45 +57,6 @@
                 </div>
             </div>
         </a>
-        <% if (level == 1 || level == null) { %>
-        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg no-padding-top-bottom">
-            <div class="weui-media-box__hd">
-                <% if (typeof consumer.wechatData.headimgurl == 'undefined') { %>
-                    <img class="weui-media-box__thumb circle" src="/resources/img/face-1.png" alt="">
-                <% } else { %>
-                    <img class="weui-media-box__thumb circle" src="<%=consumer.wechatData.headimgurl %>" alt="">
-                <% } %>
 
-                {#<img class="weui-media-box__thumb circle" src="/resources/img/face-1.png" alt="">#}
-            </div>
-            <div class="weui-media-box__bd">
-                <div class="clearfix">
-                    <div style="width: 69%; float: left;" class="dashed-line-right">
-                        <p>
-                            <%=consumerPayable.wechatData.nickname%>
-                            <br>
-
-                            <% if (consumer.amountConsumers.length > 0 ) { %>
-                                使用 消费返利￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%><br>
-                            <% } else { %>
-                                使用 消费返利￥0
-                            <% } %>
-
-                            <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
-                            <% var date1 = new Date(dateMatch[1]) %>
-                            <%=date1.toLocaleDateString() %>
-                        </p>
-                    </div>
-                    <div style="width: 30%; float: left; text-align: right">
-                        <p>
-                            返利余额 <br>
-                            <b>￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%></b>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </a>
-        <% } %>
     </div>
 </script>

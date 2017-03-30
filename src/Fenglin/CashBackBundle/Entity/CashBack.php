@@ -82,6 +82,16 @@ class CashBack
     private $rebateBalance;
 
     /**
+     * @var float
+     */
+    private $usedCashback;
+
+    /**
+     * @var float
+     */
+    private $spent;
+
+    /**
      * Get id
      *
      * @return int
@@ -337,6 +347,38 @@ class CashBack
     public function setRebateBalance($rebateBalance)
     {
         $this->rebateBalance = $rebateBalance;
+    }
+
+    /**
+     * @return float
+     */
+    public function getUsedCashback()
+    {
+        return $this->usedCashback;
+    }
+
+    /**
+     * @param float $usedCashback
+     */
+    public function setUsedCashback($usedCashback)
+    {
+        $this->usedCashback = $usedCashback;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSpent()
+    {
+        return $this->spent;
+    }
+
+    /**
+     * @param float $spent
+     */
+    public function setSpent($spent)
+    {
+        $this->spent = $spent;
     }
 }
 

@@ -52,6 +52,11 @@ class CashBackController extends Controller
     private $consumerLevel3;
 
     /**
+     * @var float
+     */
+    private $spent = 0;
+
+    /**
      * @return int
      */
     public function getCode()
@@ -209,14 +214,11 @@ class CashBackController extends Controller
 
         $shopperEmail = $this->getUser()->getUsername();
         $qb = $em->createQueryBuilder();
-        $qb->select('c, cns, ca, s, cp')
+        $qb->select('c, cns, s, cp')
             ->from('FenglinCashBackBundle:CashBack', 'c')
             ->join('c.shopper', 's')
             ->join('c.consumer', 'cns')
-            ->join('cns.amountConsumers', 'ca')
             ->join('c.consumerPayable', 'cp')
-            ->join('ca.shopper', 'ss', 'WITH', 'ss.email=:shopperEmail')
-
             ->where($qb->expr()->eq('s.email', ':shopperEmail'))
             ->orderBy('c.date', 'DESC')
             ->setParameter(':shopperEmail', $shopperEmail);
@@ -267,8 +269,11 @@ class CashBackController extends Controller
         $data['shopper_email'] = $shopperEmail;
         $payable = $this->getRequestParameters($request, 'payable');
         $balance = $this->getRequestParameters($request, 'balance');
+        $this->spent   = $this->getRequestParameters($request, 'spent');
+
         $data['payable'] = $payable;
         $data['balance'] = $balance;
+        $data['spent']   = $this->spent;
 
 
         $shopper = $em->getRepository('PandaShopperBundle:Shopper')->findOneBy([
@@ -283,7 +288,7 @@ class CashBackController extends Controller
             $rebateLevel2   = $shopper->getRebateLevel2Rate();
             $rebateLevel3   = $shopper->getRebateLevel3Rate();
 
-            $amount = ($payable/100) * $rebateLevel;
+            $amount       = ($payable/100) * $rebateLevel;
             $amountLevel2 = ($payable/100) * $rebateLevel2;
             $amountLevel3 = ($payable/100) * $rebateLevel3;
 
@@ -406,6 +411,16 @@ class CashBackController extends Controller
         $cashBack->setStatus(CashBack::STATUS_CONFIRM);
         $cashBack->setTransactionId($transactionId);
         $cashBack->setLevel(1);
+        $cashBack->setSpent($this->spent);
+
+        $usedCashBack = 0;
+
+        if ($payable == 0) {
+            $usedCashBack = $this->spent;
+        } else {
+            $usedCashBack = $this->spent - $payable;
+        }
+        $cashBack->setUsedCashback($usedCashBack);
 
         $em->persist($cashBack);
         $em->flush();
@@ -432,6 +447,8 @@ class CashBackController extends Controller
             $cashBack->setStatus(CashBack::STATUS_CONFIRM);
             $cashBack->setTransactionId($transactionId);
             $cashBack->setLevel(2);
+            $cashBack->setSpent($this->spent);
+
 
             $em->persist($cashBack);
             $em->flush();
@@ -457,6 +474,7 @@ class CashBackController extends Controller
                 $cashBack->setStatus(CashBack::STATUS_CONFIRM);
                 $cashBack->setTransactionId($transactionId);
                 $cashBack->setLevel(3);
+                $cashBack->setSpent($this->spent);
 
                 $em->persist($cashBack);
                 $em->flush();

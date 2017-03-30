@@ -57,11 +57,13 @@ define(['marionette',
 
                 var calculateInput = $('#calculateInput').val();
                 if (calculateInput != '') {
-                    var memberId = window.localStorage.getItem('member_id');
 
+                    var memberId = window.localStorage.getItem('member_id');
+                    var spent = $('#calculateInput').val();
                     var cashBackConfirmModel = new CashBackConfirmModel();
                     cashBackConfirmModel.set('id', memberId);
                     cashBackConfirmModel.set('payable', payable);
+                    cashBackConfirmModel.set('spent', spent);
                     cashBackConfirmModel.set('balance', balance);
 
                     loadToast.show();

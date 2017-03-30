@@ -171,6 +171,12 @@ class RefreeController extends Controller
 
         if ($consumerId = $this->getRequestParameters($request, 'consumerId')) {
             //$item->setRoute($route);
+            if ($consumerId == $consumer->getMemberId()) {
+                $this->setCode(500);
+                $this->setMessage('You can not specify your own memberId');
+                return false;
+            }
+
             $consumer = $em->getRepository('PandaConsumerBundle:Consumer')->findOneBy([
                 'memberId' => $consumerId
             ]);

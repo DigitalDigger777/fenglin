@@ -102,14 +102,19 @@ class ConsumerController extends Controller
         return $response;
     }
 
-
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function joinToShopperAction(Request $request)
     {
        /**
         * @var \Doctrine\ORM\EntityManager $em
         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+        * @var \Fenglin\FenglinBundle\Repository\ConsumerAmountRepository $consumerAmountRepo
         */
        $em = $this->getDoctrine()->getEntityManager();
+       $consumerAmountRepo = $em->getRepository('FenglinFenglinBundle:ConsumerAmount');
        $shopperId = $this->getRequestParameters($request, 'shopperId');
        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($shopperId);
 
@@ -125,8 +130,11 @@ class ConsumerController extends Controller
 
                $shopper->setFollowConsumers($followConsumers);
 
+
                $em->persist($shopper);
                $em->flush();
+
+               $consumerAmountRepo->createIfNotExist($shopper, $consumer);
            } else {
                $this->setMessage('access denied');
                $this->setCode(403);
