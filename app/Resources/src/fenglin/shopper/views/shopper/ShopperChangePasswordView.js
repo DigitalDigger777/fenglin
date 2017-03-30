@@ -56,7 +56,7 @@ define([
                         shopperModel.set('id', shopperId);
                         shopperModel.fetch({
                             success: function (model) {
-                                model.set('password', password);
+                                model.set('openPassword', password);
                                 model.save(null, {
                                     success: function () {
                                         loadToast.hide();
