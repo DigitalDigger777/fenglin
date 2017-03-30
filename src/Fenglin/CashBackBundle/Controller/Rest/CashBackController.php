@@ -405,6 +405,8 @@ class CashBackController extends Controller
         $cashBack->setDate(new \DateTime());
         $cashBack->setStatus(CashBack::STATUS_CONFIRM);
         $cashBack->setTransactionId($transactionId);
+        $cashBack->setLevel(1);
+
         $em->persist($cashBack);
         $em->flush();
 
@@ -429,6 +431,8 @@ class CashBackController extends Controller
             $cashBack->setDate(new \DateTime());
             $cashBack->setStatus(CashBack::STATUS_CONFIRM);
             $cashBack->setTransactionId($transactionId);
+            $cashBack->setLevel(2);
+
             $em->persist($cashBack);
             $em->flush();
 
@@ -452,6 +456,8 @@ class CashBackController extends Controller
                 $cashBack->setDate(new \DateTime());
                 $cashBack->setStatus(CashBack::STATUS_CONFIRM);
                 $cashBack->setTransactionId($transactionId);
+                $cashBack->setLevel(3);
+
                 $em->persist($cashBack);
                 $em->flush();
             }

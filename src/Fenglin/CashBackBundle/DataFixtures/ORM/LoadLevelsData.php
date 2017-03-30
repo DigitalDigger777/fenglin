@@ -93,9 +93,11 @@ class LoadLevelsData implements FixtureInterface, OrderedFixtureInterface
                     'consumer' => $consumerLevel2
                 ]);
 
-                $cashBackLevel2->setConsumerPayable($consumer);
-                $cashBackLevel2->setLevel(2);
-                $manager->persist($cashBackLevel2);
+                if ($cashBackLevel2) {
+                    $cashBackLevel2->setConsumerPayable($consumer);
+                    $cashBackLevel2->setLevel(2);
+                    $manager->persist($cashBackLevel2);
+                }
 
                 $refreeTree = $refreeTreeRepo->findOneBy([
                     'shopper'  => $shopper,

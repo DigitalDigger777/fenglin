@@ -56,9 +56,9 @@
         <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg no-padding-top-bottom">
             <div class="weui-media-box__hd">
                 <% if (typeof consumer.wechatData.headimgurl == 'undefined') { %>
-                <img class="weui-media-box__thumb circle" src="/resources/img/face-1.png" alt="">
+                    <img class="weui-media-box__thumb circle" src="/resources/img/face-1.png" alt="">
                 <% } else { %>
-                <img class="weui-media-box__thumb circle" src="<%=consumer.wechatData.headimgurl %>" alt="">
+                    <img class="weui-media-box__thumb circle" src="<%=consumer.wechatData.headimgurl %>" alt="">
                 <% } %>
 
                 {#<img class="weui-media-box__thumb circle" src="/resources/img/face-1.png" alt="">#}
@@ -87,7 +87,6 @@
                             <b>￥<%=Math.round10(consumer.amountConsumers[0].totalCashBack, -2)%></b>
                         </p>
                     </div>
-
 
                 </div>
             </div>

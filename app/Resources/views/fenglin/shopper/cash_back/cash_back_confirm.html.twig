@@ -21,7 +21,19 @@
                                 <%=typeof consumer.wechatData.nickname != 'undefined' ? consumer.wechatData.nickname : ''   %> 消费￥<%=Math.round10(payable, -2) %>
                                 <br>
                             <% } %>
-                            得到 推广返利 ￥<%=Math.round10(amount,-2)%> <br>
+
+                            <% if (level == 1) { %>
+                                得到 consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
+                            <% } %>
+
+                            <% if (level == 2) { %>
+                                得到 referal cashback ￥<%=Math.round10(amount,-2)%> <br>
+                            <% } %>
+
+                            <% if (level == 3) { %>
+                                得到 referal cashback ￥<%=Math.round10(amount,-2)%> <br>
+                            <% } %>
+
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
                             <% var date1 = new Date(dateMatch[1]) %>
                             <%=date1.toLocaleDateString() %>
