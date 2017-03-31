@@ -9,3 +9,7 @@ panda_shopper_read_qr:
 panda_shopper_rest:
     resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper.yml"
     prefix:   /rest/
+
+panda_shopper_qr_rest:
+    resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper_qr.yml"
+    prefix:   /rest/qr

@@ -35,16 +35,6 @@ class MockOauthController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-//        $log = new Log();
-//        $log->setAction('get_code');
-//        $log->setData([
-//            'code' => $code,
-//            'state' => $request->query->get('state', 0)
-//        ]);
-//        $log->setDate(new \DateTime());
-//        $em->persist($log);
-//        $em->flush();
-
         $openid = $request->cookies->get('openid');
 
         if ($openid) {
@@ -149,13 +139,4 @@ class MockOauthController extends Controller
         return $response;
     }
 
-    public function getAccessToken()
-    {
-        //get access token with Code
-    }
-
-    public function updateAccessToken()
-    {
-
-    }
 }

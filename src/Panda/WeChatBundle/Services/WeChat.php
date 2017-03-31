@@ -89,6 +89,50 @@ class WeChat
     }
 
     /**
+     * @param string $grand_type
+     * @return bool|mixed
+     */
+    public function getAccessToken($grand_type = 'client_credential')
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \GuzzleHttp\Psr7\Response $response
+         */
+        $client = new Client([
+            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
+        ]);
+
+        $response = $client->request('GET', 'cgi-bin/token', [
+            'query' => [
+                'appid'         => $this->container->getParameter('wechat_appid'),
+                'secret'        => $this->container->getParameter('wechat_secret'),
+                'grant_type'    => $grand_type
+            ]
+        ]);
+
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode == 200) {
+            $content        = $response->getBody()->getContents();
+            $responseObject = json_decode($content);
+
+            if (property_exists($responseObject, 'errcode')) {
+
+                $this->writeToLog('get access token by code', $responseObject);
+                return false;
+            }
+
+            return $responseObject;
+        } else {
+            $this->writeToLog('get access token by code', [
+                'status_code'   => $statusCode,
+                'content'       => $response->getBody()->getContents()
+            ]);
+            return false;
+        }
+    }
+
+    /**
      * @param $code
      * @param string $grand_type
      * @return bool|mixed|AccessToken
@@ -240,4 +284,50 @@ class WeChat
         $em->flush();
     }
 
+    public function createQRCodeTicket($accessToken)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         * @var \GuzzleHttp\Psr7\Response $response
+         */
+        $client = new Client([
+            'base_uri' => $this->container->getParameter('wechat_base_uri_api')
+        ]);
+
+        $response = $client->request('POST', 'cgi-bin/qrcode/create', [
+            'content-type' => 'application/json',
+            'query' => [
+                'access_token' => $accessToken
+            ],
+            'body' => json_encode([
+                'action_name' => 'QR_LIMIT_SCENE',
+                'action_info' => [
+                    'scene' => [
+                        'scene_id' => 123
+                    ]
+                ]
+            ])
+        ]);
+
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode == 200) {
+            $content        = $response->getBody()->getContents();
+            $responseObject = json_decode($content);
+
+            if (property_exists($responseObject, 'errcode')) {
+
+                $this->writeToLog('get access token by code', $responseObject);
+                return false;
+            }
+
+            return $responseObject;
+        } else {
+            $this->writeToLog('get access token by code', [
+                'status_code'   => $statusCode,
+                'content'       => $response->getBody()->getContents()
+            ]);
+            return false;
+        }
+    }
 }
