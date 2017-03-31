@@ -25,27 +25,26 @@
 
                             <br>
 
-
-
-
                             <% if (level == 1) { %>
-                                <%=consumer.wechatData.nickname%> 得到 Spent ￥<%=Math.round10(spent, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2)%> <br>
                                 used cashback ￥<%=Math.round10(usedCashback,-2)%> <br>
                                 payable ￥<%=Math.round10(payable,-2)%> <br>
-
+                                consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 2) { %>
                                 <%=consumerPayable.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2) %><br>
                                 <%=consumer.wechatData.nickname%> get referal cashback L1 ￥<%=Math.round10(amount, -2)%> <br>
+                                referral cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
-                                <%=consumerPayable.wechatData.nickname%> 消费￥<%=Math.round10(payable, -2) %><br>
+                                <%=consumerPayable.wechatData.nickname%> ￥<%=Math.round10(spent, -2) %><br>
                                 <%=consumer.wechatData.nickname%> get referal cashback L2 ￥<%=Math.round10(amount, -2)%> <br>
+                                referral cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
-                            consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
+
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
                             <% var date1 = new Date(dateMatch[1]) %>
                             <%=date1.toLocaleDateString() %>
