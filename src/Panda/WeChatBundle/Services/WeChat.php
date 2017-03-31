@@ -300,6 +300,7 @@ class WeChat
                 'access_token' => $accessToken
             ],
             'body' => json_encode([
+                'expire_seconds' => 1800,
                 'action_name' => 'QR_LIMIT_SCENE',
                 'action_info' => [
                     'scene' => [
