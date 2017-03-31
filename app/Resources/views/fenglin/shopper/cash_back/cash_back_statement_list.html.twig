@@ -34,13 +34,13 @@
 
                             <% if (level == 2) { %>
                                 <%=consumerPayable.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2) %><br>
-                                <%=consumer.wechatData.nickname%> get referal cashback L1 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> <br>
                                 referral cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
                                 <%=consumerPayable.wechatData.nickname%> ￥<%=Math.round10(spent, -2) %><br>
-                                <%=consumer.wechatData.nickname%> get referal cashback L2 ￥<%=Math.round10(amount, -2)%> <br>
+                                <%=consumer.wechatData.nickname%> <br>
                                 referral cashback ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
