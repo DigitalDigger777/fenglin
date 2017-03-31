@@ -121,9 +121,11 @@ class ShopperQRController extends Controller
          * @var \Panda\WeChatBundle\Entity\AccessToken $accessToken
          */
         $wechatService  = $this->get('wechat');
-        $accessToken = $wechatService->getAccessToken();
+        $accessTokenObject = $wechatService->getAccessToken();
+        $accessToken = $accessTokenObject['access_token'];
+        $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
-        return new JsonResponse($accessToken);
+        return new JsonResponse($ticketObject);
     }
 
     /**
