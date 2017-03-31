@@ -81,7 +81,7 @@ define([
                         });
                     } else {
                         loadToast.hide();
-                        _self.customToast('密码修改成功。', 'weui-icon-success-no-circle');
+                        _self.customToast('密码不匹配', 'weui-icon-warn');
                     }
                 }
 
