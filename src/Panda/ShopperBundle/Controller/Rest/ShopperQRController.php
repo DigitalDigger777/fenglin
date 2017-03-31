@@ -127,7 +127,7 @@ class ShopperQRController extends Controller
 
 //        var_dump($ticketObject);
 //        exit;
-        return new JsonResponse(json_decode($ticketObject));
+        return new JsonResponse($ticketObject);
     }
 
     /**
