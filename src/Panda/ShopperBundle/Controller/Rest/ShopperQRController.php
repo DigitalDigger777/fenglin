@@ -122,11 +122,11 @@ class ShopperQRController extends Controller
          */
         $wechatService  = $this->get('wechat');
         $accessTokenObject = $wechatService->getAccessToken();
-        $accessToken = $accessTokenObject['access_token'];
+        $accessToken = $accessTokenObject->access_token;
         $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
-        var_dump($ticketObject);
-        exit;
+//        var_dump($ticketObject);
+//        exit;
         return new JsonResponse(json_decode($ticketObject));
     }
 
