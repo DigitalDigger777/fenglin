@@ -200,6 +200,7 @@ class ShopperController extends Controller
             ->join('ac.shopper', 'acs', 'WITH', 'acs.id=:id')
             ->join('c.consumerPayable', 'cp')
             ->where($qb->expr()->eq('s.id', ':id'))
+            ->orderBy('c.id', 'DESC')
             ->setParameter(':id', $id)
             ->setParameter(':apikey', $apiKey);
 
