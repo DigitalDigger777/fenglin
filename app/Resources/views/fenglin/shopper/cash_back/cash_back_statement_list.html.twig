@@ -26,22 +26,22 @@
                             <br>
 
                             <% if (level == 1) { %>
-                                <%=consumer.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2)%> <br>
-                                used cashback ￥<%=Math.round10(usedCashback,-2)%> <br>
-                                payable ￥<%=Math.round10(payable,-2)%> <br>
-                                consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                <%=consumer.wechatData.nickname%> 消费 ￥<%=Math.round10(spent, -2)%> <br>
+                                使用 返利 ￥<%=Math.round10(usedCashback,-2)%> <br>
+                                实付 ￥<%=Math.round10(payable,-2)%> <br>
+                                消费佣金 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 2) { %>
-                                <%=consumerPayable.wechatData.nickname%> Spent ￥<%=Math.round10(spent, -2) %><br>
+                                <%=consumerPayable.wechatData.nickname%> 消费 ￥<%=Math.round10(spent, -2) %><br>
                                 <%=consumer.wechatData.nickname%> <br>
-                                referral cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                拿到 推广返利 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
-                                <%=consumerPayable.wechatData.nickname%> ￥<%=Math.round10(spent, -2) %><br>
+                                <%=consumerPayable.wechatData.nickname%> 消费 ￥<%=Math.round10(spent, -2) %><br>
                                 <%=consumer.wechatData.nickname%> <br>
-                                referral cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                拿到 推广返利 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
 

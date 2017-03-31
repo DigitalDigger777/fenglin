@@ -18,22 +18,22 @@
                     <div style="width: 69%; float: left;" class="dashed-line-right">
                         <p>
                             <% if (payable) { %>
-                                <%=typeof consumer.wechatData.nickname != 'undefined' ? consumer.wechatData.nickname : ''   %> <br>Spent￥<%=Math.round10(spent, -2) %>
+                                <%=typeof consumer.wechatData.nickname != 'undefined' ? consumer.wechatData.nickname : ''   %> <br> 消费￥<%=Math.round10(spent, -2) %>
                                 <br>
                             <% } %>
 
                             <% if (level == 1) { %>
-                                used cashback ￥<%=Math.round10(usedCashback,-2)%> <br>
-                                payable ￥<%=Math.round10(payable,-2)%> <br>
-                                consuming cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                使用 返利 ￥<%=Math.round10(usedCashback,-2)%> <br>
+                                实付 ￥<%=Math.round10(payable,-2)%> <br>
+                                消费佣金 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 2) { %>
-                                得到 referal cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                拿到 推广返利 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% if (level == 3) { %>
-                                得到 referal cashback ￥<%=Math.round10(amount,-2)%> <br>
+                                拿到 推广返利 ￥<%=Math.round10(amount,-2)%> <br>
                             <% } %>
 
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
