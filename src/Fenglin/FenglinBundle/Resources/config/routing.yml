@@ -1,3 +1,7 @@
+fenglin_fenglin_empty:
+    path:     /
+    defaults: { _controller: FenglinFenglinBundle:Default:empty }
+
 fenglin_fenglin_homepage:
     path:     /consumer
     defaults: { _controller: FenglinFenglinBundle:Default:index }

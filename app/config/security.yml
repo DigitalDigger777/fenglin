@@ -20,7 +20,7 @@ security:
             security: false
 
         secured_area:
-            pattern: ^/
+            pattern: ^/(shopper|staff|panda-consumer|fenglin-cash-back|panda-user|admin)
             stateless: true
             simple_preauth:
                 authenticator: apikey_authenticator

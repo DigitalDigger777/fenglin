@@ -8,6 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    public function emptyAction()
+    {
+        return $this->render('base_empty.html.twig');
+    }
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
