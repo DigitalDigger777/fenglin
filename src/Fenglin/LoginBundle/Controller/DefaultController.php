@@ -86,7 +86,7 @@ class DefaultController extends Controller
         } elseif($staff) {
             $password = $encoder->encodePassword($staff, $password);
 
-            if ($shopper->getStatus() === 0 ){
+            if ($staff->getStatus() === 0 ){
                 return new Response('Staff not active', 403);
             }
 
