@@ -42,7 +42,7 @@ class CustomMenuController extends Controller
                 [
                     "type" => "view",
                     "name" => "商户入口",
-                    "url"  => 'http://wxfenling.com/login'
+                    "url"  => 'http://fenglinfl.com/login'
                 ]
             ]
         ], JSON_UNESCAPED_UNICODE);
