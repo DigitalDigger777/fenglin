@@ -48,7 +48,7 @@ define(['marionette',
                     payable = 0;
                 }
 
-                $('#payable').text(payable);
+                $('#payable').text(Math.round10(payable, -2));
                 //$('#calculateCashBackValue').text(balance);
                 console.log(calcVal, '-', calcCashBackValue, '-payable:', payable, '-balance:', balance);
             },
