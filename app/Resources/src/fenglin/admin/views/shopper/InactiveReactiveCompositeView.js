@@ -35,11 +35,13 @@ define([
                         if ($(e.currentTarget).hasClass('weui-btn_warn')) {
                             $(e.currentTarget).removeClass('weui-btn_warn');
                             $(e.currentTarget).addClass('weui-btn_primary');
+                            $(e.currentTarget).text('恢复账号');
 
                             model.set('status', 0);
                         } else {
                             $(e.currentTarget).removeClass('weui-btn_primary');
                             $(e.currentTarget).addClass('weui-btn_warn');
+                            $(e.currentTarget).text('注销账号');
 
                             model.set('status', 1);
                         }
