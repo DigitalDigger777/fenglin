@@ -81,7 +81,7 @@ define([
                         });
                     } else {
                         loadToast.hide();
-                        _self.customToast('密码不匹配', 'weui-icon-warn');
+                        _self.customToast('密码最少6位', 'weui-icon-warn');
                     }
                 }
 
