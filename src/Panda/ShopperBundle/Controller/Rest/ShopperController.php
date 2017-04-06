@@ -326,7 +326,7 @@ class ShopperController extends Controller
 
     /**
      * @param Request $request
-     * 
+     *
      * @return array
      */
     public function uploadImageAction(Request $request)
