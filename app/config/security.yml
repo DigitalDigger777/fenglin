@@ -16,7 +16,7 @@ security:
             security: false
 #
         main:
-            pattern: ^/(panda-shopper|mock-wechat-oauth|panda-we-chat|login|panda-consumer\/read-qr|panda-consumer\/redirect-wechat-home-oa)
+            pattern: ^/(panda-shopper|mock-wechat-oauth|panda-we-chat|login|panda-consumer\/read-qr|panda-consumer\/redirect-wechat-home-oa|panda-consumer\/get-headers)
             security: false
 
         secured_area:
