@@ -29,4 +29,11 @@ class DefaultController extends Controller
             'biz' => urlencode($this->container->getParameter('wechat_biz'))
         ]);
     }
+
+    public function redirectAction(Request $request)
+    {
+        $biz = urlencode($this->container->getParameter('wechat_biz'));
+        $url = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=' . $biz;
+        return $this->redirect($url);
+    }
 }
