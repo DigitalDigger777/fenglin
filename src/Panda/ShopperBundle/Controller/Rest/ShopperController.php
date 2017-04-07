@@ -513,7 +513,7 @@ class ShopperController extends Controller
             $shopperArray['amount'] = isset($shopperArray['amount']) ? $shopperArray['amount'] : 0;
 
             $wechatData = $shopper->getWechatData();
-
+            exit;
             if (!count($wechatData)) {
                 $wechatService  = $this->get('wechat');
                 $accessTokenObject = $wechatService->getAccessToken();
