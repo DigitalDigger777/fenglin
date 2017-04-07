@@ -42,6 +42,7 @@ class DefaultController extends Controller
 
     public function getWeChatHeadersAction(Request $request)
     {
+        echo '<pre>';
         print_r($request->headers->all());
         exit;
     }
