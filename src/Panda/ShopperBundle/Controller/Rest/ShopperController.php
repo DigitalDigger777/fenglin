@@ -482,10 +482,10 @@ class ShopperController extends Controller
          * @var \Panda\ShopperBundle\Entity\Shopper $shopper
          * @var \Fenglin\FenglinBundle\Entity\ConsumerAmount $amountConsumer
          */
-        $em = $this->getDoctrine()->getManager();
-        $id = $request->get('id');
+        $em     = $this->getDoctrine()->getManager();
+        $id     = $request->get('id');
         $apikey = $this->getRequestParameters($request, 'apikey');
-        $qb = $em->createQueryBuilder();
+        $qb     = $em->createQueryBuilder();
 
         $qb->select('s, a')
             ->from('PandaShopperBundle:Shopper', 's')
@@ -511,6 +511,27 @@ class ShopperController extends Controller
             }
 
             $shopperArray['amount'] = isset($shopperArray['amount']) ? $shopperArray['amount'] : 0;
+
+            $wechatData = $shopper->getWechatData();
+
+            if (!count($wechatData)) {
+                $wechatService  = $this->get('wechat');
+                $accessTokenObject = $wechatService->getAccessToken();
+                $accessToken = $accessTokenObject->access_token;
+                $ticketObject = $wechatService->createQRCodeTicket($accessToken);
+
+                $shopper->setWechatData([
+                    'QR' => $ticketObject
+                ]);
+
+                $em->persist($shopper);
+                $em->flush();
+
+                $shopperArray['wechatData'] = [
+                    'QR' => $ticketObject
+                ];
+            }
+
             $this->setData($shopperArray);
         } catch (\Exception $e) {
             $this->setCode(500);

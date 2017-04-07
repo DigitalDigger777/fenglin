@@ -284,6 +284,10 @@ class WeChat
         $em->flush();
     }
 
+    /**
+     * @param $accessToken
+     * @return bool|mixed
+     */
     public function createQRCodeTicket($accessToken)
     {
         /**
