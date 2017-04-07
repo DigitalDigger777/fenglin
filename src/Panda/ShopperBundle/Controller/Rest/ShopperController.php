@@ -521,7 +521,7 @@ class ShopperController extends Controller
                 $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
                 $_shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($id);
-
+                echo $_shopper->getId(); exit;
                 $_shopper->setWechatData([
                     'QR' => $ticketObject
                 ]);
