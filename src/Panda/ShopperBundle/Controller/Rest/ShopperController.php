@@ -541,6 +541,9 @@ class ShopperController extends Controller
                 }
             }
 
+            //wechat redirect options
+            $shopperArray['domain'] = $this->container->getParameter('wechat_domain');
+            $shopperArray['biz'] = $this->container->getParameter('wechat_biz');
             $this->setData($shopperArray);
         } catch (\Exception $e) {
             $this->setCode(500);

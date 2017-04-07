@@ -20,13 +20,12 @@
                             if (data['role'] == 'ROLE_CONSUMER') {
                                 window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
                             } else {
-                                window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                                window.location = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}&scene=110#wechat_redirect';
                             }
                         }
                     },
                     error: function (error) {
-
-                        window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                        window.location = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}&scene=110#wechat_redirect';
                     }
                 });
             });

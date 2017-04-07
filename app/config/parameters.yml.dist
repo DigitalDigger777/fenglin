@@ -25,3 +25,7 @@ parameters:
     wechat_grant_type: client_credential
     wechat_appid: wx70d2ff5978524a23
     wechat_secret: 89e784ce396bc6234faff835db0a5894
+
+    #wechat OA redirect options
+    wechat_biz: MzI2NzYxOTY5OQ==
+    wechat_domain: wxfenling.com

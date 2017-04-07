@@ -25,7 +25,8 @@ class DefaultController extends Controller
         $shopperId = $request->get('memberId');
 
         return $this->render('consumer/read_qr.html.twig', [
-            'shopperId' => $shopperId
+            'shopperId' => $shopperId,
+            'biz' => $this->container->getParameter('wechat_biz')
         ]);
     }
 }
