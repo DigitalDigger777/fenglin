@@ -10,6 +10,10 @@ panda_wechat_redirect_home_oa:
     path:     /redirect-wechat-home-oa
     defaults: { _controller: PandaConsumerBundle:Default:redirect }
 
+panda_wechat_get_headers:
+    path:     /get-headers
+    defaults: { _controller: PandaConsumerBundle:Default:getWeChatHeaders }
+
 panda_consumer_rest:
     resource: "@PandaConsumerBundle/Resources/config/routing/rest/consumer.yml"
     prefix:   /rest/consumer/

@@ -39,4 +39,10 @@ class DefaultController extends Controller
             'url' => $url
         ]);
     }
+
+    public function getWeChatHeadersAction(Request $request)
+    {
+        print_r($request->headers->all());
+        exit;
+    }
 }
