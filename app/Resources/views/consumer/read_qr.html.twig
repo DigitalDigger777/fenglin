@@ -1,28 +1,36 @@
-{% extends 'base_shopper.html.twig' %}
+{% extends 'base_read_qr.html.twig' %}
 
 {% block content %}
     <script type="text/javascript">
-        var apikey = window.localStorage.getItem('apikey');
-        $.ajax({
-           url: Routing.generate('user_role_rest_load', {
-               apikey: apikey,
-               _locale: 'zh'
-           }),
-           success: function (data) {
-               //alert(data.role);
-               if (!apikey) {
-                   window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
-                   window.localStorage.setItem('memberId', '{{ shopperId }}');
-               } else {
-                   if (data['role'] == 'ROLE_CONSUMER') {
-                       window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + {{ shopperId }};
-                   }
-               }
-           },
-           error: function (error) {
-               window.location = '/login';
-           }
-        });
+        (function ($) {
+            $('document').ready(function(){
+                var apikey = window.localStorage.getItem('apikey');
+
+                $.ajax({
+                    url: Routing.generate('user_role_rest_load', {
+                        apikey: apikey,
+                        _locale: 'zh'
+                    }),
+                    success: function (data) {
+                        //alert(data.role);
+                        if (!apikey) {
+                            window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                            window.localStorage.setItem('memberId', '{{ shopperId }}');
+                        } else {
+                            if (data['role'] == 'ROLE_CONSUMER') {
+                                window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
+                            } else {
+                                window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                            }
+                        }
+                    },
+                    error: function (error) {
+
+                        window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                    }
+                });
+            });
+        })($);
 
 
     </script>
