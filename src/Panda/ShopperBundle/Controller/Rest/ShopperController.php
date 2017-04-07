@@ -513,7 +513,7 @@ class ShopperController extends Controller
             $shopperArray['amount'] = isset($shopperArray['amount']) ? $shopperArray['amount'] : 0;
 
             $wechatData = $shopper->getWechatData();
-            echo print_r($wechatData); exit;
+            //echo print_r($shopper->getI); exit;
             if (!count($wechatData)) {
                 $wechatService  = $this->get('wechat');
                 $accessTokenObject = $wechatService->getAccessToken();
@@ -521,7 +521,7 @@ class ShopperController extends Controller
                 $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
                 $_shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($id);
-                echo $_shopper->getId(); exit;
+                //echo $_shopper->getId(); exit;
                 $_shopper->setWechatData([
                     'QR' => $ticketObject
                 ]);
