@@ -2,6 +2,10 @@
 #    path:     /
 #    defaults: { _controller: PandaConsumerBundle:Default:index }
 
+panda_consumer_read_qr:
+    path:     /read-qr/{shopperId}
+    defaults: { _controller: PandaConsumerBundle:Default:readQR }
+
 panda_consumer_rest:
     resource: "@PandaConsumerBundle/Resources/config/routing/rest/consumer.yml"
     prefix:   /rest/consumer/

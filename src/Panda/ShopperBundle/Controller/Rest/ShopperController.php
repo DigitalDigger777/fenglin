@@ -513,25 +513,32 @@ class ShopperController extends Controller
             $shopperArray['amount'] = isset($shopperArray['amount']) ? $shopperArray['amount'] : 0;
 
             $wechatData = $shopper->getWechatData();
-            //echo print_r($shopper->getI); exit;
+
             if (!count($wechatData)) {
-                $wechatService  = $this->get('wechat');
-                $accessTokenObject = $wechatService->getAccessToken();
-                $accessToken = $accessTokenObject->access_token;
-                $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
-                $_shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($id);
-                //echo $_shopper->getId(); exit;
-                $_shopper->setWechatData([
-                    'QR' => $ticketObject
-                ]);
+                try {
+                    $wechatService = $this->get('wechat');
+                    $accessTokenObject = $wechatService->getAccessToken();
+                    $accessToken = $accessTokenObject->access_token;
+                    $ticketObject = $wechatService->createQRCodeTicket($accessToken);
 
-                $em->persist($_shopper);
-                $em->flush();
+                    $_shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($id);
 
-                $shopperArray['wechatData'] = [
-                    'QR' => $ticketObject
-                ];
+                    $_shopper->setWechatData([
+                        'QR' => $ticketObject
+                    ]);
+
+                    $em->persist($_shopper);
+                    $em->flush();
+
+                    $shopperArray['wechatData'] = [
+                        'QR' => $ticketObject
+                    ];
+                } catch (\Exception $e) {
+                    $shopperArray['wechatData'] = [
+                        'QR' => []
+                    ];
+                }
             }
 
             $this->setData($shopperArray);
