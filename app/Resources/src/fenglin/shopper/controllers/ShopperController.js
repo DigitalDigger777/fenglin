@@ -109,7 +109,15 @@ define([
 
             shopperModel.fetch({
                 success: function (model) {
+                    var domain = model.get('domain');
+                    var id = model.get('id');
 
+                    var qrSrc = Routing.generate('endroid_qrcode', {
+                        text: 'http://' + domain + '/panda-consumer/read-qr/' + id,
+                        extension: 'gif',
+                        size: 250
+                    });
+                    model.set('qrSrc', qrSrc);
                     var shopperQRView = new ShopperQRView({
                         model: model
                     });

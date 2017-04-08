@@ -211,6 +211,7 @@ class ConsumerController extends Controller
          */
         $em = $this->getDoctrine()->getManager();
         $memberId = $request->query->get('memberId');
+        $domain = $this->container->getParameter('wechat_domain');
 
         $qb = $em->createQueryBuilder();
         $qb->select('c')
@@ -230,6 +231,7 @@ class ConsumerController extends Controller
 
         try {
             $data = $query->getSingleResult(Query::HYDRATE_ARRAY);
+            $data['domain'] = $domain;
             $this->setData($data);
         } catch (\Exception $e) {
             $this->setCode(500);

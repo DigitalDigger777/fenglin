@@ -1,11 +1,11 @@
 <script id="memberIdView" type="text/html">
-    <div class="alert">
+    <div class="alert" style="margin-top: 10px">
         <h1>会员号码</h1><br>
         <h3><%=memberId %></h3><br>
         <p>推荐好友消费，可以拿到返利！<br>
             好友注册时需要填入此号码！</p>
         <p>
-            <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://wxfenling.com/panda-shopper/read-qr/<%=memberId%>" alt=""/>
+            <img src="<%=qrSrc %>" alt=""/>
         </p>
     </div>
 </script>

@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Fenglin\AdminBundle\FenglinAdminBundle(),
             new Fenglin\LoginBundle\FenglinLoginBundle(),
             new Panda\StaffBundle\PandaStaffBundle(),
+            new \Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

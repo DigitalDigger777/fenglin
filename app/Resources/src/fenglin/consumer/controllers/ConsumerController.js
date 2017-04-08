@@ -41,6 +41,15 @@ define([
             consumerModel.fetch({
                 success: function(model, response){
                     console.log('success response:', response);
+                    var domain = model.get('domain');
+                    var memberId = model.get('memberId');
+
+                    var qrSrc = Routing.generate('endroid_qrcode', {
+                        text: 'http://' + domain + '/panda-shopper/read-qr/' + memberId,
+                        extension: 'gif',
+                        size: 250
+                    });
+                    model.set('qrSrc', qrSrc);
 
                     var memberIdView = new MemberIdView({
                         model: model
