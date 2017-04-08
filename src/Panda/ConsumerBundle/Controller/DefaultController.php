@@ -22,7 +22,7 @@ class DefaultController extends Controller
      */
     public function readQRAction(Request $request)
     {
-        $shopperId = $request->get('memberId');
+        $shopperId = $request->get('shopperId');
 
         return $this->render('consumer/read_qr.html.twig', [
             'shopperId' => $shopperId,
