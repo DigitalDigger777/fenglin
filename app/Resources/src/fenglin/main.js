@@ -11,6 +11,10 @@ define([
     'consumer/routers/StatementRouter'
 ], function(Backbone){
 
+    var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
+    if (matchApiKey) {
+        localStorage.setItem('apikey', matchApiKey[1]);
+    }
 
     var fenglin = Backbone.Marionette.Application.extend({
 
