@@ -34,10 +34,10 @@ class DefaultController extends Controller
     {
         $biz = urlencode($this->container->getParameter('wechat_biz'));
         $url = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=' . $biz . '#wechat_redirect';
-        //$this->redirect($url, 200);
-        return $this->render('consumer/middle_qr.html.twig', [
-            'url' => $url
-        ]);
+        return $this->redirect($url);
+//        return $this->render('consumer/middle_qr.html.twig', [
+//            'url' => $url
+//        ]);
     }
 
     public function getWeChatHeadersAction(Request $request)
