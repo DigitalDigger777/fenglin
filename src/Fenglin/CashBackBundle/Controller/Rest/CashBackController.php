@@ -213,6 +213,7 @@ class CashBackController extends Controller
         }
 
         $shopperEmail = $this->getUser()->getUsername();
+
         $qb = $em->createQueryBuilder();
         $qb->select('c, cns, s, cp')
             ->from('FenglinCashBackBundle:CashBack', 'c')
@@ -227,6 +228,7 @@ class CashBackController extends Controller
         try {
             $data = $query->getResult(Query::HYDRATE_ARRAY);
             $this->setData($data);
+
         } catch (\Exception $e) {
             $this->setCode(500);
             $this->setMessage($e->getMessage());

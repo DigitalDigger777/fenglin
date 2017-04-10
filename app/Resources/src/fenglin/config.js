@@ -4,7 +4,7 @@
 
 requirejs.config({
     urlRoot: 'http://dev.fenglin/app_dev.php/',
-    urlArgs: "bust=" + (new Date()).getTime(),
+    // urlArgs: "bust=" + (new Date()).getTime(),
     baseUrl: '/',
     paths: {
         vendor: "/vendor",
