@@ -17,3 +17,4 @@
 /web/vendor/
 /.idea/
 /bin/permission.sh
+composer.lock
