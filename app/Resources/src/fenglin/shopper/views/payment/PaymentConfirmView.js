@@ -98,7 +98,7 @@ define([
                         });
                     } else {
                         var toastModel = new Backbone.Model();
-                        toastModel.set('message', '之前点击计算');
+                        toastModel.set('message', '请先点击计算！');
                         toastModel.set('className', 'weui-icon-warn');
                         var customToast = new CustomToastView({
                             model: toastModel

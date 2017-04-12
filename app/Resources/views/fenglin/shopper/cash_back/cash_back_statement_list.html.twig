@@ -47,7 +47,7 @@
 
                             <% var dateMatch = /^([0-9\-]+?)\s[\w\W]+?$/.exec(date.date) %>
                             <% var date1 = new Date(dateMatch[1]) %>
-                            <%=date1.toLocaleDateString() %>
+                            <%=date1.toLocaleString() %>
                         </p>
                     </div>
                     <div style="width: 30%; float: left; text-align: right">
