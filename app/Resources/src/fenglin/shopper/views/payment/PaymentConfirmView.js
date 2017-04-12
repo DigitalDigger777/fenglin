@@ -2,17 +2,22 @@
  * Created by korman on 27.01.17.
  */
 
-define(['marionette',
+define([
+    'backbone',
+    'marionette',
     'shopper/views/core/MenuHomeView',
     'shopper/models/CashBackConfirmModel',
     'consumer/views/core/ErrorToastView',
-    'consumer/views/core/LoadingToastView'
+    'consumer/views/core/LoadingToastView',
+    'consumer/views/core/CustomToastView'
 ], function(
+    Backbone,
     Marionette,
     MenuHomeView,
     CashBackConfirmModel,
     ErrorToastView,
-    LoadingToastView
+    LoadingToastView,
+    CustomToastView
 ){
     var payable             = 0.00;
     var balance             = 0.00;
@@ -20,8 +25,10 @@ define(['marionette',
     var loadToast = new LoadingToastView();
     var errorToast = new ErrorToastView();
 
+
     loadToast.render();
     errorToast.render();
+    //customToast.render();
 
     var _self = this;
 
@@ -66,27 +73,42 @@ define(['marionette',
                     cashBackConfirmModel.set('spent', spent);
                     cashBackConfirmModel.set('balance', balance);
 
-                    loadToast.show();
-                    cashBackConfirmModel.save(null, {
-                        success: function(model){
-                            window.localStorage.setItem('member_total_amount', model.get('balance'));
-                            window.localStorage.setItem('payable', payable);
-                            loadToast.hide();
+                    console.log(payable);
+                    if (payable != 0) {
+                        loadToast.show();
+                        cashBackConfirmModel.save(null, {
+                            success: function(model){
+                                window.localStorage.setItem('member_total_amount', model.get('balance'));
+                                window.localStorage.setItem('payable', payable);
+                                loadToast.hide();
 
-                            $('#contentContainer').off('click', '#cashBackButton');
-                            // console.log(model.toJSON());
-                            window.location.hash = '#cashback/confirm/' + model.get('transactionId');
+                                $('#contentContainer').off('click', '#cashBackButton');
+                                // console.log(model.toJSON());
+                                window.location.hash = '#cashback/confirm/' + model.get('transactionId');
 
-                        },
-                        error: function(){
-                            loadToast.hide();
-                            errorToast.show();
+                            },
+                            error: function(){
+                                loadToast.hide();
+                                errorToast.show();
 
-                            setTimeout(function(){
-                                errorToast.hide();
-                            }, 3000);
-                        }
-                    });
+                                setTimeout(function(){
+                                    errorToast.hide();
+                                }, 3000);
+                            }
+                        });
+                    } else {
+                        var toastModel = new Backbone.Model();
+                        toastModel.set('message', '之前点击计算');
+                        toastModel.set('className', 'weui-icon-warn');
+                        var customToast = new CustomToastView({
+                            model: toastModel
+                        });
+                        customToast.render();
+                        customToast.show();
+                        setTimeout(function(){
+                            customToast.hide();
+                        }, 3000);
+                    }
                 }
                 //alert(payable + '-' + balance + '-memberId:' + memberId);
             },
