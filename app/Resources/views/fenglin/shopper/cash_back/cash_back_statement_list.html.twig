@@ -46,8 +46,8 @@
 
 
                             <% var dateMatch = /^([0-9\-]+?\s[\w\W]+?)$/.exec(date.date) %>
-                            <% var date1 = new Date(dateMatch[1]) %>
-                            <%=dateMatch[1] %>
+                            <% var date1 = new Date(dateMatch[1].replace(' ', 'T') %>
+
                             <%=date1.toLocaleDateString() +' '+ date1.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %>
                         </p>
                     </div>
