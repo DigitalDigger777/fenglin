@@ -134,16 +134,21 @@ class ShopperController extends Controller
 
         $qb->select('s, fc')
             ->from('PandaShopperBundle:Shopper', 's')
-            ->leftJoin('s.followConsumers', 'fc', 'WITH', ' fc.apiKey=:apiKey')
-            ->where($qb->expr()->isNotNull('s.rebateLevelRate'));
+            ->leftJoin('s.followConsumers', 'fc', 'WITH', ' fc.apiKey=:apiKey');
 
         if ($search) {
             $qb->where($qb->expr()->like('s.name', ':name'))
                 ->setParameter(':name', '%' . $search . '%');
         }
 
+
         if ($user->getRole() != 'ROLE_ADMIN') {
-            $qb->andWhere($qb->expr()->eq('s.status', ':status'));
+            $qb->where(
+                $qb->expr()->andX(
+                    $qb->expr()->isNotNull('s.rebateLevelRate'),
+                    $qb->expr()->eq('s.status', ':status')
+                )
+            );
             $qb->setParameter(':status', 1);
         }
 
