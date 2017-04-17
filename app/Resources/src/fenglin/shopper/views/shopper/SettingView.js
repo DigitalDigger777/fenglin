@@ -96,6 +96,8 @@ define([
             menu.render();
 
             $('#uploaderInput').change(function(){
+                loadToast.show();
+
                 var fd = new FormData();
                 fd.append("photo", $('input[type=file]')[0].files[0]);
                 $.ajax({
@@ -109,6 +111,14 @@ define([
                     console.log( data );
                     $('#previewImage').attr('src', '/uploads/shoppers/' + data[0]);
                     $('#previewImage').attr('data-src', data[0]);
+                    loadToast.hide();
+                }).fail(function( error ){
+
+                    loadToast.hide();
+                    errorToast.show();
+                    setTimeout(function () {
+                        errorToast.hide();
+                    }, 3000);
                 });
             });
 
