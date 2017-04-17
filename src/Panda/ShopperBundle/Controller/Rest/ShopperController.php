@@ -1,4 +1,5 @@
 <?php
+
 namespace Panda\ShopperBundle\Controller\Rest;
 
 use Doctrine\ORM\Query;
@@ -143,7 +144,7 @@ class ShopperController extends Controller
 
 
         if ($user->getRole() != 'ROLE_ADMIN') {
-            $qb->where(
+            $qb->andWhere(
                 $qb->expr()->andX(
                     $qb->expr()->isNotNull('s.rebateLevelRate'),
                     $qb->expr()->eq('s.status', ':status')
