@@ -33,6 +33,11 @@
 
 
     </script>
-    <img style="width: 100%" src="{{ qrcode_url('http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwNjgwNzkyNw%3D%3D#wechat_redirect') }}" alt="">
-    <a href="http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwNjgwNzkyNw%3D%3D#wechat_redirect" class="btn btn-success">Follow the QR</a>
+    <img style="width: 100%" src="{{ asset('oa_qr.jpg') }}" alt="">
+    <p>
+        您还没有加入{{ shopper.name }} 返利计划。请先关注枫林返利公众号号。
+    </p>
+    <p>
+        长按下方二维码关注
+    </p>
 {% endblock %}

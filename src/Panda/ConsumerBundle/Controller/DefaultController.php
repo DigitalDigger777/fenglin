@@ -23,9 +23,11 @@ class DefaultController extends Controller
     public function readQRAction(Request $request)
     {
         $shopperId = $request->get('shopperId');
+        $shopper = $this->getDoctrine()->getRepository('PandaShopperBundle:Shopper')->find($shopperId);
 
         return $this->render('consumer/read_qr.html.twig', [
             'shopperId' => $shopperId,
+            'shopper' => $shopper,
             'biz' => urlencode($this->container->getParameter('wechat_biz'))
         ]);
     }

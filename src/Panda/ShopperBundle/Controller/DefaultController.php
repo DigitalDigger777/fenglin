@@ -51,9 +51,9 @@ class DefaultController extends Controller
     public function readQRAction(Request $request)
     {
         $memberId = $request->get('memberId');
-        exit;
-//        return $this->render('shopper/read_qr.html.twig', [
-//            'memberId' => $memberId
-//        ]);
+
+        return $this->render('shopper/read_qr.html.twig', [
+            'memberId' => $memberId
+        ]);
     }
 }
