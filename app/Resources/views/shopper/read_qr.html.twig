@@ -1,34 +1,33 @@
 {% extends 'base_shopper.html.twig' %}
 
 {% block content %}
-    {#<script type="text/javascript">#}
-        {#var apikey = window.localStorage.getItem('apikey');#}
-        {#$.ajax({#}
-           {#url: Routing.generate('user_role_rest_load', {#}
-               {#apikey: apikey,#}
-               {#_locale: 'zh'#}
-           {#}),#}
-           {#success: function (data) {#}
-               {#//alert(data.role);#}
-               {#if (!apikey) {#}
-                   {#window.location = '/login';#}
-                   {#window.localStorage.setItem('memberId', '{{ memberId }}');#}
-               {#} else {#}
-                   {#if (data['role'] == 'ROLE_SHOPPER') {#}
-                       {#window.location = '/shopper?apikey=' + apikey + '#consumer/search/' + {{ memberId }};#}
-                   {#}#}
+    <script type="text/javascript">
+        var apikey = window.localStorage.getItem('apikey');
+        $.ajax({
+           url: Routing.generate('user_role_rest_load', {
+               apikey: apikey,
+               _locale: 'zh'
+           }),
+           success: function (data) {
+               //alert(data.role);
+               if (!apikey) {
+                   window.location = '/login';
+                   window.localStorage.setItem('memberId', '{{ memberId }}');
+               } else {
+                   if (data['role'] == 'ROLE_SHOPPER') {
+                       window.location = '/shopper?apikey=' + apikey + '#consumer/search/' + {{ memberId }};
+                   }
 
-                   {#if (data['role'] == 'ROLE_STAFF') {#}
-                       {#window.location = '/staff?apikey=' + apikey + '#consumer/search/' + {{ memberId }};#}
-                   {#}#}
-               {#}#}
-           {#},#}
-           {#error: function (error) {#}
-               {#window.location = '/login';#}
-           {#}#}
-        {#});#}
+                   if (data['role'] == 'ROLE_STAFF') {
+                       window.location = '/staff?apikey=' + apikey + '#consumer/search/' + {{ memberId }};
+                   }
+               }
+           },
+           error: function (error) {
+               window.location = '/login';
+           }
+        });
 
 
-    {#</script>#}
-    <a href="http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwNjgwNzkyNw%3D%3D#wechat_redirect" class="btn btn-success">Follow the QR</a>
+    </script>
 {% endblock %}

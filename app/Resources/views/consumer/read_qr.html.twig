@@ -14,18 +14,18 @@
                     success: function (data) {
                         //alert(data.role);
                         if (!apikey) {
-                            window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
+                            //window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
                             window.localStorage.setItem('memberId', '{{ shopperId }}');
                         } else {
                             if (data['role'] == 'ROLE_CONSUMER') {
                                 window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
                             } else {
-                                window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                                //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
                             }
                         }
                     },
                     error: function (error) {
-                        window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                       // window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
                     }
                 });
             });
@@ -33,4 +33,5 @@
 
 
     </script>
+    <a href="http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIwNjgwNzkyNw%3D%3D#wechat_redirect" class="btn btn-success">Follow the QR</a>
 {% endblock %}
