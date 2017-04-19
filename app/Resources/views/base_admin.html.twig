@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>枫林返利</title>
-    <link rel="stylesheet" href="{{ asset('vendor/weui/dist/style/weui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fenglin/vendor/weui/dist/style/weui.css') }}"/>
     <link rel="stylesheet" href="{{ asset('resources/styles/main.css') }}"/>
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script src="{{ asset('vendor/zepto/zepto.js') }}"></script>
+    <script src="{{ asset('fenglin/vendor/zepto/zepto.js') }}"></script>
 
 </head>
 <body ontouchstart>
@@ -87,9 +87,9 @@
 
     {% block javascripts %}
         {% if (app.environment == 'dev') %}
-            <script data-main="{{ asset('fenglin/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>
+            <script data-main="{{ asset('fenglin/config_admin.js') }}" src="{{ asset('fenglin/vendor/requirejs/require.js') }}"></script>
         {% else %}
-            <script data-main="{{ asset('fenglin_build/config.js') }}" src="{{ asset('vendor/requirejs/require.js') }}"></script>
+            <script data-main="{{ asset('build/main-admin-build.js') }}" src="{{ asset('fenglin/vendor/requirejs/require.js') }}"></script>
         {% endif %}
 
         {#<script src="{{ asset('vendor/zepto/zepto.js') }}"></script>#}

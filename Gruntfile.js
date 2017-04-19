@@ -6,6 +6,9 @@ module.exports = function(grunt) {
     //require('jit-grunt')(grunt, {
     //    htmlbuild: 'grunt-html-build'
     //});
+
+    var optimize = "none"; //uglify|none|test
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -46,7 +49,101 @@ module.exports = function(grunt) {
             clean: './build'
         },
 
-        clean: ['<%= path.clean %>'],
+
+        requirejs: {
+            compile_main: {
+                options: {
+                    baseUrl: '.',
+                    name: 'app/Resources/src/fenglin/vendor/almond/almond.js',
+                    include: ['app/Resources/src/fenglin/config'],
+                    // insertRequire: ['main'],
+                    out: 'app/Resources/build/main-build.js',
+                    optimize: "uglify",
+                    //optimize: "none",   // If you need to debug the compiled script
+                    //namespace: "test",  // If using Almond then no need to namespace
+                    paths: {
+                        vendor: "app/Resources/src/fenglin/vendor",
+                        admin: "app/Resources/src/fenglin/admin",
+                        consumer: "app/Resources/src/fenglin/consumer",
+                        shopper: "app/Resources/src/fenglin/shopper",
+
+                        jquery: "app/Resources/src/fenglin/vendor/jquery/dist/jquery.min",
+                        underscore: "app/Resources/src/fenglin/vendor/underscore/underscore-min",
+                        backbone: "app/Resources/src/fenglin/vendor/backbone/backbone-min",
+                        "backbone.radio": "app/Resources/src/fenglin/vendor/backbone.radio/build/backbone.radio.min",
+                        marionette: "app/Resources/src/fenglin/vendor/backbone.marionette/lib/backbone.marionette.min",
+                        zepto: "app/Resources/src/fenglin/vendor/zepto/zepto",
+                        jweixin: "app/Resources/src/fenglin/vendor/jweixin-bower/jweixin-1.0.0",
+                        weui: "app/Resources/src/fenglin/vendor/weui.js/dist/weui",
+                        text: "app/Resources/src/fenglin/vendor/text/text",
+                        main: "app/Resources/src/fenglin/main"
+                    },
+                    wrap: true
+                }
+            },
+            compile_admin_main: {
+                options: {
+                    baseUrl: '.',
+                    name: 'app/Resources/src/fenglin/vendor/almond/almond.js',
+                    include: ['app/Resources/src/fenglin/config_admin'],
+                    // insertRequire: ['main'],
+                    out: 'app/Resources/build/main-admin-build.js',
+                    optimize: "uglify",
+                    //optimize: "none",   // If you need to debug the compiled script
+                    //namespace: "test",  // If using Almond then no need to namespace
+                    paths: {
+                        vendor: "app/Resources/src/fenglin/vendor",
+                        admin: "app/Resources/src/fenglin/admin",
+                        consumer: "app/Resources/src/fenglin/consumer",
+                        shopper: "app/Resources/src/fenglin/shopper",
+
+                        jquery: "app/Resources/src/fenglin/vendor/jquery/dist/jquery.min",
+                        underscore: "app/Resources/src/fenglin/vendor/underscore/underscore-min",
+                        backbone: "app/Resources/src/fenglin/vendor/backbone/backbone-min",
+                        "backbone.radio": "app/Resources/src/fenglin/vendor/backbone.radio/build/backbone.radio.min",
+                        marionette: "app/Resources/src/fenglin/vendor/backbone.marionette/lib/backbone.marionette.min",
+                        zepto: "app/Resources/src/fenglin/vendor/zepto/zepto",
+                        jweixin: "app/Resources/src/fenglin/vendor/jweixin-bower/jweixin-1.0.0",
+                        weui: "app/Resources/src/fenglin/vendor/weui.js/dist/weui",
+                        text: "app/Resources/src/fenglin/vendor/text/text",
+                        "main.admin": "app/Resources/src/fenglin/main_admin"
+
+                    },
+                    wrap: true
+                }
+            },
+            compile_shopper_main: {
+                options: {
+                    baseUrl: '.',
+                    name: 'app/Resources/src/fenglin/vendor/almond/almond.js',
+                    include: ['app/Resources/src/fenglin/config_shopper'],
+                    // insertRequire: ['main'],
+                    out: 'app/Resources/build/main-shopper-build.js',
+                    optimize: "uglify",
+                    //optimize: "none",   // If you need to debug the compiled script
+                    //namespace: "test",  // If using Almond then no need to namespace
+                    paths: {
+                        vendor: "app/Resources/src/fenglin/vendor",
+                        admin: "app/Resources/src/fenglin/admin",
+                        consumer: "app/Resources/src/fenglin/consumer",
+                        shopper: "app/Resources/src/fenglin/shopper",
+
+                        jquery: "app/Resources/src/fenglin/vendor/jquery/dist/jquery.min",
+                        underscore: "app/Resources/src/fenglin/vendor/underscore/underscore-min",
+                        backbone: "app/Resources/src/fenglin/vendor/backbone/backbone-min",
+                        "backbone.radio": "app/Resources/src/fenglin/vendor/backbone.radio/build/backbone.radio.min",
+                        marionette: "app/Resources/src/fenglin/vendor/backbone.marionette/lib/backbone.marionette.min",
+                        zepto: "app/Resources/src/fenglin/vendor/zepto/zepto",
+                        jweixin: "app/Resources/src/fenglin/vendor/jweixin-bower/jweixin-1.0.0",
+                        weui: "app/Resources/src/fenglin/vendor/weui.js/dist/weui",
+                        text: "app/Resources/src/fenglin/vendor/text/text",
+                        "main.shopper": "app/Resources/src/fenglin/main_shopper"
+                    },
+                    wrap: true
+                }
+            }
+        }
+        // clean: ['<%= path.clean %>'],
 
         // htmlbuild: {
         //     production: {
@@ -172,135 +269,135 @@ module.exports = function(grunt) {
         //         src: '<%= path.build.css %>main.css'
         //     }
         // },
-        concat: {
-            options: {
-
-            },
-            consumer_js: {
-                src: [
-                    '<%= path.src.js %>config.js',
-                    '<%= path.src.js %>main.js',
-                    '<%= path.src.js %>consumer/collections/*.js',
-                    '<%= path.src.js %>consumer/controllers/*.js',
-                    '<%= path.src.js %>consumer/models/*.js',
-                    '<%= path.src.js %>consumer/routers/*.js',
-                    '<%= path.src.js %>consumer/views/*.js',
-                    '<%= path.src.js %>admin/collections/*.js',
-                    '<%= path.src.js %>admin/controllers/*.js',
-                    '<%= path.src.js %>admin/models/*.js',
-                    '<%= path.src.js %>admin/routers/*.js',
-                    '<%= path.src.js %>admin/views/*.js',
-                    '<%= path.src.js %>shopper/collections/*.js',
-                    '<%= path.src.js %>shopper/controllers/*.js',
-                    '<%= path.src.js %>shopper/models/*.js',
-                    '<%= path.src.js %>shopper/routers/*.js',
-                    '<%= path.src.js %>shopper/views/*.js'
-                ],
-                dest: '<%= path.build.js %>consumer.js'
-            },
-            shopper_js: {
-                src: [
-                    '<%= path.src.js %>config.js',
-                    '<%= path.src.js %>main_shopper.js',
-                    '<%= path.src.js %>consumer/collections/*.js',
-                    '<%= path.src.js %>consumer/controllers/*.js',
-                    '<%= path.src.js %>consumer/models/*.js',
-                    '<%= path.src.js %>consumer/routers/*.js',
-                    '<%= path.src.js %>consumer/views/*.js',
-                    '<%= path.src.js %>admin/collections/*.js',
-                    '<%= path.src.js %>admin/controllers/*.js',
-                    '<%= path.src.js %>admin/models/*.js',
-                    '<%= path.src.js %>admin/routers/*.js',
-                    '<%= path.src.js %>admin/views/*.js',
-                    '<%= path.src.js %>shopper/collections/*.js',
-                    '<%= path.src.js %>shopper/controllers/*.js',
-                    '<%= path.src.js %>shopper/models/*.js',
-                    '<%= path.src.js %>shopper/routers/*.js',
-                    '<%= path.src.js %>shopper/views/*.js'
-                ],
-                dest: '<%= path.build.js %>shopper.js'
-            },
-            admin_js: {
-                src: [
-                    '<%= path.src.js %>config.js',
-                    '<%= path.src.js %>main_admin.js',
-                    '<%= path.src.js %>consumer/collections/*.js',
-                    '<%= path.src.js %>consumer/controllers/*.js',
-                    '<%= path.src.js %>consumer/models/*.js',
-                    '<%= path.src.js %>consumer/routers/*.js',
-                    '<%= path.src.js %>consumer/views/*.js',
-                    '<%= path.src.js %>admin/collections/*.js',
-                    '<%= path.src.js %>admin/controllers/*.js',
-                    '<%= path.src.js %>admin/models/*.js',
-                    '<%= path.src.js %>admin/routers/*.js',
-                    '<%= path.src.js %>admin/views/*.js',
-                    '<%= path.src.js %>shopper/collections/*.js',
-                    '<%= path.src.js %>shopper/controllers/*.js',
-                    '<%= path.src.js %>shopper/models/*.js',
-                    '<%= path.src.js %>shopper/routers/*.js',
-                    '<%= path.src.js %>shopper/views/*.js'
-                ],
-                dest: '<%= path.build.js %>admin.js'
-            },
-            bower_css: {
-                src: ['<%= path.bower_components.css %>'],
-                dest: '<%= path.build.css %>lib.css'
-            }
-        },
-        uglify: {
-            options: {
-                mangle: false,
-                sourceMap: true
-            },
-            project: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= path.build.js %>',
-                    src: ['*.js', '!*.min.css'],
-                    dest: '<%= path.build.js %>',
-                    ext: '.min.js'
-                }]
-            },
-        },
-        cssmin: {
-            options: {
-                sourceMap: true,
-            },
-            project: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= path.build.css %>',
-                    src: ['*.css', '!*.min.css'],
-                    dest: '<%= path.build.css %>',
-                    ext: '.min.css'
-                }]
-            },
-        },
-        copy: {
-            bower: {
-                files: [
-                    {
-                        expand: true,
-                        flatten: true,
-                        src: ['<%= path.bower_components.fonts %>'],
-                        dest: '<%= path.build.fonts %>',
-                        filter: 'isFile'
-                    },
-                ],
-            },
-            project: {
-                files: [
-                    {
-                        expand: true,
-                        flatten: true,
-                        src: ['<%= path.src.js %>'],
-                        dest: '<%= path.build.js %>',
-                        filter: 'isFile'
-                    },
-
-                ],
-            },
-        },
+        // concat: {
+        //     options: {
+        //
+        //     },
+        //     consumer_js: {
+        //         src: [
+        //             '<%= path.src.js %>config.js',
+        //             '<%= path.src.js %>main.js',
+        //             '<%= path.src.js %>consumer/collections/*.js',
+        //             '<%= path.src.js %>consumer/controllers/*.js',
+        //             '<%= path.src.js %>consumer/models/*.js',
+        //             '<%= path.src.js %>consumer/routers/*.js',
+        //             '<%= path.src.js %>consumer/views/*.js',
+        //             '<%= path.src.js %>admin/collections/*.js',
+        //             '<%= path.src.js %>admin/controllers/*.js',
+        //             '<%= path.src.js %>admin/models/*.js',
+        //             '<%= path.src.js %>admin/routers/*.js',
+        //             '<%= path.src.js %>admin/views/*.js',
+        //             '<%= path.src.js %>shopper/collections/*.js',
+        //             '<%= path.src.js %>shopper/controllers/*.js',
+        //             '<%= path.src.js %>shopper/models/*.js',
+        //             '<%= path.src.js %>shopper/routers/*.js',
+        //             '<%= path.src.js %>shopper/views/*.js'
+        //         ],
+        //         dest: '<%= path.build.js %>consumer.js'
+        //     },
+        //     shopper_js: {
+        //         src: [
+        //             '<%= path.src.js %>config.js',
+        //             '<%= path.src.js %>main_shopper.js',
+        //             '<%= path.src.js %>consumer/collections/*.js',
+        //             '<%= path.src.js %>consumer/controllers/*.js',
+        //             '<%= path.src.js %>consumer/models/*.js',
+        //             '<%= path.src.js %>consumer/routers/*.js',
+        //             '<%= path.src.js %>consumer/views/*.js',
+        //             '<%= path.src.js %>admin/collections/*.js',
+        //             '<%= path.src.js %>admin/controllers/*.js',
+        //             '<%= path.src.js %>admin/models/*.js',
+        //             '<%= path.src.js %>admin/routers/*.js',
+        //             '<%= path.src.js %>admin/views/*.js',
+        //             '<%= path.src.js %>shopper/collections/*.js',
+        //             '<%= path.src.js %>shopper/controllers/*.js',
+        //             '<%= path.src.js %>shopper/models/*.js',
+        //             '<%= path.src.js %>shopper/routers/*.js',
+        //             '<%= path.src.js %>shopper/views/*.js'
+        //         ],
+        //         dest: '<%= path.build.js %>shopper.js'
+        //     },
+        //     admin_js: {
+        //         src: [
+        //             '<%= path.src.js %>config.js',
+        //             '<%= path.src.js %>main_admin.js',
+        //             '<%= path.src.js %>consumer/collections/*.js',
+        //             '<%= path.src.js %>consumer/controllers/*.js',
+        //             '<%= path.src.js %>consumer/models/*.js',
+        //             '<%= path.src.js %>consumer/routers/*.js',
+        //             '<%= path.src.js %>consumer/views/*.js',
+        //             '<%= path.src.js %>admin/collections/*.js',
+        //             '<%= path.src.js %>admin/controllers/*.js',
+        //             '<%= path.src.js %>admin/models/*.js',
+        //             '<%= path.src.js %>admin/routers/*.js',
+        //             '<%= path.src.js %>admin/views/*.js',
+        //             '<%= path.src.js %>shopper/collections/*.js',
+        //             '<%= path.src.js %>shopper/controllers/*.js',
+        //             '<%= path.src.js %>shopper/models/*.js',
+        //             '<%= path.src.js %>shopper/routers/*.js',
+        //             '<%= path.src.js %>shopper/views/*.js'
+        //         ],
+        //         dest: '<%= path.build.js %>admin.js'
+        //     },
+        //     bower_css: {
+        //         src: ['<%= path.bower_components.css %>'],
+        //         dest: '<%= path.build.css %>lib.css'
+        //     }
+        // },
+        // uglify: {
+        //     options: {
+        //         mangle: false,
+        //         sourceMap: true
+        //     },
+        //     project: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: '<%= path.build.js %>',
+        //             src: ['*.js', '!*.min.css'],
+        //             dest: '<%= path.build.js %>',
+        //             ext: '.min.js'
+        //         }]
+        //     },
+        // },
+        // cssmin: {
+        //     options: {
+        //         sourceMap: true,
+        //     },
+        //     project: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: '<%= path.build.css %>',
+        //             src: ['*.css', '!*.min.css'],
+        //             dest: '<%= path.build.css %>',
+        //             ext: '.min.css'
+        //         }]
+        //     },
+        // },
+        // copy: {
+        //     bower: {
+        //         files: [
+        //             {
+        //                 expand: true,
+        //                 flatten: true,
+        //                 src: ['<%= path.bower_components.fonts %>'],
+        //                 dest: '<%= path.build.fonts %>',
+        //                 filter: 'isFile'
+        //             },
+        //         ],
+        //     },
+        //     project: {
+        //         files: [
+        //             {
+        //                 expand: true,
+        //                 flatten: true,
+        //                 src: ['<%= path.src.js %>'],
+        //                 dest: '<%= path.build.js %>',
+        //                 filter: 'isFile'
+        //             },
+        //
+        //         ],
+        //     },
+        // },
         // watch: {
         //     html: {
         //         files: '<%= path.watch.html %>',
@@ -348,19 +445,19 @@ module.exports = function(grunt) {
     // grunt.loadNpmTasks('grunt-html-build');
     // grunt.loadNpmTasks('grunt-contrib-less');
     // grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    // grunt.loadNpmTasks('grunt-contrib-copy');
+    // grunt.loadNpmTasks('grunt-contrib-concat');
+    // grunt.loadNpmTasks('grunt-contrib-uglify');
+    // grunt.loadNpmTasks('grunt-contrib-cssmin');
     // grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+    // grunt.loadNpmTasks('grunt-contrib-clean');
     // grunt.loadNpmTasks('grunt-uncss');
     // grunt.loadNpmTasks('grunt-svgicons2svgfont');
 
-    grunt.registerTask('default', ['concat']);
+    // grunt.registerTask('default', ['concat']);
     // grunt.registerTask('bower', ['concat:bower_js','concat:bower_css']);
     // grunt.registerTask('dev', ['copy:project','less:production','postcss','htmlbuild:dev']);
     // grunt.registerTask('build', ['bower','dev','uglify','cssmin','htmlbuild:production']);
     // grunt.registerTask('tidycss', ['uncss','cssmin','htmlbuild:tidycss']);
-
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 };

@@ -5,7 +5,7 @@
 requirejs.config({
     urlRoot: 'http://dev.fenglin/app_dev.php/',
     // urlArgs: "bust=" + (new Date()).getTime(),
-    baseUrl: '/fenglin',
+    baseUrl: '/',
     paths: {
         vendor: "vendor",
         admin: "admin",
@@ -21,7 +21,7 @@ requirejs.config({
         jweixin: "vendor/jweixin-bower/jweixin-1.0.0",
         weui: "vendor/weui.js/dist/weui",
         text: "vendor/text/text",
-        main: "main"
+        "main.admin": "main_admin"
     },
     shim: {
         underscore: {
@@ -41,8 +41,8 @@ requirejs.config({
 
 console.log(window.location.pathname);
 
-if (/consumer/.test(window.location.pathname)) {
-    requirejs(['main'], function (Fenglin) {
+if (/admin/.test(window.location.pathname)) {
+    requirejs(['main.admin'], function (Fenglin) {
         var fenglin = new Fenglin();
         fenglin.start();
     });

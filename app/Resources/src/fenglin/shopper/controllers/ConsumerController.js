@@ -8,7 +8,7 @@ define([
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/LoadingToastView'
 ], function(ConsumerSearchView, ConsumerModel, ErrorToastView, LoadingToastView){
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+    // var urlRoot = requirejs.s.contexts._.config.urlRoot;
 
     var loadToast = new LoadingToastView();
     var errorToast = new ErrorToastView();

@@ -18,3 +18,5 @@
 /.idea/
 /bin/permission.sh
 composer.lock
+/app/Resources/src/fenglin/vendor
+/app/Resources/build/

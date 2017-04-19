@@ -7,7 +7,7 @@ define([
     'consumer/views/shopper/ShopperDetailView'
 ], function(ShopperModel, ShopperDetailView){
 
-    var urlRoot = requirejs.s.contexts._.config.urlRoot;
+    // var urlRoot = requirejs.s.contexts._.config.urlRoot;
 
     return {
         showDetailPage: function(id){
