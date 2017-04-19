@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                     include: ['app/Resources/src/fenglin/config'],
                     // insertRequire: ['main'],
                     out: 'app/Resources/build/main-build.js',
-                    optimize: "uglify",
+                    optimize: optimize,
                     //optimize: "none",   // If you need to debug the compiled script
                     //namespace: "test",  // If using Almond then no need to namespace
                     paths: {
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
                     include: ['app/Resources/src/fenglin/config_admin'],
                     // insertRequire: ['main'],
                     out: 'app/Resources/build/main-admin-build.js',
-                    optimize: "uglify",
+                    optimize: optimize,
                     //optimize: "none",   // If you need to debug the compiled script
                     //namespace: "test",  // If using Almond then no need to namespace
                     paths: {
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
                     include: ['app/Resources/src/fenglin/config_shopper'],
                     // insertRequire: ['main'],
                     out: 'app/Resources/build/main-shopper-build.js',
-                    optimize: "uglify",
+                    optimize: optimize,
                     //optimize: "none",   // If you need to debug the compiled script
                     //namespace: "test",  // If using Almond then no need to namespace
                     paths: {
