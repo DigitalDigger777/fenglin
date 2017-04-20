@@ -25,6 +25,7 @@
                                     window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
                                 } else {
                                     //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                                    $('#middleQR').fadeIn();
                                 }
                             }
 
@@ -40,7 +41,7 @@
 
     </script>
 
-    <div class="page__bd page__bd_spacing">
+    <div id="middleQR" class="page__bd page__bd_spacing" style="display: none">
         <div class="weui-flex">
             <div class="weui-flex__item"><div class="placeholder" style="text-align: center"><h4>您还没有加入{{ shopper.name }} 返利计划。请先关注枫林返利公众号号。</h4></div></div>
         </div>
