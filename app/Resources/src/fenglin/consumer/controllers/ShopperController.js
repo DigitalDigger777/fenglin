@@ -4,8 +4,9 @@
 
 define([
     'consumer/models/ShopperModel',
-    'consumer/views/shopper/ShopperDetailView'
-], function(ShopperModel, ShopperDetailView){
+    'consumer/views/shopper/ShopperDetailView',
+    'consumer/views/shopper/ShopperJoinView'
+], function(ShopperModel, ShopperDetailView, ShopperJoinView){
 
     // var urlRoot = requirejs.s.contexts._.config.urlRoot;
 
@@ -27,11 +28,22 @@ define([
                 }
             });
         },
-        shoppeListPage: function(search){
+        shopperJoinPage: function(id){
+            var model = new ShopperModel();
+            model.set('id', id);
+            model.fetch({
+                success: function(model, response){
+                    var shopperJoinView = new ShopperJoinView({
+                        model: model
+                    });
+                    shopperJoinView.render();
 
-        },
-        cashBackStatementPage: function(){
 
+                },
+                error: function(model, response) {
+
+                }
+            });
         }
     }
 });

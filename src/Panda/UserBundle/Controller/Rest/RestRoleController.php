@@ -82,16 +82,21 @@ class RestRoleController extends Controller
         /**
          * @var \Doctrine\ORM\EntityManager $em
          * @var \Panda\UserBundle\Repository\UserRepository $userRepo
+         * @var \Panda\ShopperBundle\Repository\ShopperRepository $shopperRepo
          * @var \Panda\UserBundle\Entity\User $user
          */
         $em = $this->getDoctrine()->getManager();
         $apiKey = $this->getRequestParameters($request, 'apikey');
+        $shopperId = $this->getRequestParameters($request, 'shopperId');
         $userRepo = $em->getRepository('PandaUserBundle:User');
+        $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
         $user = $userRepo->loadUserByApiKey($apiKey);
+        $issetShopper = $shopperRepo->checkJoinToConsumer($shopperId, $user->getId());
 
         if ($user) {
             $this->setData([
-                'role' => $user->getRole()
+                'role' => $user->getRole(),
+                'issetShopper' => $issetShopper
             ]);
         } else {
             $this->setMessage('user not found');

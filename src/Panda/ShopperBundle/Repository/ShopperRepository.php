@@ -42,4 +42,27 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
 
         return $chain ? $this : $this->shopper;
     }
+
+    /**
+     * @param $shopperId
+     * @param $consumerId
+     * @return mixed
+     */
+    public function checkJoinToConsumer($shopperId, $consumerId)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('COUNT(s)')
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->join('s.followConsumers', 'c')
+            ->where($qb->expr()->andX(
+                $qb->expr()->eq('c.id', ':consumerId'),
+                $qb->expr()->eq('s.id', ':shopperId')
+            ))
+            ->setParameter(':consumerId', $consumerId)
+            ->setParameter(':shopperId', $shopperId);
+
+        $result = $qb->getQuery()->getSingleScalarResult();
+
+        return $result;
+    }
 }

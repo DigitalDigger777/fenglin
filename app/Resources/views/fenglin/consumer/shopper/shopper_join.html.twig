@@ -1,0 +1,66 @@
+<script id="shopperJoinView" type="text/html">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <h4 class="weui-media-box__title" style="text-align: center">请加入<%=name %> 返利计划</h4>
+        </div>
+        <div class="weui-panel__bd">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="<%=logo?'/uploads/shoppers/' + logo : '/resources/img/no-image-60x60.png' %>" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title"><%=name %></h4>
+                </div>
+            </a>
+        </div>
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">
+                    消费返利： <%=rebateLevelRate %>%<br>
+                    推广返利： 第一层 <%=rebateLevel2Rate %>%；第二层：<%=rebateLevel3Rate %>%
+                </div>
+            </a>
+            <div class="weui-cells mrg-t">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <i class="ff ff-1_5x ff-location-arrow mrg-r" aria-hidden="true"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p><%=address %></p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <i class="ff ff-1_5x ff-phone mrg-r" aria-hidden="true"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p><%=contactTel %></p>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <i class="ff ff-1_5x ff-play mrg-r" aria-hidden="true"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>营业时间：<%=shedule %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel">
+        {#<div class="weui-panel__bd">#}
+            {#<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">#}
+                {#<div class="weui-media-box__bd">#}
+                    {#<h4 class="weui-media-box__title" style="text-align: center">返利余额：<b>$<%=Math.round10(amount, -2) %></b></h4>#}
+                {#</div>#}
+            {#</a>#}
+        {#</div>#}
+        <div class="weui-panel__ft">
+            <div class="button-sp-area mrg-b" style="text-align: center">
+                <a href="#consumer/statement/<%=id %>" class="weui-btn weui-btn_mini weui-btn_primary">加入</a>
+            </div>
+        </div>
+    </div>
+
+</script>

@@ -9,6 +9,7 @@
                 $.ajax({
                     url: Routing.generate('user_role_rest_load', {
                         apikey: apikey,
+                        shopperId: {{ app.request.get('shopperId') }},
                         _locale: 'zh'
                     }),
                     success: function (data) {
@@ -17,11 +18,16 @@
                             //window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
                             window.localStorage.setItem('memberId', '{{ shopperId }}');
                         } else {
-                            if (data['role'] == 'ROLE_CONSUMER') {
-                                window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
+                            if (data['role'] == 'ROLE_CONSUMER' && data['issetShopper'] == 0) {
+                                window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/join-page/' + '{{ shopperId }}';
                             } else {
-                                //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                                if (data['role'] == 'ROLE_CONSUMER' && data['issetShopper'] == 1) {
+                                    //window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
+                                } else {
+                                    //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                                }
                             }
+
                         }
                     },
                     error: function (error) {

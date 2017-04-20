@@ -8,9 +8,7 @@ define(['marionette', 'consumer/controllers/ShopperController'], function(Marion
         controller: ShopperController,
         appRoutes: {
             'consumer/shopper/detail/:id':'showDetailPage',
-            'consumer/shopper/list': 'shoppeListPage',
-            'consumer/shopper/list/:search': 'shoppeListPage',
-            'consumer/shopper/cash-back-statement': 'cashBackStatementPage'
+            'consumer/shopper/join-page/:id':'shopperJoinPage'
         }
     });
 
