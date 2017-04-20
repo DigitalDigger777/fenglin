@@ -3,6 +3,7 @@
  */
 
 define([
+    'backbone',
     'shopper/views/shopper/ShopperHomeView',
     'shopper/views/shopper/SettingView',
     'shopper/views/cash_back/CashBackStatementCompositeView',
@@ -14,7 +15,8 @@ define([
     'consumer/views/core/LoadingToastView',
     'shopper/views/shopper/ShopperChangePasswordView',
     'shopper/views/shopper/ShopperQRView'
-], function(ShopperHomeView,
+], function(Backbone,
+            ShopperHomeView,
             SettingView,
             CashBackStatementCompositeView,
             CashBackConfirmCollection,
@@ -35,8 +37,29 @@ define([
     return {
         homePage: function(){
             console.log('home page');
-            var shopperHomeView = new ShopperHomeView();
-            shopperHomeView.render();
+
+
+            $.ajax({
+                url: Routing.generate('panda_shopper_statistic_rest_index'),
+                dataType: 'json',
+                method: 'GET',
+                data: {
+                    method: 'GET_TOTAL_SPENT',
+                    apikey: window.localStorage.getItem('apikey')
+                },
+                success: function(data){
+                    console.log(data);
+                    var model = new Backbone.Model(data);
+                    var shopperHomeView = new ShopperHomeView({
+                        model: model
+                    });
+                    shopperHomeView.render();
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+
         },
         cashBackStatementPage: function(){
             var cashBackStatementCollection = new CashBackStatementCollection();

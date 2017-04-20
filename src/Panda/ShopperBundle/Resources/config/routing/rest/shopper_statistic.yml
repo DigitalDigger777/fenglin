@@ -1,0 +1,5 @@
+panda_shopper_statistic_rest_index:
+    path:     /
+    defaults: { _controller: PandaShopperBundle:Rest/ShopperStatistic:index}
+    options:
+        expose: true

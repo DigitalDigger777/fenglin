@@ -13,3 +13,7 @@ panda_shopper_rest:
 panda_shopper_qr_rest:
     resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper_qr.yml"
     prefix:   /rest/qr
+
+panda_shopper_statistic_rest:
+    resource: "@PandaShopperBundle/Resources/config/routing/rest/shopper_statistic.yml"
+    prefix:   /rest/statistic
