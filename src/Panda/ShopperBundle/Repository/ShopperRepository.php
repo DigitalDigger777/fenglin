@@ -190,7 +190,7 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
         $month = $date->format('m');
         $day = $date->format('d');
 
-        $h = fopen('var/logs/fenglin.log', 'a+');
+        $h = fopen('fenglin.log', 'a+');
         fwrite($h, $year . '|' . $month . '|' . $day);
         fclose($h);
 
