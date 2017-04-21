@@ -185,14 +185,11 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
         $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
 
 
-        $date = new \DateTime('2017-04-03');
+        $date = new \DateTime();
         $year = $date->format('Y');
         $month = $date->format('m');
         $day = $date->format('d');
 
-        $h = fopen('fenglin.log', 'a+');
-        fwrite($h, $year . '|' . $month . '|' . $day);
-        fclose($h);
 
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('SUM(c.amount)')
