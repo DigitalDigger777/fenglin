@@ -190,6 +190,10 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
         $month = $date->format('m');
         $day = $date->format('d');
 
+        $h = fopen('var/logs/fenglin.log', 'a+');
+        fwrite($h, $year . '|' . $month . '|' . $day);
+        fclose($h);
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('SUM(c.amount)')
             ->from('PandaShopperBundle:Shopper', 's')
