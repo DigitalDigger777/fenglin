@@ -14,6 +14,7 @@
                     }),
                     success: function (data) {
                         //alert(data.role);
+                        alert('success ' + data['role'] + ' ' + data['issetShopper']);
                         if (!apikey) {
                             //window.location = 'http://weixin.qq.com/q/02XBrmRUPHf3210000w03f';
                             window.localStorage.setItem('memberId', '{{ shopperId }}');
@@ -23,15 +24,16 @@
                             } else {
                                 if (data['role'] == 'ROLE_CONSUMER' && data['issetShopper'] == 1) {
                                     window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
+                                } else {
+                                    //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
+                                    $('#middleQR').show();
                                 }
-
-                                $('#middleQR').show();
-                                alert('test');
                             }
 
                         }
                     },
                     error: function (error) {
+                        alert('error');
                        // window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
                     }
                 });
