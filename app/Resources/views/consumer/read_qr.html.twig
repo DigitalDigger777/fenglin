@@ -23,10 +23,10 @@
                             } else {
                                 if (data['role'] == 'ROLE_CONSUMER' && data['issetShopper'] == 1) {
                                     window.location = '/consumer?apikey=' + apikey + '#consumer/shopper/detail/' + '{{ shopperId }}';
-                                } else {
-                                    //window.location = 'http://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={{ biz }}#wechat_redirect';
-                                    $('#middleQR').show();
                                 }
+
+                                $('#middleQR').show();
+                                alert('test');
                             }
 
                         }
