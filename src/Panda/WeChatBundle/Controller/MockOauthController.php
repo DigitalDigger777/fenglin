@@ -49,7 +49,7 @@ class MockOauthController extends Controller
 
         if (!$user) {
             $responseObject = $wechatService->getAccessTokenByCode($code);
-
+            print_r($responseObject); exit;
             if ($responseObject) {
                 $responseObjectUserInfo = $wechatService->getUserInfo($responseObject->access_token, $responseObject->openid);
 
