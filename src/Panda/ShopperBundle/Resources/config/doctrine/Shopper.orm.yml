@@ -59,6 +59,9 @@ Panda\ShopperBundle\Entity\Shopper:
         staffs:
             targetEntity: \Panda\StaffBundle\Entity\Staff
             mappedBy: shopper
+        followStatistics:
+            targetEntity: \Fenglin\FenglinBundle\Entity\FollowStatistic
+            mappedBy: shopper
     manyToMany:
         followConsumers:
             targetEntity: \Panda\ConsumerBundle\Entity\Consumer

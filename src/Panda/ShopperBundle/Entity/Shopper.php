@@ -96,6 +96,11 @@ class Shopper extends User
     private $contactTel;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $followStatistics;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -429,6 +434,22 @@ class Shopper extends User
     public function setContactTel($contactTel)
     {
         $this->contactTel = $contactTel;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFollowStatistics()
+    {
+        return $this->followStatistics;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $followStatistics
+     */
+    public function setFollowStatistics($followStatistics)
+    {
+        $this->followStatistics = $followStatistics;
     }
 }
 

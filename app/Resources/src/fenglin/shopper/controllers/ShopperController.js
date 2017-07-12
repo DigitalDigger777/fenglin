@@ -48,7 +48,7 @@ define([
                     apikey: window.localStorage.getItem('apikey')
                 },
                 success: function(data){
-                    console.log(data);
+
                     var model = new Backbone.Model(data);
                     var shopperHomeView = new ShopperHomeView({
                         model: model

@@ -114,9 +114,11 @@ class ShopperStatisticController extends Controller
         /**
          * @var \Doctrine\ORM\EntityManager $em
          * @var \Panda\ShopperBundle\Repository\ShopperRepository $shopperRepo
+         * @var \Fenglin\FenglinBundle\Repository\FollowStatisticRepository $followStatisticRepo
          */
         $em     = $this->getDoctrine()->getManager();
         $shopperRepo = $em->getRepository('PandaShopperBundle:Shopper');
+        $followStatisticRepo = $em->getRepository('FenglinFenglinBundle:FollowStatistic');
 
         $apikey = $this->getRequestParameters($request, 'apikey');
 
@@ -130,7 +132,7 @@ class ShopperStatisticController extends Controller
             $shopperArray['todayMemberConsumed'] = $todayMemberConsumed ? $todayMemberConsumed : 0;
             $shopperArray['todayConsumed'] = $todayConsumed ? $todayConsumed : 0;
             $shopperArray['todayCashback'] = $todayCashback ? $todayCashback : 0;
-
+            $shopperArray['totalJoinedConsumers'] = $followStatisticRepo->getCountFollow($apikey);
 
             //wechat redirect options
             //$shopperArray['domain'] = $this->container->getParameter('wechat_domain');

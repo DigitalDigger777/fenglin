@@ -1,0 +1,24 @@
+Fenglin\FenglinBundle\Entity\FollowStatistic:
+    type: entity
+    table: null
+    repositoryClass: Fenglin\FenglinBundle\Repository\FollowStatisticRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        countFollow:
+            type: integer
+            column: count_follow
+        date:
+            type: datetime
+    manyToOne:
+        shopper:
+            targetEntity: \Panda\ShopperBundle\Entity\Shopper
+            inversedBy: followStatistics
+            joinColumn:
+                name: shopper_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

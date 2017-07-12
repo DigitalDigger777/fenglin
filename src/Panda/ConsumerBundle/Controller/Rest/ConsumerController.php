@@ -112,9 +112,12 @@ class ConsumerController extends Controller
         * @var \Doctrine\ORM\EntityManager $em
         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
         * @var \Fenglin\FenglinBundle\Repository\ConsumerAmountRepository $consumerAmountRepo
+        * @var \Fenglin\FenglinBundle\Repository\FollowStatisticRepository $followStatisticRepo
         */
-       $em = $this->getDoctrine()->getEntityManager();
-       $consumerAmountRepo = $em->getRepository('FenglinFenglinBundle:ConsumerAmount');
+       $em = $this->getDoctrine()->getManager();
+       $consumerAmountRepo  = $em->getRepository('FenglinFenglinBundle:ConsumerAmount');
+       $followStatisticRepo = $em->getRepository('FenglinFenglinBundle:FollowStatistic');
+
        $shopperId = $this->getRequestParameters($request, 'shopperId');
        $shopper = $em->getRepository('PandaShopperBundle:Shopper')->find($shopperId);
 
@@ -129,7 +132,7 @@ class ConsumerController extends Controller
                $followConsumers->add($consumer);
 
                $shopper->setFollowConsumers($followConsumers);
-
+               $followStatisticRepo->up($shopper);
 
                $em->persist($shopper);
                $em->flush();
@@ -139,18 +142,20 @@ class ConsumerController extends Controller
                $this->setMessage('access denied');
                $this->setCode(403);
            }
-        } else {
+       } else {
            $this->setMessage('Shopper not found');
            $this->setCode(500);
-        }
-        $data = $this->getData();
-        if (count($data) > 0) {
+       }
+
+       $data = $this->getData();
+
+       if (count($data) > 0) {
             $response = new JsonResponse($data, $this->getCode());
-        } else {
+       } else {
             $response = new JsonResponse([
                 'message' => $this->getMessage()
             ], $this->getCode());
-        }
+       }
         return $response;
     }
 
