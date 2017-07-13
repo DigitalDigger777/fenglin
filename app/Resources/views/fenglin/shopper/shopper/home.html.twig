@@ -1,4 +1,5 @@
 <script id="shopperHomeView" type="text/html">
+
     {#<div class="alert">#}
         {#<i class="weui-icon-success"></i>欢迎使用枫林返利！<br>#}
     {#</div>#}
@@ -12,54 +13,63 @@
         {#</div>#}
         {#<a id="searchConsumerButton" href="#consumer/search" class="weui-btn weui-btn_primary" style="margin-top: 30px">搜索</a>#}
     {#</div>#}
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__bd">
-                    <h2 class="weui-media-box__title">枫林会员总消费</h2>
-                    <p class="weui-media-box__desc">￥<%=Math.round10(totalSpent, -2) %></p>
-                </div>
-            </a>
+
+    {% if not app.request.attributes.get('_route') == 'panda_staff_homepage' %}
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">枫林会员总消费</h2>
+                        <p class="weui-media-box__desc">￥<%=Math.round10(totalSpent, -2) %></p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__bd">
-                    <h2 class="weui-media-box__title">今日枫林会员消费人数</h2>
-                    <p class="weui-media-box__desc"><%=todayMemberConsumed %></p>
-                </div>
-            </a>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">今日枫林会员消费人数</h2>
+                        <p class="weui-media-box__desc"><%=todayMemberConsumed %></p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__bd">
-                    <h2 class="weui-media-box__title">今日枫林会员消费金额</h2>
-                    <p class="weui-media-box__desc">￥<%=Math.round10(todayConsumed, -2)%></p>
-                </div>
-            </a>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">今日枫林会员消费金额</h2>
+                        <p class="weui-media-box__desc">￥<%=Math.round10(todayConsumed, -2)%></p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__bd">
-                    <h2 class="weui-media-box__title">今日返现金额</h2>
-                    <p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>
-                </div>
-            </a>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">今日返现金额</h2>
+                        <p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__bd">
-                    <h2 class="weui-media-box__title">今日新增会员</h2>
-                    <p class="weui-media-box__desc"><%=Math.round10(totalJoinedConsumers, -2)%></p>
-                </div>
-            </a>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">今日新增会员</h2>
+                        <p class="weui-media-box__desc"><%=Math.round10(totalJoinedConsumers, -2)%></p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+
+    {% else %}
+        <div style="text-align: center; margin-top: 200px">
+            <h1>今日新增会员</h1>
+            <p><%=Math.round10(totalJoinedConsumers, -2)%></p>
+        </div>
+    {% endif %}
 </script>
