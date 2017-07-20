@@ -50,7 +50,7 @@ class FollowStatisticRepository extends \Doctrine\ORM\EntityRepository
 
         $result = $qb->getQuery()->getResult();
 
-        if (count($result) == 0) {
+        if (!$result) {
             $followStatistic = new FollowStatistic();
             $followStatistic->setDate(new \DateTime());
             $followStatistic->setCountFollow(1);
