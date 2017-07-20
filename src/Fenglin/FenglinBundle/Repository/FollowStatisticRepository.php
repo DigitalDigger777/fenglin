@@ -27,11 +27,14 @@ class FollowStatisticRepository extends \Doctrine\ORM\EntityRepository
         $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
 
         $date = new \DateTime();
-        $year = $date->format('Y');
+
+        $year  = $date->format('Y');
         $month = $date->format('m');
-        $day = $date->format('d');
+        $day   = $date->format('d');
+
 
         $shopperId = $shopper->getId();
+        echo $year . ':' . $day . ':' . $month . ':' . $shopperId;
 
         $qb = $this->_em->createQueryBuilder();
         $qb->select('f')
