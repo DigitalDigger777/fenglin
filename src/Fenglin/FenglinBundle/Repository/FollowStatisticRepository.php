@@ -34,14 +34,14 @@ class FollowStatisticRepository extends \Doctrine\ORM\EntityRepository
 
 
         $shopperId = $shopper->getId();
-        echo $year . ':' . $day . ':' . $month . ':' . $shopperId;
+
 
         $qb = $this->_em->createQueryBuilder();
         $qb->select('f')
             ->from('FenglinFenglinBundle:FollowStatistic', 'f')
             ->join('f.shopper', 's')
             ->where($qb->expr()->andX(
-                $qb->expr()->eq('f.id', ':shopperId'),
+                $qb->expr()->eq('s.id', ':shopperId'),
                 $qb->expr()->eq('YEAR(f.date)', ':year'),
                 $qb->expr()->eq('MONTH(f.date)', ':month'),
                 $qb->expr()->eq('DAY(f.date)', ':day')
