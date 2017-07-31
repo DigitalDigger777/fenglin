@@ -227,6 +227,9 @@ class CashBackController extends Controller
         $query = $qb->getQuery();
         try {
             $data = $query->getResult(Query::HYDRATE_ARRAY);
+            foreach ($data as &$item) {
+                $item['date'] = $item['date']->format('d/m/Y h:iA');
+            }
             $this->setData($data);
 
         } catch (\Exception $e) {
@@ -367,6 +370,10 @@ class CashBackController extends Controller
 
         try {
             $data = $query->getResult(Query::HYDRATE_ARRAY);
+
+            foreach ($data as &$item) {
+                $item['date'] = $item['date']->format('d/m/Y h:iA');
+            }
             $this->setData($data);
         } catch (\Exception $e) {
             $this->setCode(500);
