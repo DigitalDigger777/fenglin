@@ -6,8 +6,9 @@
 define([
     'consumer/views/statement/StatementCompositeView',
     'consumer/collections/StatementCollections',
-    'consumer/models/ShopperModel'
-], function(StatementCompositeView, StatementCollections, ShopperModel){
+    'consumer/models/ShopperModel',
+    'consumer/views/statement/StatementEmptyView'
+], function(StatementCompositeView, StatementCollections, ShopperModel, StatementEmptyView){
 
     return {
         statementPage: function(id){
@@ -24,16 +25,23 @@ define([
                     collection.fetch({
                         success: function(collection, response){
 
-                            var statementView = new StatementCompositeView({
-                                model: shopperModel,
-                                collection: collection
-                            });
-                            statementView.render();
-
+                            if (collection.length > 0) {
+                                var statementView = new StatementCompositeView({
+                                    model: shopperModel,
+                                    collection: collection
+                                });
+                                statementView.render();
+                            } else {
+                                var statementEmptyView = new StatementEmptyView({
+                                    model: shopperModel
+                                });
+                                statementEmptyView.render();
+                            }
                             console.log('statement page');
+                            console.log(collection.length);
                         },
                         error: function(model, response){
-
+                            console.log('statement error');
                         }
                     });
                 },
