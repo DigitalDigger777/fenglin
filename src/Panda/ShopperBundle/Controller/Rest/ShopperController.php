@@ -447,6 +447,11 @@ class ShopperController extends Controller
                 $changePass = true;
             }
 
+            //change description
+            $description = $this->getRequestParameters($request, 'description');
+            $data = $item->getData();
+            $data['description'] = $description;
+            $item->setData($data);
 
             $item->setEmail($tel.'@wxfenling.com');
 

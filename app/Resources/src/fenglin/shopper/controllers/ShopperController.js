@@ -14,6 +14,7 @@ define([
     'consumer/views/core/ErrorToastView',
     'consumer/views/core/LoadingToastView',
     'shopper/views/shopper/ShopperChangePasswordView',
+    'shopper/views/shopper/ShopperChangeDescriptionView',
     'shopper/views/shopper/ShopperQRView'
 ], function(Backbone,
             ShopperHomeView,
@@ -26,6 +27,7 @@ define([
             ErrorToastView,
             LoadingToastView,
             ShopperChangePasswordView,
+            ShopperChangeDescriptionView,
             ShopperQRView){
 
     var loadToast = new LoadingToastView();
@@ -122,6 +124,20 @@ define([
                         model: model
                     });
                     shopperChangePasswordView.render();
+                }
+            });
+
+        },
+        changeDescriptionPage: function (shopperId) {
+            var shopperModel = new ShopperModel();
+            shopperModel.set('id', shopperId);
+
+            shopperModel.fetch({
+                success: function (model) {
+                    var shopperChangeDescriptionView = new ShopperChangeDescriptionView({
+                        model: model
+                    });
+                    shopperChangeDescriptionView.render();
                 }
             });
 

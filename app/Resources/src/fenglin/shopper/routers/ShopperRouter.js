@@ -12,6 +12,7 @@ define(['marionette', 'shopper/controllers/ShopperController'], function(Marione
             'shopper/setting': 'settingPage',
             'shopper/cash-back/confirm': 'cashBackConfirm',
             'shopper/change-password/:shopperId': 'changePasswordPage',
+            'shopper/change-description/:shopperId': 'changeDescriptionPage',
             'shopper/qr/:shopperId': 'qrPage'
         }
     });

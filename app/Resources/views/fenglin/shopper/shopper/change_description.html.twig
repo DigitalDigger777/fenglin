@@ -1,0 +1,13 @@
+<script id="shopperChangeDescriptionView" type="text/html">
+    <input id="shopperId" name="shopperId" type="hidden" value="<%=id %>"/>
+
+    <div class="weui-cells">
+        <div class="weui-cells__title">商户介绍</div>
+        <div class="weui-cell">
+            <textarea id="description" class="weui-textarea" placeholder="请输入段落文本" rows="3"><%=data.description%></textarea>
+        </div>
+    </div>
+    <div class="add-button">
+        <a id="saveDescriptionButton" href="#" class="weui-btn weui-btn_plain-primary">确认修改</a>
+    </div>
+</script>
