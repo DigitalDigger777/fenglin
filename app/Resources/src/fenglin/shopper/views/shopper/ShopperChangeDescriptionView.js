@@ -58,7 +58,7 @@ define([
                             model.save(null, {
                                 success: function () {
                                     loadToast.hide();
-                                    _self.customToast('密码修改成功。', 'weui-icon-success-no-circle');
+                                    _self.customToast('商户介绍修改成功！', 'weui-icon-success-no-circle');
                                 },
                                 error: function () {
                                     loadToast.hide();
