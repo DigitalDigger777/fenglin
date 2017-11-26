@@ -38,7 +38,7 @@ define(['marionette',
                 $('#contentContainer').off('click', '#inviteConsumer');
 
                 var shopperId = $('#shopperId').val();
-                var memberId = $('#memberId').val();
+                var memberId  = $('#memberId').val();
 
                 var consumerModel = new ConsumerModel();
 
