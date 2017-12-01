@@ -125,14 +125,19 @@ class ShopperStatisticController extends Controller
         try {
             $totalSpent = $shopperRepo->getTotalSpent($apikey);
             $todayMemberConsumed = $shopperRepo->getTodayMemberConsumed($apikey);
-            $todayConsumed = $shopperRepo->getTodayConsumed($apikey);
-            $todayCashback = $shopperRepo->getTodayCashback($apikey);
+            $todayConsumed  = $shopperRepo->getTodayConsumed($apikey);
+            $todayCashback  = $shopperRepo->getTodayCashback($apikey);
+            $todaySpent     = $shopperRepo->getTodaySpent($apikey);
+            $todayPayable   = $shopperRepo->getTodayPayable($apikey);
 
             $shopperArray['totalSpent'] = $totalSpent ? $totalSpent : 0;
             $shopperArray['todayMemberConsumed'] = $todayMemberConsumed ? $todayMemberConsumed : 0;
             $shopperArray['todayConsumed'] = $todayConsumed ? $todayConsumed : 0;
             $shopperArray['todayCashback'] = $todayCashback ? $todayCashback : 0;
+            $shopperArray['todaySpent'] = $todaySpent ? $todaySpent : 0;
+            $shopperArray['todayPayable'] = $todayPayable ? $todayPayable : 0;
             $shopperArray['totalJoinedConsumers'] = $followStatisticRepo->getCountFollow($apikey);
+            $shopperArray['totalConsumers'] = $shopperRepo->getTotalMembers($apikey);
 
             //wechat redirect options
             //$shopperArray['domain'] = $this->container->getParameter('wechat_domain');

@@ -95,6 +95,22 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
      * @param $apikey
      * @return mixed
      */
+    public function getTotalMembers($apikey)
+    {
+        /**
+         * @var \Panda\ShopperBundle\Entity\Shopper $shopper
+         */
+        $shopper = $this->getEntityManager()->getRepository('PandaShopperBundle:Shopper')->findOneBy([
+            'apiKey' => $apikey
+        ]);
+
+        return $shopper->getFollowConsumers()->count();
+    }
+
+    /**
+     * @param $apikey
+     * @return mixed
+     */
     public function getTodayMemberConsumed($apikey)
     {
         $emConfig = $this->getEntityManager()->getConfiguration();
@@ -193,6 +209,91 @@ class ShopperRepository extends \Doctrine\ORM\EntityRepository
 
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('SUM(c.amount)')
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->join('s.cashbacks', 'c')
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('s.apiKey', ':apikey'),
+                    $qb->expr()->eq('c.level', ':level'),
+                    $qb->expr()->eq('YEAR(c.date)', ':year'),
+                    $qb->expr()->eq('MONTH(c.date)', ':month'),
+                    $qb->expr()->eq('DAY(c.date)', ':day')
+                )
+            )
+            ->setParameter(':apikey', $apikey)
+            ->setParameter(':level', 1)
+            ->setParameter(':year', $year)
+            ->setParameter(':month', $month)
+            ->setParameter(':day', $day);
+
+        $result = $qb->getQuery()->getSingleScalarResult();
+
+        return $result;
+    }
+
+
+    /**
+     * @param $apikey
+     * @return mixed
+     */
+    public function getTodaySpent($apikey)
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+
+
+        $date = new \DateTime();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('SUM(c.usedCashback)')
+            ->from('PandaShopperBundle:Shopper', 's')
+            ->join('s.cashbacks', 'c')
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('s.apiKey', ':apikey'),
+                    $qb->expr()->eq('c.level', ':level'),
+                    $qb->expr()->eq('YEAR(c.date)', ':year'),
+                    $qb->expr()->eq('MONTH(c.date)', ':month'),
+                    $qb->expr()->eq('DAY(c.date)', ':day')
+                )
+            )
+            ->setParameter(':apikey', $apikey)
+            ->setParameter(':level', 1)
+            ->setParameter(':year', $year)
+            ->setParameter(':month', $month)
+            ->setParameter(':day', $day);
+
+        $result = $qb->getQuery()->getSingleScalarResult();
+
+        return $result;
+    }
+
+    /**
+     * @param $apikey
+     * @return mixed
+     */
+    public function getTodayPayable($apikey)
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+
+
+        $date = new \DateTime();
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('SUM(c.payable)')
             ->from('PandaShopperBundle:Shopper', 's')
             ->join('s.cashbacks', 'c')
             ->where(
