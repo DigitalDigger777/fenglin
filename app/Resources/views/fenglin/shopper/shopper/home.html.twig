@@ -26,6 +26,7 @@
             </div>
         </div>
         <div class="weui-panel weui-panel_access">
+            {#1#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
@@ -36,16 +37,7 @@
             </div>
         </div>
         <div class="weui-panel weui-panel_access">
-            <div class="weui-panel__bd">
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__bd">
-                        <h2 class="weui-media-box__title">今日枫林会员消费人数</h2>
-                        <p class="weui-media-box__desc"><%=todayMemberConsumed %></p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="weui-panel weui-panel_access">
+            {#2#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
@@ -55,28 +47,8 @@
                 </a>
             </div>
         </div>
-
         <div class="weui-panel weui-panel_access">
-            <div class="weui-panel__bd">
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__bd">
-                        <h2 class="weui-media-box__title">今日返现金额</h2>
-                        <p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        {#<div class="weui-panel weui-panel_access">#}
-            {#<div class="weui-panel__bd">#}
-                {#<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">#}
-                    {#<div class="weui-media-box__bd">#}
-                        {#<h2 class="weui-media-box__title">今日推广返现金额</h2>#}
-                        {#<p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-        {#</div>#}
-        <div class="weui-panel weui-panel_access">
+            {#3#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
@@ -86,21 +58,19 @@
                 </a>
             </div>
         </div>
-
         <div class="weui-panel weui-panel_access">
+            {#4#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
-                        <h2 class="weui-media-box__title">今日新增会员</h2>
-                        <p class="weui-media-box__desc"><%=Math.round10(totalConsumers, -2)%></p>
+                        <h2 class="weui-media-box__title">今日返现金额</h2>
+                        <p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>
                     </div>
                 </a>
             </div>
         </div>
-
-
-
         <div class="weui-panel weui-panel_access">
+            {#5#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
@@ -111,25 +81,61 @@
             </div>
         </div>
         <div class="weui-panel weui-panel_access">
+            {#6#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
                         <h2 class="weui-media-box__title">会员总人数</h2>
+                        <p class="weui-media-box__desc"><%=Math.round10(totalConsumers, -2)%></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            {#7#}
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <h2 class="weui-media-box__title">今日新增会员</h2>
                         <p class="weui-media-box__desc"><%=Math.round10(totalJoinedConsumers, -2)%></p>
                     </div>
                 </a>
             </div>
         </div>
         <div class="weui-panel weui-panel_access">
+            {#8#}
             <div class="weui-panel__bd">
                 <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">
-                        <h2 class="weui-media-box__title">今日枫林会员实付金额</h2>
-                        <p class="weui-media-box__desc"><%=Math.round10(totalJoinedConsumers, -2)%></p>
+                        <h2 class="weui-media-box__title">今日枫林会员消费人数</h2>
+                        <p class="weui-media-box__desc"><%=todayMemberConsumed %></p>
                     </div>
                 </a>
             </div>
         </div>
+
+        {#<div class="weui-panel weui-panel_access">#}
+            {#<div class="weui-panel__bd">#}
+                {#<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">#}
+                    {#<div class="weui-media-box__bd">#}
+                        {#<h2 class="weui-media-box__title">今日推广返现金额</h2>#}
+                        {#<p class="weui-media-box__desc">￥<%=Math.round10(todayCashback, -2)%></p>#}
+                    {#</div>#}
+                {#</a>#}
+            {#</div>#}
+        {#</div>#}
+
+
+        {#<div class="weui-panel weui-panel_access">#}
+            {#<div class="weui-panel__bd">#}
+                {#<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">#}
+                    {#<div class="weui-media-box__bd">#}
+                        {#<h2 class="weui-media-box__title">今日枫林会员实付金额</h2>#}
+                        {#<p class="weui-media-box__desc"><%=Math.round10(totalJoinedConsumers, -2)%></p>#}
+                    {#</div>#}
+                {#</a>#}
+            {#</div>#}
+        {#</div>#}
     {% else %}
         <div style="text-align: center; margin-top: 200px">
             <h1>今日新增会员</h1>
