@@ -350,7 +350,15 @@ class ShopperController extends Controller
 
             if ($file) {
                 $file->move('uploads/shoppers', $name);
+                $thumb = new \Imagick();
+                $thumb->readImage('uploads/shoppers/' . $name);
+                $thumb->scaleImage(100, 0);
+                $thumb->writeImage('uploads/shoppers/' . $name);
+                $thumb->clear();
+                $thumb->destroy();
+
                 $responseFiles[] = $name;
+
             }
         }
 
