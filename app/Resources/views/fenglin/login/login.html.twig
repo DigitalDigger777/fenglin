@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="wrap-form">
-        <form action="{{ path('fenglin_login_homepage') }}" method="post">
+        <form id="loginForm" style="display: none" action="{{ path('fenglin_login_homepage') }}" method="post">
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -21,4 +21,14 @@
             <button class="weui-btn weui-btn_primary" style="margin-top: 30px" type="submit">登入</button>
         </form>
     </div>
+    <script>
+        var apiKey = window.localStorage.getItem('apikey');
+
+        if (apiKey) {
+            window.location = '/shopper?apikey=' + apiKey + '#shopper/home';
+        } else {
+            var el = document.getElementById('loginForm');
+            el.style.display = 'block';
+        }
+    </script>
 {% endblock %}
