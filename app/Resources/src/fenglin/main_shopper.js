@@ -15,6 +15,7 @@ define([
     var matchApiKey = /^\?apikey=([\w\W]+?)$/.exec(location.search);
     if (matchApiKey) {
         localStorage.setItem('apikey', matchApiKey[1]);
+        localStorage.setItem('shopper_apikey', matchApiKey[1]);
     }
 
     if (!localStorage.getItem('apikey')) {
