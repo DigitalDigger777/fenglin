@@ -22,9 +22,11 @@
         </form>
     </div>
     <script>
-        var apiKey = window.localStorage.getItem('apikey');
+        var apiKey = window.localStorage.getItem('shopper_apikey');
+
 
         if (apiKey) {
+            window.localStorage.setItem('apikey', apiKey);
             window.location = '/shopper?apikey=' + apiKey + '#shopper/home';
         } else {
             var el = document.getElementById('loginForm');
