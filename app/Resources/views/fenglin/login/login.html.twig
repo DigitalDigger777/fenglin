@@ -30,8 +30,8 @@
             window.localStorage.setItem('apikey', shopperApiKey);
         }
 
-        if (apiKey) {
-            window.location = '/shopper?apikey=' + apiKey + '#shopper/home';
+        if (shopperApiKey) {
+            window.location = '/shopper?apikey=' + shopperApiKey + '#shopper/home';
         } else {
             var el = document.getElementById('loginForm');
             el.style.display = 'block';
