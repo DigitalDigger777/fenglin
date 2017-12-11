@@ -18,7 +18,7 @@ define([
         localStorage.setItem('shopper_apikey', matchApiKey[1]);
     }
 
-    if (!localStorage.getItem('apikey')) {
+    if (!localStorage.getItem('shopper_apikey')) {
         window.location = Routing.generate('fenglin_login_homepage');
     } else {
         var fenglin = Backbone.Marionette.Application.extend({
