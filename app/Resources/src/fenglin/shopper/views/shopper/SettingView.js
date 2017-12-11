@@ -30,12 +30,14 @@ define([
         el:'#contentContainer',
         template: '#settingView',
         ui: {
-            saveButton: '#saveShopperButton'
+            saveButton: '#saveShopperButton',
+            logoutButton: '#logoutShopperButton'
         },
         events: {
             'click @ui.saveButton': function(e){
                 e.preventDefault();
-                console.log('click');
+                //console.log('click');
+
                 loadToast.show();
 
                 var shopperId       = $('#shopperId').val();
@@ -85,6 +87,12 @@ define([
                         }, 3000);
                     }
                 });
+            },
+            'click @ui.logoutButton': function(e){
+                e.preventDefault();
+                window.localStorage.removeItem('apikey');
+                window.localStorage.removeItem('shopper_apikey');
+                window.location = '/login';
             }
         },
         onRender: function(){
