@@ -146,7 +146,7 @@ class ShopperController extends Controller
         if ($user->getRole() != 'ROLE_ADMIN') {
             $qb->andWhere(
                 $qb->expr()->andX(
-                    $qb->expr()->isNotNull('s.rebateLevelRate'),
+                    //$qb->expr()->isNotNull('s.rebateLevelRate'),
                     $qb->expr()->eq('s.status', ':status')
                 )
             );
